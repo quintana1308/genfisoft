@@ -1,0 +1,51 @@
+#divLoading {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(254, 254, 255, .65);
+    z-index: 9999;
+    display: none;
+}
+
+#divLoading img {
+    width: 55px;
+    height: 55px;
+}
+
+#logoPryvit {
+    transition: transform 0.3s ease;
+}
+
+#logoPryvit:hover {
+    transform: rotate(10deg);
+}
+
+#boton1 {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#boton1:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+@keyframes gradientText {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+#logoPryvit1 {
+    background: linear-gradient(270deg, rgb(250, 0, 0), rgb(0, 59, 0), rgb(0, 0, 513), rgb(-35, 103, 0), rgb(229, 0, 351));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientText 5s linear infinite;
+}
+
+.swal2-popup .swal2-icon {
+    margin: auto !important;
+}

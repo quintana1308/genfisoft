@@ -1,0 +1,96 @@
+body {
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .qr-container {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+      position: relative;
+    }
+
+    .qr-container:hover {
+      transform: scale(1.02);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .qr-box {
+      margin-bottom: 20px;
+    }
+
+    .qr-box img {
+      max-width: 100%;
+      border: 2px solid #007bff;
+      border-radius: 8px;
+      padding: 10px;
+      background: #f0f9ff;
+    }
+
+    .message {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .timer {
+      font-size: 24px;
+      margin: 20px 0;
+      font-weight: bold;
+      color: #DB0A00;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      font-size: 16px;
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    .btn-refresh {
+      background-color: #007bff;
+    }
+
+    .btn-refresh i {
+      font-size: 24px;
+      margin-right: 8px;
+    }
+
+    .btn-refresh:hover {
+      background-color: #0056b3;
+      transform: translateY(-2px);
+    }
+
+    .btn-refresh:active {
+      background-color: #004494;
+      transform: translateY(0);
+    }
+
+    .btn-back {
+      background-color: #28a745;
+    }
+
+    .btn-back:hover {
+      background-color: #218838;
+      transform: translateY(-2px);
+    }
+
+    .btn-back:active {
+      background-color: #1e7e34;
+      transform: translateY(0);
+    }

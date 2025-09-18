@@ -1,0 +1,136 @@
+/* Variables de Estilo y Color */
+:root {
+    --color-form-bg: #f9f9f9;
+    --color-form-header-font-size: 1.75rem;
+    --color-form-header-font-weight: 600;
+    --color-form-label-font-weight: 500;
+    --color-form-input-bg: #fff;
+    --color-form-input-border: #ced4da;
+    --color-form-input-shadow: rgba(0, 0, 0, 0.12);
+    --color-form-box-shadow: rgba(0, 0, 0, 0.1);
+    --color-form-padding: 20px;
+    --color-form-border-radius: 10px;
+    --color-form-input-border-radius: 5px;
+    --color-form-input-padding: 10px;
+    --color-form-margin-bottom: 20px;
+    --color-form-header-margin-bottom: 30px;
+
+    --color-background-color-oscuro: #161616;
+    --color-background-color: #2a2a2a;
+    --color-text-white: #fff;
+    --color-box-shadow-modal: 0 4px 8px rgb(255 255 255 / 10%);
+}
+
+/* Estilo para el contenedor del formulario */
+.form-container-custom {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--color-form-padding);
+    border-radius: var(--color-form-border-radius);
+    box-shadow: 0 4px 8px var(--color-form-box-shadow);
+}
+
+/* Estilo para el encabezado del formulario */
+.form-header-custom {
+    font-size: var(--color-form-header-font-size);
+    font-weight: var(--color-form-header-font-weight);
+    margin-bottom: var(--color-form-header-margin-bottom);
+    text-align: center;
+}
+
+/* Estilo para las etiquetas de los campos */
+.form-label-custom {
+    font-weight: var(--color-form-label-font-weight);
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Estilo para los campos de entrada */
+.form-input-custom {
+    border-radius: var(--color-form-input-border-radius);
+    box-shadow: inset 0 1px 3px var(--color-form-input-shadow);
+    padding: var(--color-form-input-padding);
+    font-size: 1rem;
+    border: 1px solid var(--color-form-input-border);
+    box-sizing: border-box;
+    height: 100%;
+    /* Ajuste de altura al 100% del contenedor */
+}
+
+.custom-dropdown {
+    max-width: 300px;
+    /* Ajusta el valor según tus necesidades */
+}
+
+
+/********************/
+/* Modo Oscuro */
+/********************/
+body.dark-mode .modal-header{
+    background-color: var(--color-background-color-oscuro) !important;
+}
+
+body.dark-mode .modal-content{
+    background-color: var(--color-background-color) !important;
+}
+
+body.dark-mode .modal-dialog h3{
+    color: var(--color-text-white) !important;
+}
+
+body.dark-mode .modal-dialog .close{
+    background-color: var(--color-background-color) !important;
+}
+
+body.dark-mode .modal-dialog .form-label-custom{
+    color: var(--color-text-white) !important;
+}
+
+body.dark-mode .modal-dialog .form-container-custom{
+    box-shadow: var(--color-box-shadow-modal) !important;
+    background-color: var(--color-background-color-oscuro) !important;
+}
+
+body.dark-mode .modal-dialog input{
+    background-color: var(--color-background-color) !important;
+    color: var(--color-text-white) !important;
+}
+
+body.dark-mode .modal-dialog .form-select.form-select-solid{
+    background-color: var(--color-background-color) !important;
+    color: var(--color-text-white) !important;
+}
+
+body.dark-mode .modal-dialog .select2-container--bootstrap5 .select2-dropdown .select2-results__option{
+    color: var(--color-text-white) !important;
+}
+
+body.dark-mode .modal-dialog .select2-container--bootstrap5 .select2-dropdown .select2-results__option.select2-results__option--selected{
+    background-color: var(--color-background-color-oscuro) !important;
+}
+
+
+body.dark-mode .modal-dialog .select2-container--bootstrap5 .select2-dropdown .select2-results__option.select2-results__option--highlighted{
+    background-color: var(--color-background-color-oscuro) !important;
+}
+
+body.dark-mode .modal-dialog .modal-body .text-white.btn{
+    background-color: var(--color-background-color-oscuro) !important;
+    border: 1px solid var(--color-text-white) !important;
+}
+
+body.dark-mode .modal-dialog .modal-body .input-group-text{
+    background-color: var(--color-background-color) !important;
+}
+
+body.dark-mode .modal-dialog .modal-body label{
+    color: var(--color-text-white) !important;
+}
+
+body.dark-mode .modal-dialog .modal-content label{
+    color: var(--color-text-white) !important;
+}
+
+body.dark-mode .modal-dialog .modal-content p{
+    color: var(--color-text-white) !important;
+}

@@ -1,0 +1,607 @@
+/* Variables de Color */
+:root {
+  --color-bg-light: #f8f9fa;
+  --color-bg-dark: #161616;
+  --color-text-light: #e0e0e0;
+  --color-text-dark: #000;
+  --color-border-light: #dddddd;
+  --color-border-dark: #333;
+  --color-header-light: #35c896;
+  --color-header-update: #007bff;
+  --color-btn-gradient-1: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+  --color-btn-gradient-2: linear-gradient(to right, #f5ce62, #e43603, #fa7199, #e85a19);
+  --color-background-color-table: #443f3f;
+  --color-background-color-oscuro: #161616;
+  --color-background-color-verde: #20D489;
+
+  /* Añadir más variables de colores según sea necesario */
+
+  --color-background-color: #2a2a2a;
+  --color-background-color-arriba: #443f3f;
+}
+
+/* Estilos generales*/
+/*--------------------------------------*/
+
+/********************/
+/* Modo Claro */
+/********************/
+body.light-mode {
+  background-color: var(--color-bg-light);
+}
+
+/* Sidebar Usuario */
+body.light-mode .app-sidebar__user-avatar {
+  width: 53px;
+  padding: 1px;
+  height: 53px;
+  background-color: #fff;
+  object-fit: contain;
+}
+
+/* Encabezados */
+.headerRegister,
+.header-primary {
+  background: var(--color-header-light);
+  color: #fff;
+}
+
+.headerUpdate {
+  background: var(--color-header-update);
+  color: #fff;
+}
+
+/* Estados de Carga */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(254, 254, 255, 0.95);
+  z-index: 999999999999;
+  display: none;
+}
+
+.loading-overlay img {
+  width: 55px;
+  height: 55px;
+}
+
+#divLoadingVista,
+#divLoadingOrigen,
+#divLoading,
+#divLoadingMsj,
+#divLoadingMsj1,
+#divLoadingCont,
+#divLoadingExcel,
+#divLoadingg,
+#divLoading3 {
+    align-content: center;
+    justify-items: center;
+  /* Compartido entre todos */
+  @extend .loading-overlay;
+  
+}
+
+#divLoadingCont,
+#divLoadingExcel {
+  background: rgba(254, 254, 255, 0.65);
+  z-index: 9999;
+}
+
+/* Estilos del modal */
+.select2-selection__rendered li {
+  background-color: #3bd9d9 !important;
+  color: black !important;
+  box-shadow: 0px 2px 14px -4px;
+}
+
+/* Botones */
+.btn-hover {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  background-size: 300% 100%;
+  border-radius: 5px;
+  transition: all .4s ease-in-out;
+}
+
+.btn-hover:hover {
+  background-position: 100% 0;
+}
+
+.btn-hover:focus {
+  outline: none;
+}
+
+.btn-hover.color-1 {
+  background-image: var(--color-btn-gradient-1);
+  box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+}
+
+.btn-hover.color-2 {
+  background-image: var(--color-btn-gradient-2);
+  box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
+}
+
+/* Transiciones para los botones en todo el sistema */
+#logoPryvit {
+  transition: transform 0.3s ease;
+}
+
+#logoPryvit:hover {
+  transform: rotate(10deg);
+}
+
+#logoPryvitHome {
+  transition: transform 0.3s ease;
+}
+
+#logoPryvitHome:hover {
+  transform: rotate(10deg);
+}
+
+#boton1 {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#boton1:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+/* Tablas */
+.custom-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.custom-table th,
+.custom-table td {
+  border: 1px solid var(--color-border-light);
+  padding: 8px;
+  text-align: left;
+}
+
+.custom-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.custom-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.custom-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Contenedores */
+#main-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+#table-container {
+  flex: 0 0 70%;
+}
+
+#description-container {
+  flex: 0 0 30%;
+  padding-left: 5px;
+}
+
+/* Flexbox helpers */
+.dflex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.vflex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.textcenter {
+  text-align: center;
+}
+
+.textright {
+  text-align: right;
+}
+
+.logoPryvit {
+  width: 80%;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+  .logoPryvit {
+    display: none;
+  }
+}
+
+.container-title {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.container-title input {
+  border: 1px solid #ccc;
+  padding: 4px;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.ventasFechas input {
+  border: 1px solid #ccc;
+  padding: 4px;
+  padding-top: 3px;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+/* Ocultar UI DatePicker */
+.ui-datepicker-calendar {
+  display: none;
+}
+
+/* Texto requerido */
+.required {
+  color: red;
+  font-size: 13pt;
+  font-weight: bold;
+}
+
+/* Tasa */
+.tasa {
+  display: flex;
+  flex-wrap: wrap;
+  color: #fff;
+  margin: 14px;
+  font-size: 12px;
+  letter-spacing: 0.06px;
+}
+
+/* Links */
+.link:hover {
+  text-decoration: none;
+}
+
+/* Nuevos estilos añadidos */
+
+/* Contenedor del perfil de usuario */
+.profile-container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 10px auto;
+}
+
+/* Imagen del avatar */
+.avatar {
+  flex-shrink: 0;
+}
+
+.avatar-img {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #ddd;
+}
+
+/* Información del usuario */
+.info-user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.username {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.status {
+  font-size: 12px;
+  color: #666;
+}
+
+
+
+
+/********************/
+/* Modo Oscuro */
+/********************/
+body.dark-mode {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-dark);
+}
+
+/* Estilos de la tarjeta en modo oscuro */
+body.dark-mode .card {
+  background-color: var(--color-background-color);
+  color: #000000;
+  box-shadow: 0px 1px 14px -6px rgb(0, 0, 0) !important;
+}
+
+/* Estilos para el div en modo oscuro */
+body.dark-mode .row.p-5 {
+  background-color: var(--color-background-color);
+  color: var(--color-text-dark);
+  border-radius: 10px;
+  box-shadow: 0px 1px 14px -6px rgb(0, 0, 0) !important;
+}
+body.dark-mode .row.row-cols-2.g-0 {
+  background-color: var(--color-background-color); /* Fondo del div en modo oscuro */
+  color: var(--color-text-dark); /* Color de texto en modo oscuro */
+  border-radius: 10px;
+}
+
+body.dark-mode .app-sidebar__user-avatar {
+  background-color: var(--color-bg-dark);
+}
+
+body.dark-mode .headerRegister,
+body.dark-mode .header-primary {
+  background: var(--color-bg-dark);
+}
+
+body.dark-mode .headerUpdate {
+  background: var(--color-header-update);
+}
+
+body.dark-mode .loading-overlay {
+  background: rgba(0, 0, 0, 0.8); /* Fondo oscuro para el overlay en modo oscuro */
+}
+
+body.dark-mode #divLoadingCont,
+body.dark-mode #divLoadingExcel {
+  background: rgba(0, 0, 0, 0.65); /* Fondo más oscuro para el overlay de carga */
+  z-index: 9999;
+}
+
+body.dark-mode .custom-table th {
+  background-color: #333;
+  color: #e0e0e0;
+}
+
+body.dark-mode .custom-table td {
+  border: 1px solid var(--color-border-dark);
+  background-color: #2a2a2a;
+}
+
+body.dark-mode .custom-table tr:nth-child(even) {
+  background-color: #1e1e1e;
+}
+
+body.dark-mode .custom-table tr:hover {
+  background-color: #3c3c3c;
+}
+
+/* Estilos en modo oscuro */
+body.dark-mode .profile-container {
+  background-color: var(--color-background-color-arriba);
+  border: 1px solid var(--color-border-dark);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .avatar-img {
+  border: 2px solid var(--color-border-dark);
+}
+
+body.dark-mode .username {
+  color: var(--color-text-dark);
+}
+
+body.dark-mode .status {
+  color: #aaa;
+}
+
+body.dark-mode .table-borderless{
+  background-color: var(--color-background-color-table);
+}
+
+body.dark-mode a{
+  color: var(--color-text-light) !important;
+}
+
+body.dark-mode span{
+  color: var(--color-text-light) !important;
+}
+
+body.dark-mode .username{
+  color: var(--color-text-light) !important;
+}
+
+body.dark-mode .form-control {
+  background-color: var(--color-background-color);
+  color: var(--color-text-light);
+}
+
+body.dark-mode .btn.btn-active-light.active{
+  background-color: var(--color-background-color-oscuro) !important;
+}
+
+body.dark-mode .btn.btn-active-light:hover:not(.btn-active){
+  background-color: var(--color-background-color-oscuro) !important;
+}
+body.dark-mode .sidebar .sidebar-toolbar .btn{
+  background-color: var(--color-background-color);
+}
+body.dark-mode .sidebar .sidebar-toolbar .btn:hover {
+  background-color: var(--color-header-light);
+}
+
+body.dark-mode .sidebar .sidebar-nav .nav-link{
+  background-color: var(--color-background-color);
+}
+
+body.dark-mode .sidebar .sidebar-nav .nav-link.active {
+  background-color: var(--color-header-light);
+}
+
+body.dark-mode .card-body .btn.btn-primary{
+  background-color: var(--color-background-color-arriba);
+}
+
+body.dark-mode .card-body .btn.btn-primary:hover:not(.btn-active){
+  background-color: var(--color-background-color-arriba);
+}
+
+body.dark-mode h1{
+  color: var(--color-text-light);
+}
+
+body.dark-mode .dataTables_length label{
+  color: var(--color-text-light);
+}
+
+body.dark-mode .dataTables_length select{
+  background-color: var(--color-background-color);
+}
+
+body.dark-mode .dataTables_length select:focus{
+  background-color: var(--color-background-color);
+  color: var(--color-text-light);
+}
+
+body.dark-mode .dataTables_filter label{
+  color: var(--color-text-light);
+}
+
+body.dark-mode .dataTables_info{
+  color: var(--color-text-light) !important;
+}
+
+body.dark-mode .dataTables_filter input:focus{
+  background-color: var(--color-background-color);
+  color: var(--color-text-light);
+}
+
+body.dark-mode tr{
+  color: var(--color-text-light);
+}
+
+body.dark-mode tr.odd{
+  --bs-table-accent-bg: var(--color-background-color-arriba) !important;
+  color: var(--color-text-light) !important;
+}
+
+body.dark-mode .dataTables_wrapper .btn.btn-secondary{
+  background-color: var(--color-background-color-arriba);
+}
+
+body.dark-mode .dataTables_wrapper .btn.btn-secondary:hover{
+  background-color: var(--color-background-color);
+}
+
+body.dark-mode .col-xl-12.bg-white{
+  background-color: var(--color-background-color-arriba) !important;
+}
+
+/*body.dark-mode #kt_header{
+    background-color: var(--color-background-color-oscuro) !important;
+}*/
+
+body.dark-mode #kt_header[data-kt-sticky-header=on][data-sidebar=on]{
+  background-color: var(--color-background-color-oscuro) !important;
+}
+
+body.dark-mode b{
+  color: var(--color-text-light) !important;
+}
+
+body.dark-mode h2{
+  color: var(--color-text-light) !important;
+}
+
+body.dark-mode h6{
+  color: var(--color-text-light) !important;
+}
+
+body.dark-mode p{
+  color: var(--color-text-light) !important;
+}
+
+body.dark-mode ul{
+  color: var(--color-text-light) !important;
+}
+
+body.dark-mode li{
+  color: var(--color-text-light) !important;
+}
+
+/* Estilos del modal */
+body.dark-mode .select2-selection__rendered li {
+  background-color: var(--color-background-color-oscuro) !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode span.select2-dropdown.select2-dropdown--above{
+  background-color: var(--color-background-color) !important;
+}
+
+body.dark-mode span.select2-dropdown.select2-dropdown--above li:hover{
+  background-color: var(--color-background-color-oscuro) !important;
+}
+
+body.dark-mode span.select2-dropdown.select2-dropdown--above li.select2-results__option--selected{
+  background-color: var(--color-background-color-oscuro) !important;
+}
+
+body.dark-mode span.select2-dropdown.select2-dropdown--below{
+  background-color: var(--color-background-color) !important;
+}
+
+body.dark-mode span.select2-dropdown.select2-dropdown--below li.select2-results__option--selected{
+  background-color: var(--color-background-color-oscuro) !important;
+}
+
+body.dark-mode span.select2-dropdown.select2-dropdown--below li:hover{
+  background-color: var(--color-background-color-oscuro) !important;
+}
+
+body.dark-mode .form-check-input{
+  border: 1px solid var(--color-text-light) !important;
+}
+
+body.dark-mode .menu.menu-sub.menu-sub-dropdown{
+  background-color: var(--color-background-color-oscuro) !important;
+}
+
+body.dark-mode .menu.menu-sub.menu-sub-dropdown a{
+  border: 1px solid var(--color-background-color-oscuro) !important;
+}
+
+body.dark-mode .menu .menu-content{
+  background-image: none !important;
+  background-color: var(--color-background-color-verde) !important;
+}
+
+body.dark-mode .menu .menu-content span{
+  color: var(--color-text-dark) !important;
+}
+
+body.dark-mode .alert-dismissible{
+  background-color: var(--color-background-color) !important;
+}
+
+body.dark-mode .swal2-content {
+  color: #fff !important;
+}
+
+body.dark-mode .header[data-kt-sticky=true] {
+  background-color: var(--color-background-color) !important;
+  margin-bottom: 1.5rem !important;
+}
