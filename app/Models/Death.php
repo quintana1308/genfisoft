@@ -20,6 +20,7 @@ class Death extends Model
 
     protected $fillable = [
         'user_id',
+        'company_id',
         'cattle_id',
         'reason',
         'date'
@@ -40,12 +41,18 @@ class Death extends Model
         return $this->belongsTo(Cattle::class, 'cattle_id', 'id');
     }
 
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
     //CONSULTAS
     public function getDeaths($request)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
-        $query = Death::with('status')->where('user_id', $userId);
+        $query = Death::with('status')->where('company_id', $activeCompanyId);
 
         // Si se envían las dos fechas
         if ($request->filled('fecha_inicio') && $request->filled('fecha_fin')) {
@@ -91,10 +98,12 @@ class Death extends Model
 
     public function createDeath($request)
     {
-        $userId = auth()->id();
+        $user = auth()->user();
+        $userId = $user->id;
+        $activeCompanyId = $user->active_company_id;
 
         // Evitar duplicados
-        if (Death::where('user_id', $userId)->where('cattle_id', $request->cattle)->exists()) {
+        if (Death::where('company_id', $activeCompanyId)->where('cattle_id', $request->cattleId)->exists()) {
             return response()->json(['status' => false, 'msg' => 'El animal ya se encuentra muerto.']);
         }
 
@@ -103,6 +112,7 @@ class Death extends Model
             'reason' => $request->reason,
             'date' => $request->date,
             'user_id' => $userId,
+            'company_id' => $activeCompanyId,
         ]);
 
         // Actualizar el status del animal

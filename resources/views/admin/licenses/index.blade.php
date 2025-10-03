@@ -187,16 +187,18 @@
                                                 <button class="btn btn-info btn-sm" onclick="renewLicense({{ $license->id }})" title="Renovar">
                                                     <i class="nc-icon nc-refresh-69"></i>
                                                 </button>
-                                                <form method="POST" action="{{ route('admin.licenses.toggle', $license->id) }}" style="display: inline;">
+                                                <form method="POST" action="{{ route('admin.licenses.toggle-status', $license->id) }}" style="display: inline;">
                                                     @csrf
+                                                    @method('PUT')
                                                     <button type="submit" class="btn btn-warning btn-sm" title="Suspender" 
                                                             onclick="return confirm('¿Suspender esta licencia?')">
                                                         <i class="nc-icon nc-button-pause"></i>
                                                     </button>
                                                 </form>
                                             @else
-                                                <form method="POST" action="{{ route('admin.licenses.toggle', $license->id) }}" style="display: inline;">
+                                                <form method="POST" action="{{ route('admin.licenses.toggle-status', $license->id) }}" style="display: inline;">
                                                     @csrf
+                                                    @method('PUT')
                                                     <button type="submit" class="btn btn-success btn-sm" title="Activar"
                                                             onclick="return confirm('¿Activar esta licencia?')">
                                                         <i class="nc-icon nc-button-play"></i>

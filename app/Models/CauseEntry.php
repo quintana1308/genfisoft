@@ -19,6 +19,7 @@ class CauseEntry extends Model
 
     protected $fillable = [
         'user_id',
+        'company_id',
         'name',
     ];
 
@@ -32,12 +33,18 @@ class CauseEntry extends Model
         return $this->belongsTo(Status::class, 'status_id', 'id');
     }
 
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
     //CONSULTAS
     public function getCauseEntrys($request)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
-        $causeEntrys = CauseEntry::with('status')->where('user_id', $userId)->get();
+        $causeEntrys = CauseEntry::with('status')->where('company_id', $activeCompanyId)->get();
 
         if ($causeEntrys->count() === 0) {
             return DataTables::of(collect())->make(true);
@@ -74,16 +81,19 @@ class CauseEntry extends Model
 
     public function createCauseEntry($request)
     {
-        $userId = auth()->id();
+        $user = auth()->user();
+        $userId = $user->id;
+        $activeCompanyId = $user->active_company_id;
 
         // Evitar duplicados
-        if (CauseEntry::where('user_id', $userId)->where('name', $request->name)->exists()) {
+        if (CauseEntry::where('company_id', $activeCompanyId)->where('name', $request->name)->exists()) {
             return response()->json(['status' => false, 'msg' => 'La causa de entrada ya existe.']);
         }
 
         CauseEntry::create([
             'name' => $request->name,
             'user_id' => $userId,
+            'company_id' => $activeCompanyId,
         ]);
 
         return response()->json(['status' => true, 'msg' => 'Causa de entrada creada correctamente.']);
@@ -91,11 +101,12 @@ class CauseEntry extends Model
 
     public function getCauseEntry($id)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
         $causeEntry = CauseEntry::with('status') // Cargar la relación
                 ->where('id', $id)
-                ->where('user_id', $userId)
+                ->where('company_id', $activeCompanyId)
                 ->first();
 
         if (!$causeEntry) {

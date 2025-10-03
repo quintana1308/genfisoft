@@ -176,7 +176,6 @@ Route::middleware('auth')->group(function () {
         
         // Gestión de licencias
         Route::get('/companies/{companyId}/licenses', [AdminController::class, 'companyLicenses'])->name('companies.licenses');
-        Route::get('/companies/{companyId}/licenses/data', [AdminController::class, 'getCompanyLicensesData'])->name('companies.licenses.data');
         Route::get('/companies/{companyId}/licenses/create', [AdminController::class, 'createLicense'])->name('licenses.create');
         Route::post('/companies/{companyId}/licenses', [AdminController::class, 'storeLicense'])->name('licenses.store');
         Route::post('/licenses/{id}/renew', [AdminController::class, 'renewLicense'])->name('licenses.renew');

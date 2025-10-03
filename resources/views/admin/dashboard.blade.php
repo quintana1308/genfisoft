@@ -115,7 +115,7 @@
                                             <span class="badge badge-warning">{{ $license->getDaysRemaining() }}</span>
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.company.licenses', $license->company_id) }}" 
+                                            <a href="{{ route('admin.companies.licenses', $license->company_id) }}" 
                                                class="btn btn-sm btn-info">
                                                 <i class="nc-icon nc-key-25"></i>
                                             </a>

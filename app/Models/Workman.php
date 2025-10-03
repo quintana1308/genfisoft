@@ -19,6 +19,7 @@ class Workman extends Model
 
     protected $fillable = [
         'user_id',
+        'company_id',
         'description',
         'date',
         'cost',
@@ -34,12 +35,18 @@ class Workman extends Model
         return $this->belongsTo(Status::class, 'status_id', 'id');
     }
 
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
     //CONSULTAS
     public function getWorkmans($request)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
         
-        $query = Workman::with('status')->where('user_id', $userId);
+        $query = Workman::with('status')->where('company_id', $activeCompanyId);
 
         // Si se envían las dos fechas
         if ($request->filled('fecha_inicio') && $request->filled('fecha_fin')) {
@@ -97,10 +104,12 @@ class Workman extends Model
 
     public function createWorkman($request)
     {
-        $userId = auth()->id();
+        $user = auth()->user();
+        $userId = $user->id;
+        $activeCompanyId = $user->active_company_id;
 
         // Evitar duplicados
-        if (Workman::where('user_id', $userId)->where('description', $request->description)->exists()) {
+        if (Workman::where('company_id', $activeCompanyId)->where('description', $request->description)->exists()) {
             return response()->json(['status' => false, 'msg' => 'La hechura ya existe.']);
         }
 
@@ -109,6 +118,7 @@ class Workman extends Model
             'date' => $request->date,
             'cost' => $request->cost,
             'user_id' => $userId,
+            'company_id' => $activeCompanyId,
         ]);
 
         return response()->json(['status' => true, 'msg' => 'Hechura creada correctamente.']);
@@ -116,11 +126,12 @@ class Workman extends Model
 
     public function getWorkman($id)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
         $workman = Workman::with('status') // Cargar la relación
                 ->where('id', $id)
-                ->where('user_id', $userId)
+                ->where('company_id', $activeCompanyId)
                 ->first();
 
         if (!$workman) {

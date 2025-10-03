@@ -145,7 +145,7 @@
                                     <a href="{{ route('admin.companies') }}" class="btn btn-secondary">
                                         <i class="nc-icon nc-minimal-left"></i> Volver
                                     </a>
-                                    <a href="{{ route('admin.company.licenses', $company->id) }}" class="btn btn-info">
+                                    <a href="{{ route('admin.companies.licenses', $company->id) }}" class="btn btn-info">
                                         <i class="nc-icon nc-key-25"></i> Gestionar Licencias
                                     </a>
                                 </div>

@@ -19,6 +19,7 @@ class Owner extends Model
 
     protected $fillable = [
         'user_id',
+        'company_id',
         'name',
     ];
 
@@ -35,9 +36,10 @@ class Owner extends Model
     //CONSULTAS
     public function getOwners($request)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
-        $owners = Owner::with('status')->where('user_id', $userId)->get();
+        $owners = Owner::with('status')->where('company_id', $activeCompanyId)->get();
 
         if ($owners->count() === 0) {
             return DataTables::of(collect())->make(true);
@@ -74,16 +76,19 @@ class Owner extends Model
 
     public function createOwner($request)
     {
-        $userId = auth()->id();
+        $user = auth()->user();
+        $userId = $user->id;
+        $activeCompanyId = $user->active_company_id;
 
         // Evitar duplicados
-        if (Owner::where('user_id', $userId)->where('name', $request->name)->exists()) {
-            return response()->json(['status' => false, 'msg' => 'El owner ya existe.']);
+        if (Owner::where('company_id', $activeCompanyId)->where('name', $request->name)->exists()) {
+            return response()->json(['status' => false, 'msg' => 'El propietario ya existe.']);
         }
 
         Owner::create([
             'name' => $request->name,
             'user_id' => $userId,
+            'company_id' => $activeCompanyId,
         ]);
 
         return response()->json(['status' => true, 'msg' => 'Propietario creado correctamente.']);
@@ -91,11 +96,12 @@ class Owner extends Model
 
     public function getOwner($id)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
         $owner = Owner::with('status') // Cargar la relación
                 ->where('id', $id)
-                ->where('user_id', $userId)
+                ->where('company_id', $activeCompanyId)
                 ->first();
 
         if (!$owner) {

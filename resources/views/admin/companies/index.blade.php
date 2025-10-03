@@ -147,7 +147,7 @@ $(document).ready(function() {
                             <a href="{{ url('admin/companies') }}/${data}/edit" class="btn btn-warning btn-sm" title="Editar">
                                 <i class="nc-icon nc-ruler-pencil"></i>
                             </a>
-                            <a href="{{ url('admin/companies') }}/${data}/licenses" class="btn btn-success btn-sm" title="Gestionar Licencias">
+                            <a href="/admin/companies/${data}/licenses" class="btn btn-success btn-sm" title="Gestionar Licencias">
                                 <i class="nc-icon nc-key-25"></i>
                             </a>
                         </div>

@@ -19,6 +19,7 @@ class Color extends Model
 
     protected $fillable = [
         'user_id',
+        'company_id',
         'name',
     ];
 
@@ -32,12 +33,18 @@ class Color extends Model
         return $this->belongsTo(Status::class, 'status_id', 'id');
     }
 
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
     //CONSULTAS
     public function getColors($request)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
-        $colors = Color::with('status')->where('user_id', $userId)->get();
+        $colors = Color::with('status')->where('company_id', $activeCompanyId)->get();
 
         if ($colors->count() === 0) {
             return DataTables::of(collect())->make(true);
@@ -74,16 +81,19 @@ class Color extends Model
 
     public function createColor($request)
     {
-        $userId = auth()->id();
+        $user = auth()->user();
+        $userId = $user->id;
+        $activeCompanyId = $user->active_company_id;
 
         // Evitar duplicados
-        if (Color::where('user_id', $userId)->where('name', $request->name)->exists()) {
+        if (Color::where('company_id', $activeCompanyId)->where('name', $request->name)->exists()) {
             return response()->json(['status' => false, 'msg' => 'El color ya existe.']);
         }
 
         Color::create([
             'name' => $request->name,
             'user_id' => $userId,
+            'company_id' => $activeCompanyId,
         ]);
 
         return response()->json(['status' => true, 'msg' => 'Color creado correctamente.']);
@@ -91,11 +101,12 @@ class Color extends Model
 
     public function getColor($id)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
         $color = Color::with('status') // Cargar la relación
                 ->where('id', $id)
-                ->where('user_id', $userId)
+                ->where('company_id', $activeCompanyId)
                 ->first();
 
         if (!$color) {

@@ -12,8 +12,15 @@ class DeathController extends Controller
 {
     public function index()
     {    
-        $userId = Auth::id();
-        $cattles = Cattle::where('user_id', $userId)->whereNotIn('status_id', [2, 3])->orderBy('code')->get(['id', 'code']);
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
+        
+        // Filtrar animales por empresa activa (solo animales vivos)
+        $cattles = Cattle::where('company_id', $activeCompanyId)
+            ->whereNotIn('status_id', [2, 3])
+            ->orderBy('code')
+            ->get(['id', 'code']);
+            
         return view('death.index', compact('cattles'));
     }
 

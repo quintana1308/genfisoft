@@ -130,7 +130,7 @@
                                     <button type="submit" class="btn btn-success">
                                         <i class="nc-icon nc-check-2"></i> Crear Licencia
                                     </button>
-                                    <a href="{{ route('admin.company.licenses', $company->id) }}" class="btn btn-secondary">
+                                    <a href="{{ route('admin.companies.licenses', $company->id) }}" class="btn btn-secondary">
                                         <i class="nc-icon nc-minimal-left"></i> Cancelar
                                     </a>
                                 </div>

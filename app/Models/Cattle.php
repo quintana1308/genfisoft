@@ -118,12 +118,9 @@ class Cattle extends Model
         $user = Auth::user();
         $activeCompanyId = $user->active_company_id;
 
-        $query = Cattle::with('status', 'veterinarians')->where('user_id', $userId);
-        
-        // Filtrar por empresa activa si no es admin
-        if ($user->role !== 'admin') {
-            $query->where('company_id', $activeCompanyId);
-        }
+        // Siempre filtrar por empresa activa del usuario
+        $query = Cattle::with('status', 'veterinarians')
+            ->where('company_id', $activeCompanyId);
 
         $cattles = $query->get();
 
@@ -182,22 +179,55 @@ class Cattle extends Model
 
     public function newCattles()
     {
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
-        $categorys = Category::whereNotIn('status_id', [2, 3])->get();
-        $status = Status::all();
-        $herds = Herd::whereNotIn('status_id', [2, 3])->get();
-        $causeEntrys = CauseEntry::whereNotIn('status_id', [2, 3])->get();
-        $statusReproductives = StatusReproductive::whereNotIn('status_id', [2, 3])->get();
-        $statusProductives = StatusProductive::whereNotIn('status_id', [2, 3])->get();
-        $owners = Owner::whereNotIn('status_id', [2, 3])->get();
-        $fathers = Cattle::where('sexo', 'Macho')
-        ->whereNotNull('code')->whereNotIn('status_id', [2, 3])
-        ->get();
-        $mothers = Cattle::where('sexo', 'Hembra')
-            ->whereNotNull('code')->whereNotIn('status_id', [2, 3])
+        // Filtrar por empresa activa del usuario
+        $categorys = Category::where('company_id', $activeCompanyId)
+            ->whereNotIn('status_id', [2, 3])
             ->get();
-        $colors = Color::whereNotIn('status_id', [2, 3])->get();
-        $classifications = Classification::whereNotIn('status_id', [2, 3])->get();
+        
+        $status = Status::all(); // Los status son globales
+        
+        $herds = Herd::where('company_id', $activeCompanyId)
+            ->whereNotIn('status_id', [2, 3])
+            ->get();
+        
+        $causeEntrys = CauseEntry::where('company_id', $activeCompanyId)
+            ->whereNotIn('status_id', [2, 3])
+            ->get();
+        
+        $statusReproductives = StatusReproductive::where('company_id', $activeCompanyId)
+            ->whereNotIn('status_id', [2, 3])
+            ->get();
+        
+        $statusProductives = StatusProductive::where('company_id', $activeCompanyId)
+            ->whereNotIn('status_id', [2, 3])
+            ->get();
+        
+        $owners = Owner::where('company_id', $activeCompanyId)
+            ->whereNotIn('status_id', [2, 3])
+            ->get();
+        
+        $fathers = Cattle::where('company_id', $activeCompanyId)
+            ->where('sexo', 'Macho')
+            ->whereNotNull('code')
+            ->whereNotIn('status_id', [2, 3])
+            ->get();
+        
+        $mothers = Cattle::where('company_id', $activeCompanyId)
+            ->where('sexo', 'Hembra')
+            ->whereNotNull('code')
+            ->whereNotIn('status_id', [2, 3])
+            ->get();
+        
+        $colors = Color::where('company_id', $activeCompanyId)
+            ->whereNotIn('status_id', [2, 3])
+            ->get();
+        
+        $classifications = Classification::where('company_id', $activeCompanyId)
+            ->whereNotIn('status_id', [2, 3])
+            ->get();
         
         return [
             'categorys' => $categorys,
@@ -257,8 +287,12 @@ class Cattle extends Model
     {
         $userId = Auth::id();
 
+        // Obtener empresa activa del usuario
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
+
         $cattle = Cattle::where('id', $id)
-                ->where('user_id', $userId)
+                ->where('company_id', $activeCompanyId)
                 ->first();
 
         if (!$cattle) {
@@ -270,16 +304,16 @@ class Cattle extends Model
 
         // Obtener todos los status
         $statuses = Status::orderBy('name')->get(['id', 'name']);
-        $categories = Category::where('user_id', $userId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
-        $causeEntrys = CauseEntry::where('user_id', $userId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
-        $classifications = Classification::where('user_id', $userId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
-        $colors = Color::where('user_id', $userId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
-        $herds = Herd::where('user_id', $userId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'code', 'name']);
-        $owners = Owner::where('user_id', $userId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
-        $statusProductives = StatusProductive::where('user_id', $userId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
-        $statusReproductives = StatusReproductive::where('user_id', $userId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
-        $fathers = Cattle::where('user_id', $userId)->where('sexo', 'Macho')->whereNotIn('status_id', [2, 3])->orderBy('code')->get(['id', 'code']);
-        $mothers = Cattle::where('user_id', $userId)->where('sexo', 'Hembra')->whereNotIn('status_id', [2, 3])->orderBy('code')->get(['id', 'code']);
+        $categories = Category::where('company_id', $activeCompanyId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
+        $causeEntrys = CauseEntry::where('company_id', $activeCompanyId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
+        $classifications = Classification::where('company_id', $activeCompanyId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
+        $colors = Color::where('company_id', $activeCompanyId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
+        $herds = Herd::where('company_id', $activeCompanyId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'code', 'name']);
+        $owners = Owner::where('company_id', $activeCompanyId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
+        $statusProductives = StatusProductive::where('company_id', $activeCompanyId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
+        $statusReproductives = StatusReproductive::where('company_id', $activeCompanyId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
+        $fathers = Cattle::where('company_id', $activeCompanyId)->where('sexo', 'Macho')->whereNotIn('status_id', [2, 3])->orderBy('code')->get(['id', 'code']);
+        $mothers = Cattle::where('company_id', $activeCompanyId)->where('sexo', 'Hembra')->whereNotIn('status_id', [2, 3])->orderBy('code')->get(['id', 'code']);
 
         $data =  response()->json([
             'status' => true,
@@ -326,7 +360,8 @@ class Cattle extends Model
 
     public function getCattleView($id)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
         $cattle = Cattle::with(['category',
                                 'herd', 
@@ -340,7 +375,7 @@ class Cattle extends Model
                                 'classification',
                                 'status'])
                 ->where('id', $id)
-                ->where('user_id', $userId)
+                ->where('company_id', $activeCompanyId)
                 ->first();
 
         if (!$cattle) {

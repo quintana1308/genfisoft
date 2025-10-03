@@ -21,6 +21,7 @@ class Veterinarian extends Model
 
     protected $fillable = [
         'user_id',
+        'company_id',
         'cattle_id',
         'product_id',
         'symptoms',
@@ -50,12 +51,18 @@ class Veterinarian extends Model
         return $this->belongsTo(Status::class, 'status_id', 'id');
     }
 
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
     //CONSULTAS
     public function getVeterinarians($request)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
-        $veterinarians = Veterinarian::with('status')->where('user_id', $userId)->get();
+        $veterinarians = Veterinarian::with('status')->where('company_id', $activeCompanyId)->get();
 
         if ($veterinarians->count() === 0) {
             return DataTables::of(collect())->make(true);
@@ -104,13 +111,12 @@ class Veterinarian extends Model
 
     public function newVeterinarians()
     {
-
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
         
         $status = Status::all();
-        $cattles = Cattle::with('status')->where('user_id', $userId)->whereNotIn('status_id', [2, 3])->get();
-        $products = Product::with('status')->where('user_id', $userId)->whereNotIn('status_id', [2, 3])->get();
-        $status = Status::all();
+        $cattles = Cattle::where('company_id', $activeCompanyId)->whereNotIn('status_id', [2, 3])->get();
+        $products = Product::where('company_id', $activeCompanyId)->whereNotIn('status_id', [2, 3])->get();
         
         return [
             'status' => $status,
@@ -121,10 +127,13 @@ class Veterinarian extends Model
 
     public function createVeterinarian($request)
     {
-        $userId = auth()->id();
+        $user = auth()->user();
+        $userId = $user->id;
+        $activeCompanyId = $user->active_company_id;
 
         Veterinarian::create([
             'user_id' => $userId,
+            'company_id' => $activeCompanyId,
             'cattle_id' => $request->cattle,
             'product_id' => $request->product,
             'symptoms' => $request->symptoms,
@@ -139,11 +148,12 @@ class Veterinarian extends Model
 
     public function getVeterinarian($id)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
         $veterinarian = Veterinarian::with('status') // Cargar la relación
                 ->where('id', $id)
-                ->where('user_id', $userId)
+                ->where('company_id', $activeCompanyId)
                 ->first();
 
         if (!$veterinarian) {
@@ -155,8 +165,8 @@ class Veterinarian extends Model
 
         // Obtener todos los status
         $statuses = Status::orderBy('name')->get(['id', 'name']);
-        $cattles = Cattle::where('user_id', $userId)->orderBy('code')->whereNotIn('status_id', [2, 3])->get(['id', 'code']);
-        $products = Product::where('user_id', $userId)->orderBy('name')->whereNotIn('status_id', [2, 3])->get(['id', 'name']);
+        $cattles = Cattle::where('company_id', $activeCompanyId)->orderBy('code')->whereNotIn('status_id', [2, 3])->get(['id', 'code']);
+        $products = Product::where('company_id', $activeCompanyId)->orderBy('name')->whereNotIn('status_id', [2, 3])->get(['id', 'name']);
 
         return response()->json([
             'status' => true,
@@ -177,13 +187,14 @@ class Veterinarian extends Model
 
     public function getVeterinarianView($id)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
         $veterinarian = Veterinarian::with(['Cattle',
                                 'Product',
                                 'status'])
                 ->where('id', $id)
-                ->where('user_id', $userId)
+                ->where('company_id', $activeCompanyId)
                 ->first();
 
         if (!$veterinarian) {

@@ -19,6 +19,7 @@ class StatusProductive extends Model
 
     protected $fillable = [
         'user_id',
+        'company_id',
         'name',
     ];
 
@@ -32,6 +33,11 @@ class StatusProductive extends Model
         return $this->belongsTo(Status::class, 'status_id', 'id');
     }
 
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
     /*public function tags()
     {
         return $this->belongsToMany(Tag::class, 'contact_tag', 'CONTACT_ID', 'TAG_ID');
@@ -40,9 +46,10 @@ class StatusProductive extends Model
     //CONSULTAS
     public function getStatusProductives($request)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
-        $statusProductives = StatusProductive::with('status')->where('user_id', $userId)->get();
+        $statusProductives = StatusProductive::with('status')->where('company_id', $activeCompanyId)->get();
 
         if ($statusProductives->count() === 0) {
             return DataTables::of(collect())->make(true);
@@ -79,16 +86,19 @@ class StatusProductive extends Model
 
     public function createStatusProductive($request)
     {
-        $userId = auth()->id();
+        $user = auth()->user();
+        $userId = $user->id;
+        $activeCompanyId = $user->active_company_id;
 
         // Evitar duplicados
-        if (StatusProductive::where('user_id', $userId)->where('name', $request->name)->exists()) {
+        if (StatusProductive::where('company_id', $activeCompanyId)->where('name', $request->name)->exists()) {
             return response()->json(['status' => false, 'msg' => 'El estado productivo ya existe.']);
         }
 
         StatusProductive::create([
             'name' => $request->name,
             'user_id' => $userId,
+            'company_id' => $activeCompanyId,
         ]);
 
         return response()->json(['status' => true, 'msg' => 'Estado productivo creado correctamente.']);
@@ -96,11 +106,12 @@ class StatusProductive extends Model
 
     public function getStatusProductive($id)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
         $statusProductive = StatusProductive::with('status') // Cargar la relación
                 ->where('id', $id)
-                ->where('user_id', $userId)
+                ->where('company_id', $activeCompanyId)
                 ->first();
 
         if (!$statusProductive) {

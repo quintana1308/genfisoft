@@ -19,6 +19,7 @@ class Product extends Model
 
     protected $fillable = [
         'user_id',
+        'company_id',
         'name',
         'type',
         'status_id'
@@ -34,12 +35,18 @@ class Product extends Model
         return $this->belongsTo(Status::class, 'status_id', 'id');
     }
 
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
     //CONSULTAS
     public function getProducts($request)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
-        $products = Product::with('status')->where('user_id', $userId)->get();
+        $products = Product::with('status')->where('company_id', $activeCompanyId)->get();
 
         if ($products->count() === 0) {
             return DataTables::of(collect())->make(true);
@@ -79,10 +86,12 @@ class Product extends Model
 
     public function createProduct($request)
     {
-        $userId = auth()->id();
+        $user = auth()->user();
+        $userId = $user->id;
+        $activeCompanyId = $user->active_company_id;
 
         // Evitar duplicados
-        if (Product::where('user_id', $userId)->where('name', $request->name)->exists()) {
+        if (Product::where('company_id', $activeCompanyId)->where('name', $request->name)->exists()) {
             return response()->json(['status' => false, 'msg' => 'El producto ya existe.']);
         }
 
@@ -90,6 +99,7 @@ class Product extends Model
             'name' => $request->name,
             'type' => $request->type,
             'user_id' => $userId,
+            'company_id' => $activeCompanyId,
         ]);
 
         return response()->json(['status' => true, 'msg' => 'Producto creado correctamente.']);
@@ -97,11 +107,12 @@ class Product extends Model
 
     public function getProduct($id)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
         $product = Product::with('status') // Cargar la relación
                 ->where('id', $id)
-                ->where('user_id', $userId)
+                ->where('company_id', $activeCompanyId)
                 ->first();
 
         if (!$product) {

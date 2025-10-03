@@ -19,6 +19,7 @@ class Herd extends Model
 
     protected $fillable = [
         'user_id',
+        'company_id',
         'code',
         'name',
     ];
@@ -33,12 +34,18 @@ class Herd extends Model
         return $this->belongsTo(Status::class, 'status_id', 'id');
     }
 
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
     //CONSULTAS
     public function getHerds($request)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
-        $herds = Herd::with('status')->where('user_id', $userId)->get();
+        $herds = Herd::with('status')->where('company_id', $activeCompanyId)->get();
 
         if ($herds->count() === 0) {
             return DataTables::of(collect())->make(true);
@@ -78,10 +85,12 @@ class Herd extends Model
 
     public function createHerd($request)
     {
-        $userId = auth()->id();
+        $user = auth()->user();
+        $userId = $user->id;
+        $activeCompanyId = $user->active_company_id;
 
         // Evitar duplicados
-        if (Herd::where('user_id', $userId)->where('code', $request->code)->exists()) {
+        if (Herd::where('company_id', $activeCompanyId)->where('code', $request->code)->exists()) {
             return response()->json(['status' => false, 'msg' => 'El rebaño ya existe.']);
         }
 
@@ -89,6 +98,7 @@ class Herd extends Model
             'code' => $request->code,
             'name' => $request->name,
             'user_id' => $userId,
+            'company_id' => $activeCompanyId,
         ]);
 
         return response()->json(['status' => true, 'msg' => 'Rebaño creado correctamente.']);
@@ -96,11 +106,12 @@ class Herd extends Model
 
     public function getHerd($id)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
         $herd = Herd::with('status') // Cargar la relación
                 ->where('id', $id)
-                ->where('user_id', $userId)
+                ->where('company_id', $activeCompanyId)
                 ->first();
 
         if (!$herd) {

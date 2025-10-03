@@ -19,6 +19,7 @@ class Estate extends Model
 
     protected $fillable = [
         'user_id',
+        'company_id',
         'description',
         'date_purchase',
         'price',
@@ -34,6 +35,11 @@ class Estate extends Model
         return $this->belongsTo(Status::class, 'status_id', 'id');
     }
 
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
     /*public function tags()
     {
         return $this->belongsToMany(Tag::class, 'contact_tag', 'CONTACT_ID', 'TAG_ID');
@@ -42,9 +48,10 @@ class Estate extends Model
     //CONSULTAS
     public function getEstates($request)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
-        $query = Estate::with('status')->where('user_id', $userId);
+        $query = Estate::with('status')->where('company_id', $activeCompanyId);
 
         // Si se envían las dos fechas
         if ($request->filled('fecha_inicio') && $request->filled('fecha_fin')) {
@@ -102,10 +109,12 @@ class Estate extends Model
 
     public function createEstate($request)
     {
-        $userId = auth()->id();
+        $user = auth()->user();
+        $userId = $user->id;
+        $activeCompanyId = $user->active_company_id;
 
         // Evitar duplicados
-        if (Estate::where('user_id', $userId)->where('description', $request->description)->exists()) {
+        if (Estate::where('company_id', $activeCompanyId)->where('description', $request->description)->exists()) {
             return response()->json(['status' => false, 'msg' => 'El Recurso ya existe.']);
         }
 
@@ -114,6 +123,7 @@ class Estate extends Model
             'date_purchase' => $request->datePurchase,
             'price' => $request->price,
             'user_id' => $userId,
+            'company_id' => $activeCompanyId,
         ]);
 
         return response()->json(['status' => true, 'msg' => 'Recurso creado correctamente.']);
@@ -121,11 +131,12 @@ class Estate extends Model
 
     public function getEstate($id)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
         $estate = Estate::with('status') // Cargar la relación
                 ->where('id', $id)
-                ->where('user_id', $userId)
+                ->where('company_id', $activeCompanyId)
                 ->first();
 
         if (!$estate) {

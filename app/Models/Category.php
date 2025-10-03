@@ -19,6 +19,7 @@ class Category extends Model
 
     protected $fillable = [
         'user_id',
+        'company_id',
         'name',
     ];
 
@@ -32,12 +33,18 @@ class Category extends Model
         return $this->belongsTo(Status::class, 'status_id', 'id');
     }
 
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
     //CONSULTAS
     public function getCategorys($request)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
-        $categorys = Category::with('status')->where('user_id', $userId)->get();
+        $categorys = Category::with('status')->where('company_id', $activeCompanyId)->get();
 
         if ($categorys->count() === 0) {
             return DataTables::of(collect())->make(true);
@@ -74,16 +81,19 @@ class Category extends Model
 
     public function createCategory($request)
     {
-        $userId = auth()->id();
+        $user = auth()->user();
+        $userId = $user->id;
+        $activeCompanyId = $user->active_company_id;
 
         // Evitar duplicados
-        if (Category::where('user_id', $userId)->where('name', $request->name)->exists()) {
+        if (Category::where('company_id', $activeCompanyId)->where('name', $request->name)->exists()) {
             return response()->json(['status' => false, 'msg' => 'La categoría ya existe.']);
         }
 
         Category::create([
             'name' => $request->name,
             'user_id' => $userId,
+            'company_id' => $activeCompanyId,
         ]);
 
         return response()->json(['status' => true, 'msg' => 'Categoría creada correctamente.']);
@@ -91,11 +101,12 @@ class Category extends Model
 
     public function getCategory($id)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
         $category = Category::with('status') // Cargar la relación
                 ->where('id', $id)
-                ->where('user_id', $userId)
+                ->where('company_id', $activeCompanyId)
                 ->first();
 
         if (!$category) {

@@ -20,6 +20,7 @@ class Input extends Model
 
     protected $fillable = [
         'user_id',
+        'company_id',
         'owner_id',
         'description',
         'price',
@@ -42,12 +43,18 @@ class Input extends Model
         return $this->belongsTo(Owner::class, 'owner_id', 'id');
     }
 
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
     //CONSULTAS
     public function getInputs($request)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
-        $query = Input::with('status')->where('user_id', $userId);
+        $query = Input::with('status')->where('company_id', $activeCompanyId);
 
         // Si se envían las dos fechas
         if ($request->filled('fecha_inicio') && $request->filled('fecha_fin')) {
@@ -111,10 +118,12 @@ class Input extends Model
 
     public function createInput($request)
     {
-        $userId = auth()->id();
+        $user = auth()->user();
+        $userId = $user->id;
+        $activeCompanyId = $user->active_company_id;
 
         // Evitar duplicados
-        if (Input::where('user_id', $userId)->where('description', $request->description)->exists()) {
+        if (Input::where('company_id', $activeCompanyId)->where('description', $request->description)->exists()) {
             return response()->json(['status' => false, 'msg' => 'El insumo ya existe.']);
         }
 
@@ -125,6 +134,7 @@ class Input extends Model
             'quantity' => $request->quantity,
             'date' => $request->date,
             'user_id' => $userId,
+            'company_id' => $activeCompanyId,
         ]);
 
         return response()->json(['status' => true, 'msg' => 'Insumo creado correctamente.']);
@@ -132,11 +142,12 @@ class Input extends Model
 
     public function getInput($id)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
         $input = Input::with('status') // Cargar la relación
                 ->where('id', $id)
-                ->where('user_id', $userId)
+                ->where('company_id', $activeCompanyId)
                 ->first();
 
         if (!$input) {
@@ -149,7 +160,7 @@ class Input extends Model
         // Obtener todos los status
         $statuses = Status::orderBy('name')->get(['id', 'name']);
 
-        $owners = Owner::where('user_id', $userId)->orderBy('name')->whereNotIn('status_id', [2, 3])->get(['id', 'name']);
+        $owners = Owner::where('company_id', $activeCompanyId)->orderBy('name')->whereNotIn('status_id', [2, 3])->get(['id', 'name']);
 
         return response()->json([
             'status' => true,

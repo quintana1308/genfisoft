@@ -12,8 +12,15 @@ class InputController extends Controller
 {
     public function index()
     {    
-        $userId = Auth::id();
-        $owners = Owner::where('user_id', $userId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
+        
+        // Filtrar propietarios por empresa activa
+        $owners = Owner::where('company_id', $activeCompanyId)
+            ->whereNotIn('status_id', [2, 3])
+            ->orderBy('name')
+            ->get(['id', 'name']);
+            
         return view('input.index', compact('owners'));
     }
 

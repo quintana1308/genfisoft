@@ -19,6 +19,7 @@ class StatusReproductive extends Model
 
     protected $fillable = [
         'user_id',
+        'company_id',
         'name',
     ];
 
@@ -32,12 +33,18 @@ class StatusReproductive extends Model
         return $this->belongsTo(Status::class, 'status_id', 'id');
     }
 
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
     //CONSULTAS
     public function getStatusReproductives($request)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
-        $statusReproductives = StatusReproductive::with('status')->where('user_id', $userId)->get();
+        $statusReproductives = StatusReproductive::with('status')->where('company_id', $activeCompanyId)->get();
 
         if ($statusReproductives->count() === 0) {
             return DataTables::of(collect())->make(true);
@@ -74,16 +81,19 @@ class StatusReproductive extends Model
 
     public function createStatusReproductive($request)
     {
-        $userId = auth()->id();
+        $user = auth()->user();
+        $userId = $user->id;
+        $activeCompanyId = $user->active_company_id;
 
         // Evitar duplicados
-        if (StatusReproductive::where('user_id', $userId)->where('name', $request->name)->exists()) {
+        if (StatusReproductive::where('company_id', $activeCompanyId)->where('name', $request->name)->exists()) {
             return response()->json(['status' => false, 'msg' => 'El estado reproductivo ya existe.']);
         }
 
         StatusReproductive::create([
             'name' => $request->name,
             'user_id' => $userId,
+            'company_id' => $activeCompanyId,
         ]);
 
         return response()->json(['status' => true, 'msg' => 'Estado reproductivo creado correctamente.']);
@@ -91,11 +101,12 @@ class StatusReproductive extends Model
 
     public function getStatusReproductive($id)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
         $statusReproductive = StatusReproductive::with('status') // Cargar la relación
                 ->where('id', $id)
-                ->where('user_id', $userId)
+                ->where('company_id', $activeCompanyId)
                 ->first();
 
         if (!$statusReproductive) {

@@ -20,29 +20,35 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {   
-        $totalCost = Workman::where('user_id', Auth::id())->whereMonth('created_at', Carbon::now()->month)
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
+
+        $totalCost = Workman::where('company_id', $activeCompanyId)->whereMonth('created_at', Carbon::now()->month)
         ->whereYear('created_at', Carbon::now()->year)
         ->sum('cost');
 
-        $totalEstate = Estate::where('user_id', Auth::id())->whereMonth('created_at', Carbon::now()->month)
+        $totalEstate = Estate::where('company_id', $activeCompanyId)->whereMonth('created_at', Carbon::now()->month)
         ->whereYear('created_at', Carbon::now()->year)
         ->sum('price');
 
-        $totalNursing = Cattle::where('user_id', Auth::id())->where('classification_id', 4)->count();
+        $totalNursing = Cattle::where('company_id', $activeCompanyId)->where('classification_id', 4)->count();
 
-        $totalInput = Input::where('user_id', Auth::id())->whereMonth('created_at', Carbon::now()->month)
+        $totalInput = Input::where('company_id', $activeCompanyId)->whereMonth('created_at', Carbon::now()->month)
         ->whereYear('created_at', Carbon::now()->year)
         ->sum('price');
 
-        $totalDeath = Death::where('user_id', Auth::id())->count();
+        $totalDeath = Death::where('company_id', $activeCompanyId)->count();
 
         return view('dashboard', compact('totalCost', 'totalEstate', 'totalNursing', 'totalInput', 'totalDeath'));
     }
 
     public function getReproductiveStats()
     {
-        // Total de animales con estado reproductivo (sin NULL)
-        $total = Cattle::whereNotNull('status_reproductive_id')->count();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
+
+        // Total de animales con estado reproductivo (sin NULL) de la empresa
+        $total = Cattle::where('company_id', $activeCompanyId)->whereNotNull('status_reproductive_id')->count();
 
         if ($total == 0) {
             return response()->json([
@@ -52,8 +58,9 @@ class DashboardController extends Controller
             ]);
         }
 
-        // Agrupar por estado reproductivo (ya tenías whereNotNull)
+        // Agrupar por estado reproductivo filtrado por empresa
         $data = Cattle::selectRaw('status_reproductive_id, COUNT(*) as total')
+            ->where('company_id', $activeCompanyId)
             ->whereNotNull('cattles.status_reproductive_id')
             ->groupBy('status_reproductive_id')
             ->pluck('total', 'status_reproductive_id');
@@ -75,8 +82,11 @@ class DashboardController extends Controller
 
     public function getProductiveStats()
     {
-        // Total de animales con estado reproductivo (sin NULL)
-        $total = Cattle::whereNotNull('status_productive_id')->count();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
+
+        // Total de animales con estado productivo (sin NULL) de la empresa
+        $total = Cattle::where('company_id', $activeCompanyId)->whereNotNull('status_productive_id')->count();
 
         if ($total == 0) {
             return response()->json([
@@ -86,8 +96,9 @@ class DashboardController extends Controller
             ]);
         }
 
-        // Agrupar por estado reproductivo (ya tenías whereNotNull)
+        // Agrupar por estado productivo filtrado por empresa
         $data = Cattle::selectRaw('status_productive_id, COUNT(*) as total')
+            ->where('company_id', $activeCompanyId)
             ->whereNotNull('cattles.status_productive_id')
             ->groupBy('status_productive_id')
             ->pluck('total', 'status_productive_id');
@@ -109,8 +120,11 @@ class DashboardController extends Controller
 
     public function getCategoryStats()
     {
-        // Total de animales con estado reproductivo (sin NULL)
-        $total = Cattle::whereNotNull('category_id')->count();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
+
+        // Total de animales con categoría (sin NULL) de la empresa
+        $total = Cattle::where('company_id', $activeCompanyId)->whereNotNull('category_id')->count();
 
         if ($total == 0) {
             return response()->json([
@@ -120,8 +134,9 @@ class DashboardController extends Controller
             ]);
         }
 
-        // Agrupar por estado reproductivo (ya tenías whereNotNull)
+        // Agrupar por categoría filtrado por empresa
         $data = Cattle::selectRaw('category_id, COUNT(*) as total')
+            ->where('company_id', $activeCompanyId)
             ->whereNotNull('cattles.category_id')
             ->groupBy('category_id')
             ->pluck('total', 'category_id');
@@ -143,10 +158,11 @@ class DashboardController extends Controller
 
     public function getInputsByOwner()
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
         $inputs = Input::with('owner')
-            ->where('user_id', $userId)
+            ->where('company_id', $activeCompanyId)
             ->selectRaw('owner_id, SUM(quantity) as total_quantity, SUM(price) as total_spent')
             ->groupBy('owner_id')
             ->get();

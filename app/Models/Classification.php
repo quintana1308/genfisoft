@@ -19,6 +19,7 @@ class Classification extends Model
 
     protected $fillable = [
         'user_id',
+        'company_id',
         'name',
     ];
 
@@ -32,12 +33,18 @@ class Classification extends Model
         return $this->belongsTo(Status::class, 'status_id', 'id');
     }
 
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
     //CONSULTAS
     public function getClassifications($request)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
-        $classifications = Classification::with('status')->where('user_id', $userId)->get();
+        $classifications = Classification::with('status')->where('company_id', $activeCompanyId)->get();
 
         if ($classifications->count() === 0) {
             return DataTables::of(collect())->make(true);
@@ -74,16 +81,19 @@ class Classification extends Model
 
     public function createClassification($request)
     {
-        $userId = auth()->id();
+        $user = auth()->user();
+        $userId = $user->id;
+        $activeCompanyId = $user->active_company_id;
 
         // Evitar duplicados
-        if (Classification::where('user_id', $userId)->where('name', $request->name)->exists()) {
+        if (Classification::where('company_id', $activeCompanyId)->where('name', $request->name)->exists()) {
             return response()->json(['status' => false, 'msg' => 'La Clasificación ya existe.']);
         }
 
         Classification::create([
             'name' => $request->name,
             'user_id' => $userId,
+            'company_id' => $activeCompanyId,
         ]);
 
         return response()->json(['status' => true, 'msg' => 'Clasificación creada correctamente.']);
@@ -91,11 +101,12 @@ class Classification extends Model
 
     public function getClassification($id)
     {
-        $userId = Auth::id();
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
 
         $classification = Classification::with('status') // Cargar la relación
                 ->where('id', $id)
-                ->where('user_id', $userId)
+                ->where('company_id', $activeCompanyId)
                 ->first();
 
         if (!$classification) {
