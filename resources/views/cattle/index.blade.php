@@ -96,6 +96,10 @@
                         Clasificación<br>
                         <span class="text-muted" id="classificationView"></span>
                     </div>
+                    <div class="col-md-4 p-3">
+                        Guía<br>
+                        <span class="text-muted" id="guideView"></span>
+                    </div>
                 </div>
                 <hr>
                 <div class="row">
@@ -114,10 +118,6 @@
                     <div class="col-md-4 p-3">
                         Precio de compra<br>
                         <span class="text-muted" id="pricePurchaseView"></span>
-                    </div>
-                    <div class="col-md-4 p-3">
-                        Precio en finca<br>
-                        <span class="text-muted" id="priceFarmView"></span>
                     </div>
                     <div class="col-md-4 p-3">
                         Peso Ingreso<br>
@@ -146,6 +146,15 @@
                     <div class="col-md-4 p-3">
                         Fecha de Nacimiento<br>
                         <span class="text-muted" id="dateBirthView"></span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-12 p-3">
+                        <h5 class="mb-3"><i class="fa-solid fa-baby text-info"></i> Hijos de este animal</h5>
+                        <div id="childrenListView">
+                            <p class="text-muted">Sin hijos registrados</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -248,6 +257,15 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Guía <span
+                                                class="text-danger">*</span></label>
+                                        <select name="guideEdit" id="guideEdit" class="form-control" required>
+                                            <option value="">-- Seleccione --</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <hr>
                             <div class="row">
@@ -279,14 +297,6 @@
                                         <label class="col-form-label">Precio de compra <span
                                                 class="text-danger">*</span></label>
                                         <input type="number" name="pricePurchaseEdit" id="pricePurchaseEdit"
-                                            class="form-control" step="any" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="col-form-label">Precio en finca <span
-                                                class="text-danger">*</span></label>
-                                        <input type="number" name="priceFarmEdit" id="priceFarmEdit"
                                             class="form-control" step="any" required>
                                     </div>
                                 </div>

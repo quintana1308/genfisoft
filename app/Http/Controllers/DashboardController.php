@@ -70,7 +70,7 @@ class DashboardController extends Controller
         foreach ($data as $statusId => $count) {
             $statusName = StatusReproductive::find($statusId)->name ?? 'Desconocido';
             $labels[] = $statusName;
-            $counts[] = round(($count / $total) * 100, 2); // porcentaje respecto al total filtrado
+            $counts[] = $count; // cantidad real
         }
 
         return response()->json([
@@ -108,7 +108,7 @@ class DashboardController extends Controller
         foreach ($data as $statusId => $count) {
             $statusName = StatusProductive::find($statusId)->name ?? 'Desconocido';
             $labels[] = $statusName;
-            $counts[] = round(($count / $total) * 100, 2); // porcentaje respecto al total filtrado
+            $counts[] = $count; // cantidad real
         }
 
         return response()->json([
@@ -146,7 +146,7 @@ class DashboardController extends Controller
         foreach ($data as $statusId => $count) {
             $statusName = Category::find($statusId)->name ?? 'Desconocido';
             $labels[] = $statusName;
-            $counts[] = round(($count / $total) * 100, 2); // porcentaje respecto al total filtrado
+            $counts[] = $count; // cantidad real
         }
 
         return response()->json([
@@ -181,6 +181,50 @@ class DashboardController extends Controller
             })
             ->addColumn('total_spent', function ($input) {
                 return '$ ' . number_format($input->total_spent, 2);
+            })
+            ->make(true);
+
+        return $data;
+    }
+
+    public function getCategoriesBySex()
+    {
+        $user = Auth::user();
+        $activeCompanyId = $user->active_company_id;
+
+        // Obtener todas las categorías con conteo de machos y hembras
+        $categories = Category::select('categorys.id', 'categorys.name')
+            ->leftJoin('cattles', function($join) use ($activeCompanyId) {
+                $join->on('categorys.id', '=', 'cattles.category_id')
+                     ->where('cattles.company_id', '=', $activeCompanyId);
+            })
+            ->selectRaw('
+                COUNT(CASE WHEN cattles.sexo = "Macho" THEN 1 END) as machos,
+                COUNT(CASE WHEN cattles.sexo = "Hembra" THEN 1 END) as hembras,
+                COUNT(cattles.id) as total
+            ')
+            ->groupBy('categorys.id', 'categorys.name')
+            ->having('total', '>', 0)
+            ->orderBy('categorys.name')
+            ->get();
+
+        if ($categories->count() === 0) {
+            return DataTables::of(collect())->make(true);
+        }
+
+        $data = DataTables::of($categories)
+            ->addIndexColumn()
+            ->addColumn('category', function ($category) {
+                return $category->name;
+            })
+            ->addColumn('machos', function ($category) {
+                return $category->machos;
+            })
+            ->addColumn('hembras', function ($category) {
+                return $category->hembras;
+            })
+            ->addColumn('total', function ($category) {
+                return $category->total;
             })
             ->make(true);
 

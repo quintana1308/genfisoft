@@ -111,7 +111,6 @@ cattle = {
                 const code = document.querySelector("#code").value;
                 const category = document.querySelector("#category").value;
                 const status = document.querySelector("#status").value;
-                const herd = document.querySelector("#herd").value;
                 const date_start = document.querySelector("#dateStart").value;
                 const causeEntry = document.querySelector("#causeEntry").value;
                 const dateRevision = document.querySelector("#dateRevision").value;
@@ -120,13 +119,11 @@ cattle = {
                 const sexo = document.querySelector("#sexo").value;
                 const incomeWeight = document.querySelector("#incomeWeight").value;
                 const pricePurchase = document.querySelector("#pricePurchase").value;
-                const priceFarm = document.querySelector("#priceFarm").value;
 
                 const campos = [
                     { campo: code, nombre: "'Código'" },
                     { campo: category, nombre: "'Categoría'" },
                     { campo: status, nombre: "'Estado'" },
-                    { campo: herd, nombre: "'Rebaño'" },
                     { campo: date_start, nombre: "'Fecha de entrada'" },
                     { campo: causeEntry, nombre: "'Causa de entrada'" },
                     { campo: dateRevision, nombre: "'Proxima revisión'" },
@@ -134,8 +131,7 @@ cattle = {
                     { campo: classification, nombre: "'Clasificación'" },
                     { campo: sexo, nombre: "'Sexo'" },
                     { campo: incomeWeight, nombre: "'Peso de ingreso'" },
-                    { campo: pricePurchase, nombre: "'Precio de compra'" },
-                    { campo: priceFarm, nombre: "'Precio en finca'" }
+                    { campo: pricePurchase, nombre: "'Precio de compra'" }
                 ];
 
                 for (const { campo, nombre } of campos) {
@@ -366,11 +362,41 @@ function viewCattle($id) {
                 document.querySelector('#dateBirthView').innerHTML = objData.cattle?.date_birth ?? 'Sin Fecha de Nacimiento';
                 document.querySelector('#colorView').innerHTML = objData.cattle.color?.name ?? 'Sin color';
                 document.querySelector('#classificationView').innerHTML = objData.cattle.classification?.name ?? 'Sin clasificación';
+                document.querySelector('#guideView').innerHTML = objData.cattle.guide?.name ?? 'Sin guía';
                 document.querySelector('#sexoView').innerHTML = objData.cattle?.sexo ?? 'Sin color';
                 document.querySelector('#incomeWeightView').innerHTML = objData.cattle?.income_weight ?? 'Sin peso inicial (Kg)';
                 document.querySelector('#outputWeightView').innerHTML = objData.cattle?.output_weight ?? 'Sin peso final (Kg)';
                 document.querySelector('#pricePurchaseView').innerHTML = objData.cattle?.price_purchase ?? 'Sin precio de compra ($/Kg)';
-                document.querySelector('#priceFarmView').innerHTML = objData.cattle?.price_farm ?? 'Sin precio en finca ($/Kg)';
+                
+                // Mostrar lista de hijos
+                const childrenContainer = document.querySelector('#childrenListView');
+                if (objData.children && objData.children.length > 0) {
+                    let childrenHTML = '<div class="table-responsive"><table class="table table-sm table-bordered">';
+                    childrenHTML += '<thead class="thead-light"><tr><th>Código</th><th>Sexo</th><th>Fecha de Nacimiento</th><th>Relación</th></tr></thead><tbody>';
+                    
+                    objData.children.forEach(child => {
+                        let relation = '';
+                        if (child.father_id == $id && child.mother_id == $id) {
+                            relation = 'Padre y Madre';
+                        } else if (child.father_id == $id) {
+                            relation = 'Padre';
+                        } else if (child.mother_id == $id) {
+                            relation = 'Madre';
+                        }
+                        
+                        childrenHTML += '<tr>';
+                        childrenHTML += '<td>' + (child.code || 'Sin código') + '</td>';
+                        childrenHTML += '<td>' + (child.sexo || 'N/A') + '</td>';
+                        childrenHTML += '<td>' + (child.date_birth || 'Sin fecha') + '</td>';
+                        childrenHTML += '<td><span class="badge badge-info">' + relation + '</span></td>';
+                        childrenHTML += '</tr>';
+                    });
+                    
+                    childrenHTML += '</tbody></table></div>';
+                    childrenContainer.innerHTML = childrenHTML;
+                } else {
+                    childrenContainer.innerHTML = '<p class="text-muted">Sin hijos registrados</p>';
+                }
             }
             $('#modalCattleView').modal('show');
         }
@@ -404,11 +430,11 @@ function editCattle($id) {
                 document.querySelector('#dateBirthEdit').value = objData.data.dateBirth;
                 fillSelect('#colorEdit', objData.colors, objData.data.color);
                 fillSelect('#classificationEdit', objData.classifications, objData.data.classification);
+                fillSelect('#guideEdit', objData.guides, objData.data.guide);
                 document.querySelector('#sexoEdit').value = objData.data.sexo;
                 document.querySelector('#incomeWeightEdit').value = objData.data.incomeWeight;
                 document.querySelector('#outputWeightEdit').value = objData.data.outputWeight;
                 document.querySelector('#pricePurchaseEdit').value = objData.data.pricePurchase;
-                document.querySelector('#priceFarmEdit').value = objData.data.priceFarm;
 
             }
             $('#modalCattleEdit').modal('show');

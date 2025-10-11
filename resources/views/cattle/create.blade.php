@@ -119,8 +119,19 @@
                                         <select name="classification" id="classification" class="form-control" required>
                                             <option value="">-- Seleccione --</option>
                                             @foreach($data['classifications'] as $classification)
-                                            <option value="{{ $classification->id }}">{{ $classification->name}}
-                                            </option>
+                                            <option value="{{ $classification->id }}">{{ $classification->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="col-form-label"><i class="fa-solid fa-book"></i> Guía
+                                            <span class="text-danger">*</span></label>
+                                        <select name="guide" id="guide" class="form-control" required>
+                                            <option value="">-- Seleccione --</option>
+                                            @foreach($data['guides'] as $guide)
+                                            <option value="{{ $guide->id }}">{{ $guide->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -166,20 +177,6 @@
                                             </div>
                                             <input type="number" name="pricePurchase" id="pricePurchase"
                                                 class="form-control" step="any" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="col-form-label"><i class="fa-solid fa-money-check-dollar"></i>
-                                            Precio en finca <span class="text-danger">*</span></label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i
-                                                        class="fa-solid fa-dollar-sign"></i></span>
-                                            </div>
-                                            <input type="number" name="priceFarm" id="priceFarm" class="form-control"
-                                                step="any" required>
                                         </div>
                                     </div>
                                 </div>

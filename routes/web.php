@@ -10,6 +10,7 @@ use App\Http\Controllers\StatusProductiveController;
 use App\Http\Controllers\StatusReproductiveController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\ClassificationController;
+use App\Http\Controllers\GuideController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\HerdController;
 use App\Http\Controllers\CattleController;
@@ -19,6 +20,8 @@ use App\Http\Controllers\EstateController;
 use App\Http\Controllers\WorkmanController;
 use App\Http\Controllers\InputController;
 use App\Http\Controllers\DeathController;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\MilkProductionController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanySwitchController;
 
@@ -39,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/chart/productive-stats', [DashboardController::class, 'getProductiveStats']);
     Route::get('/chart/category-stats', [DashboardController::class, 'getCategoryStats']);
     Route::get('/dashboard/data', [DashboardController::class, 'getInputsByOwner']);
+    Route::get('/dashboard/categories-by-sex', [DashboardController::class, 'getCategoriesBySex']);
 
     //CATEGORY
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
@@ -82,6 +86,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/color/getColor/{id}', [ColorController::class, 'getColor'])->name('getColor');
     Route::post('/color/update', [ColorController::class, 'updateColor'])->name('updateColor');
 
+    //GUIDE
+    Route::get('/guide', [GuideController::class, 'index'])->name('guide.index');
+    Route::get('/guide/data', [GuideController::class, 'getGuides']);
+    Route::post('/guide/create', [GuideController::class, 'createGuide'])->name('createGuide');
+    Route::get('/guide/getGuide/{id}', [GuideController::class, 'getGuide'])->name('getGuide');
+    Route::post('/guide/update', [GuideController::class, 'updateGuide'])->name('updateGuide');
+
     //CLASSIFICATION
     Route::get('/classification', [ClassificationController::class, 'index'])->name('classification.index');
     Route::get('/classification/data', [ClassificationController::class, 'getClassifications']);
@@ -115,6 +126,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/cattle/{id}/servicesVeterinarian', [CattleController::class, 'servicesVeterinarian'])->name('cattle.servicesVeterinarian');
     Route::get('/cattle/dataVeterinarian', [CattleController::class, 'getServicesVeterinarian']);
     Route::get('/cattle/getCattleServicesView/{id}', [CattleController::class, 'getCattleServicesView'])->name('getCattleServicesView');
+
+    //SALES
+    Route::get('/sale', [SaleController::class, 'index'])->name('sale.index');
+    Route::get('/sale/data', [SaleController::class, 'getSales']);
+    Route::get('/sale/availableCattles', [SaleController::class, 'getAvailableCattles']);
+    Route::post('/sale/create', [SaleController::class, 'createSale'])->name('createSale');
+    Route::get('/sale/getSale/{id}', [SaleController::class, 'getSale'])->name('getSale');
 
     //VETERINARIAN
     Route::get('/veterinarian', [VeterinarianController::class, 'index'])->name('veterinarian.index');
@@ -196,6 +214,15 @@ Route::middleware('auth')->group(function () {
     // Cambio de empresa
     Route::post('/switch-company', [CompanySwitchController::class, 'switchCompany'])->name('switch.company');
     Route::get('/accessible-companies', [CompanySwitchController::class, 'getAccessibleCompanies'])->name('accessible.companies');
+
+    //MILK PRODUCTION
+    Route::get('/milk', [MilkProductionController::class, 'index'])->name('milk.index');
+    Route::get('/milk/data', [MilkProductionController::class, 'getDailyProduction']);
+    Route::post('/milk/create', [MilkProductionController::class, 'create']);
+    Route::get('/milk/getProduction/{id}', [MilkProductionController::class, 'getProduction']);
+    Route::delete('/milk/delete/{id}', [MilkProductionController::class, 'delete']);
+    Route::get('/milk/report', [MilkProductionController::class, 'report'])->name('milk.report');
+    Route::get('/milk/weeklyReport', [MilkProductionController::class, 'getWeeklyReport']);
 
 });
 

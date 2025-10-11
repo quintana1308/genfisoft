@@ -18,9 +18,9 @@
                 </a>
             </li>
             <li
-                class="{{ ($elementActive ?? '') == 'cattle' || ($elementActive ?? '') == 'cattleCreate' || ($elementActive ?? '') == 'death' ? 'active' : '' }}">
+                class="{{ ($elementActive ?? '') == 'cattle' || ($elementActive ?? '') == 'cattleCreate' || ($elementActive ?? '') == 'death' || ($elementActive ?? '') == 'sale' ? 'active' : '' }}">
                 <a data-toggle="collapse"
-                    aria-expanded="{{ ($elementActive ?? '') == 'cattle' || ($elementActive ?? '') == 'cattleCreate' || ($elementActive ?? '') == 'death' ? 'true' : 'false' }}"
+                    aria-expanded="{{ ($elementActive ?? '') == 'cattle' || ($elementActive ?? '') == 'cattleCreate' || ($elementActive ?? '') == 'death' || ($elementActive ?? '') == 'sale' ? 'true' : 'false' }}"
                     href="#cattle">
                     <i class="fa-solid fa-cow"></i>
                     <p>
@@ -28,7 +28,7 @@
                         <b class="caret"></b>
                     </p>
                 </a>
-                <div class="collapse {{ ($elementActive ?? '') == 'cattle' || ($elementActive ?? '') == 'cattleCreate' || ($elementActive ?? '') == 'death' ? 'show' : '' }}"
+                <div class="collapse {{ ($elementActive ?? '') == 'cattle' || ($elementActive ?? '') == 'cattleCreate' || ($elementActive ?? '') == 'death' || ($elementActive ?? '') == 'sale' ? 'show' : '' }}"
                     id="cattle">
                     <ul class="nav">
                         <li class="{{ ($elementActive ?? '') == 'cattle' ? 'active' : '' }}">
@@ -47,6 +47,41 @@
                             <a href="{{ route('death.index', 'death') }}">
                                 <i class="fa-solid fa-cross"></i>
                                 <p>{{ __('Muertes') }}</p>
+                            </a>
+                        </li>
+                        <li class="{{ ($elementActive ?? '') == 'sale' ? 'active' : '' }}">
+                            <a href="{{ route('sale.index', 'sale') }}">
+                                <i class="fa-solid fa-dollar-sign"></i>
+                                <p>{{ __('Ventas') }}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li
+                class="{{ ($elementActive ?? '') == 'milk' || ($elementActive ?? '') == 'milkReport' ? 'active' : '' }}">
+                <a data-toggle="collapse"
+                    aria-expanded="{{ ($elementActive ?? '') == 'milk' || ($elementActive ?? '') == 'milkReport' ? 'true' : 'false' }}"
+                    href="#milk">
+                    <i class="fa-solid fa-droplet"></i>
+                    <p>
+                        {{ __('Producción de Leche') }}
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse {{ ($elementActive ?? '') == 'milk' || ($elementActive ?? '') == 'milkReport' ? 'show' : '' }}"
+                    id="milk">
+                    <ul class="nav">
+                        <li class="{{ ($elementActive ?? '') == 'milk' ? 'active' : '' }}">
+                            <a href="{{ route('milk.index', 'milk') }}">
+                                <i class="fa-solid fa-clipboard-list"></i>
+                                <p>{{ __('Registro Diario') }}</p>
+                            </a>
+                        </li>
+                        <li class="{{ ($elementActive ?? '') == 'milkReport' ? 'active' : '' }}">
+                            <a href="{{ route('milk.report', 'milkReport') }}">
+                                <i class="fa-solid fa-chart-line"></i>
+                                <p>{{ __('Reporte Semanal') }}</p>
                             </a>
                         </li>
                     </ul>
@@ -115,15 +150,15 @@
                     <p>{{ __('Insumos') }}</p>
                 </a>
             </li>
-            <li class="{{ ($elementActive ?? '') == 'category' || ($elementActive ?? '') == 'causeEntry' || ($elementActive ?? '') == 'statusProductive' || ($elementActive ?? '') == 'statusReproductive' || ($elementActive ?? '') == 'color' || ($elementActive ?? '') == 'classification' || ($elementActive ?? '') == 'herd' || ($elementActive ?? '') == 'owner' ? 'active' : '' }}">
-                <a data-toggle="collapse" aria-expanded="{{ ($elementActive ?? '') == 'category' || ($elementActive ?? '') == 'causeEntry' || ($elementActive ?? '') == 'statusProductive' || ($elementActive ?? '') == 'statusReproductive' || ($elementActive ?? '') == 'color' || ($elementActive ?? '') == 'classification' || ($elementActive ?? '') == 'herd' || ($elementActive ?? '') == 'owner' ? 'true' : 'false' }}" href="#compo">
+            <li class="{{ ($elementActive ?? '') == 'category' || ($elementActive ?? '') == 'causeEntry' || ($elementActive ?? '') == 'statusProductive' || ($elementActive ?? '') == 'statusReproductive' || ($elementActive ?? '') == 'color' || ($elementActive ?? '') == 'classification' || ($elementActive ?? '') == 'herd' || ($elementActive ?? '') == 'owner' || ($elementActive ?? '') == 'guide' ? 'active' : '' }}">
+                <a data-toggle="collapse" aria-expanded="{{ ($elementActive ?? '') == 'category' || ($elementActive ?? '') == 'causeEntry' || ($elementActive ?? '') == 'statusProductive' || ($elementActive ?? '') == 'statusReproductive' || ($elementActive ?? '') == 'color' || ($elementActive ?? '') == 'classification' || ($elementActive ?? '') == 'herd' || ($elementActive ?? '') == 'owner' || ($elementActive ?? '') == 'guide' ? 'true' : 'false' }}" href="#compo">
                     <i class="fa-solid fa-gear"></i>
                     <p>
                         {{ __('Configuración') }}
                         <b class="caret"></b>
                     </p>
                 </a>
-                <div class="collapse {{ ($elementActive ?? '') == 'category' || ($elementActive ?? '') == 'causeEntry' || ($elementActive ?? '') == 'statusProductive' || ($elementActive ?? '') == 'statusReproductive' || ($elementActive ?? '') == 'color' || ($elementActive ?? '') == 'classification' || ($elementActive ?? '') == 'herd' || ($elementActive ?? '') == 'owner' ? 'show' : '' }}" id="compo">
+                <div class="collapse {{ ($elementActive ?? '') == 'category' || ($elementActive ?? '') == 'causeEntry' || ($elementActive ?? '') == 'statusProductive' || ($elementActive ?? '') == 'statusReproductive' || ($elementActive ?? '') == 'color' || ($elementActive ?? '') == 'classification' || ($elementActive ?? '') == 'herd' || ($elementActive ?? '') == 'owner' || ($elementActive ?? '') == 'guide' ? 'show' : '' }}" id="compo">
                     <ul class="nav">
                         <li class="{{ ($elementActive ?? '') == 'category' ? 'active' : '' }}">
                             <a href="{{ route('category.index', 'category') }}">
@@ -159,6 +194,12 @@
                             <a href="{{ route('classification.index', 'classification') }}">
                                 <i class="fa-solid fa-grip"></i>
                                 <p>{{ __('Clasificación') }}</p>
+                            </a>
+                        </li>
+                        <li class="{{ ($elementActive ?? '') == 'guide' ? 'active' : '' }}">
+                            <a href="{{ route('guide.index', 'guide') }}">
+                                <i class="fa-solid fa-book"></i>
+                                <p>{{ __('Guía') }}</p>
                             </a>
                         </li>
                         <li class="{{ ($elementActive ?? '') == 'owner' ? 'active' : '' }}">

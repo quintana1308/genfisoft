@@ -17,6 +17,7 @@ use App\Models\StatusProductive;
 use App\Models\Owner;
 use App\Models\Color;
 use App\Models\Classification;
+use App\Models\Guide;
 
 class Cattle extends Model
 {
@@ -42,11 +43,11 @@ class Cattle extends Model
         'date_birth',
         'color_id',
         'classification_id',
+        'guide_id',
         'sexo',
         'income_weight',
         'output_weight',
         'price_purchase',
-        'price_farm',
         'status_id'
     ];
 
@@ -106,6 +107,11 @@ class Cattle extends Model
         return $this->belongsTo(Classification::class, 'classification_id', 'id');
     }
 
+    public function guide(): BelongsTo
+    {
+        return $this->belongsTo(Guide::class, 'guide_id', 'id');
+    }
+
     public function veterinarians()
     {
         return $this->hasMany(Veterinarian::class, 'cattle_id');
@@ -119,7 +125,7 @@ class Cattle extends Model
         $activeCompanyId = $user->active_company_id;
 
         // Siempre filtrar por empresa activa del usuario
-        $query = Cattle::with('status', 'veterinarians')
+        $query = Cattle::with('status', 'veterinarians', 'herd', 'category', 'classification', 'causeEntry')
             ->where('company_id', $activeCompanyId);
 
         $cattles = $query->get();
@@ -151,11 +157,14 @@ class Cattle extends Model
             ->addColumn('status', function ($cattle) {
                 $statusName = $cattle->status ? $cattle->status->name : 'Sin estado';
 
-                // Personalizar cattlees
+                // Personalizar colores
                 $badgeClass = match (strtolower($statusName)) {
                     'activo' => '#44C47D',
                     'inactivo' => '#DC3545',
-                    'referencia' => '#9c27b0'
+                    'referencia' => '#9c27b0',
+                    'muerto' => '#000000',
+                    'vendido' => '#FF9800',
+                    default => '#6c757d'
                 };
 
                 return '<span class="badge badge-default text-white p-2" style="background-color:' . $badgeClass . '; border-color:' . $badgeClass . '">' . $statusName . '</span>';
@@ -163,7 +172,12 @@ class Cattle extends Model
             ->addColumn('options', function ($cattle) {
                 $id = $cattle->id;
                 $btnView = '<button class="btn btn-info btn-link btn-sm btn-icon" onClick="viewCattle(`' . $id . '`)"><i class="fa-solid fa-eye"></i></button>';
-                $btnEdit = '<button class="btn btn-info btn-link btn-sm btn-icon" onClick="editCattle(`' . $id . '`)"><i class="fa-solid fa-pen-to-square"></i></button>';
+                
+                // Si el animal está vendido (status_id = 4), no mostrar botón de editar
+                $btnEdit = '';
+                if ($cattle->status_id != 4) {
+                    $btnEdit = '<button class="btn btn-info btn-link btn-sm btn-icon" onClick="editCattle(`' . $id . '`)"><i class="fa-solid fa-pen-to-square"></i></button>';
+                }
                 
                 $btnService = '';
                 if ($cattle->veterinarians->count() > 0) {
@@ -212,13 +226,13 @@ class Cattle extends Model
         $fathers = Cattle::where('company_id', $activeCompanyId)
             ->where('sexo', 'Macho')
             ->whereNotNull('code')
-            ->whereNotIn('status_id', [2, 3])
+            ->whereNotIn('status_id', [2, 3, 4]) // Excluir muertos, inactivos y vendidos
             ->get();
         
         $mothers = Cattle::where('company_id', $activeCompanyId)
             ->where('sexo', 'Hembra')
             ->whereNotNull('code')
-            ->whereNotIn('status_id', [2, 3])
+            ->whereNotIn('status_id', [2, 3, 4]) // Excluir muertos, inactivos y vendidos
             ->get();
         
         $colors = Color::where('company_id', $activeCompanyId)
@@ -226,6 +240,10 @@ class Cattle extends Model
             ->get();
         
         $classifications = Classification::where('company_id', $activeCompanyId)
+            ->whereNotIn('status_id', [2, 3])
+            ->get();
+        
+        $guides = Guide::where('company_id', $activeCompanyId)
             ->whereNotIn('status_id', [2, 3])
             ->get();
         
@@ -240,7 +258,8 @@ class Cattle extends Model
             'fathers' => $fathers,
             'mothers' => $mothers,
             'colors' => $colors,
-            'classifications' => $classifications
+            'classifications' => $classifications,
+            'guides' => $guides
         ];
     }
 
@@ -270,13 +289,13 @@ class Cattle extends Model
             'date_birth' => $request->dateBirth,
             'color_id' => $request->color,
             'classification_id' => $request->classification,
+            'guide_id' => $request->guide,
             'sexo' => $request->sexo,
             'user_id' => $userId,
             'company_id' => $activeCompanyId,
             'income_weight' => $request->incomeWeight,
             'output_weight' => $request->outputWeight,
-            'price_purchase' => $request->pricePurchase,
-            'price_farm' => $request->priceFarm
+            'price_purchase' => $request->pricePurchase
 
         ]);
 
@@ -314,6 +333,7 @@ class Cattle extends Model
         $statusReproductives = StatusReproductive::where('company_id', $activeCompanyId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
         $fathers = Cattle::where('company_id', $activeCompanyId)->where('sexo', 'Macho')->whereNotIn('status_id', [2, 3])->orderBy('code')->get(['id', 'code']);
         $mothers = Cattle::where('company_id', $activeCompanyId)->where('sexo', 'Hembra')->whereNotIn('status_id', [2, 3])->orderBy('code')->get(['id', 'code']);
+        $guides = Guide::where('company_id', $activeCompanyId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
 
         $data =  response()->json([
             'status' => true,
@@ -334,13 +354,13 @@ class Cattle extends Model
                 'dateBirth' => $cattle->date_birth,
                 'color' => optional($cattle->color)->id,
                 'classification' => optional($cattle->classification)->id,
+                'guide' => optional($cattle->guide)->id,
                 'sexo' => $cattle->sexo,
                 'name' => $cattle->name,
                 'status_id' => $cattle->status_id,
                 'incomeWeight' => $cattle->income_weight,
                 'outputWeight' => $cattle->output_weight,
                 'pricePurchase' => $cattle->price_purchase,
-                'priceFarm' => $cattle->price_farm,
             ],
             'statuses' => $statuses,
             'categories' => $categories,
@@ -352,7 +372,8 @@ class Cattle extends Model
             'statusReproductives' => $statusReproductives,
             'statusProductives' => $statusProductives,
             'fathers' => $fathers,
-            'mothers' => $mothers
+            'mothers' => $mothers,
+            'guides' => $guides
         ]);
 
         return $data;
@@ -373,6 +394,7 @@ class Cattle extends Model
                                 'owner',
                                 'color',
                                 'classification',
+                                'guide',
                                 'status'])
                 ->where('id', $id)
                 ->where('company_id', $activeCompanyId)
@@ -384,9 +406,19 @@ class Cattle extends Model
                 'msg' => 'Datos no encontrados.'
             ]);
         }else{
+            // Obtener hijos donde este animal es padre o madre
+            $children = Cattle::where('company_id', $activeCompanyId)
+                ->where(function($query) use ($id) {
+                    $query->where('father_id', $id)
+                          ->orWhere('mother_id', $id);
+                })
+                ->select('id', 'code', 'sexo', 'date_birth', 'father_id', 'mother_id')
+                ->get();
+
             $data = response()->json([
                 'status' => true,
-                'cattle' => $cattle
+                'cattle' => $cattle,
+                'children' => $children
             ]);
         }
 
@@ -418,11 +450,11 @@ class Cattle extends Model
         $cattle->date_birth = $request->dateBirthEdit;
         $cattle->color_id = $request->colorEdit;
         $cattle->classification_id = $request->classificationEdit;
+        $cattle->guide_id = $request->guideEdit ?: null;
         $cattle->sexo = $request->sexoEdit;
         $cattle->income_weight = $request->incomeWeightEdit;
         $cattle->output_weight = $request->outputWeightEdit;
         $cattle->price_purchase = $request->pricePurchaseEdit;
-        $cattle->price_farm = $request->priceFarmEdit;
 
 
         if ($cattle->save()) {
