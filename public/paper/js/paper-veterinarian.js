@@ -76,18 +76,14 @@ veterinarian = {
 
                 const cattle = document.querySelector("#cattleForm").value;
                 const product = document.querySelector("#product").value;
-                const symptoms = document.querySelector("#symptoms").value;
                 const dateStart = document.querySelector("#dateStart").value;
                 const dateEnd = document.querySelector("#dateEnd").value;
-                const observation = document.querySelector("#observation").value;
 
                 const campos = [
                     { campo: cattle, nombre: "'Animal'" },
                     { campo: product, nombre: "'Producto'" },
-                    { campo: symptoms, nombre: "'Síntoma'" },
                     { campo: dateStart, nombre: "'Fecha de ingreso'" },
-                    { campo: dateEnd, nombre: "'Fecha de salida'" },
-                    { campo: observation, nombre: "'Observación'" }
+                    { campo: dateEnd, nombre: "'Fecha de salida'" }
                 ];
 
                 for (const { campo, nombre } of campos) {
@@ -140,8 +136,7 @@ veterinarian = {
                     { id: "#productEdit", nombre: "Producto" },
                     { id: "#statusEdit", nombre: "Estado" },
                     { id: "#dateStartEdit", nombre: "Fecha de ingreso" },
-                    { id: "#dateEndEdit", nombre: "Fecha de salida" },
-                    { id: "#observationEdit", nombre: "Observación" }
+                    { id: "#dateEndEdit", nombre: "Fecha de salida" }
                 ];
 
                 for (let campo of campos) {

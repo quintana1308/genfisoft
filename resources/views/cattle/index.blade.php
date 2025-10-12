@@ -30,7 +30,7 @@
                                         <th>Categoría</th>
                                         <th>Clasificación</th>
                                         <th>F. de entrada</th>
-                                        <th>Causa de entrada</th>
+                                        <th>C. de entrada</th>
                                         <th>Estado</th>
                                         <th class="text-center">Acción</th>
                                     </tr>
@@ -225,10 +225,9 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="col-form-label">Proxima revisión <span
-                                                class="text-danger">*</span></label>
+                                        <label class="col-form-label">Proxima revisión</label>
                                         <input type="date" name="dateRevisionEdit" id="dateRevisionEdit"
-                                            class="form-control" required>
+                                            class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -259,9 +258,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="col-form-label">Guía <span
-                                                class="text-danger">*</span></label>
-                                        <select name="guideEdit" id="guideEdit" class="form-control" required>
+                                        <label class="col-form-label">Guía</label>
+                                        <select name="guideEdit" id="guideEdit" class="form-control">
                                             <option value="">-- Seleccione --</option>
                                         </select>
                                     </div>

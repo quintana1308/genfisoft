@@ -1,0 +1,489 @@
+/* ========================================
+   PALETA DE COLORES GIRASOL - GENFISOFT
+   ======================================== */
+
+:root {
+  /* Colores principales de la paleta girasol */
+  --sunflower-green-dark: #4A5D23;
+  --sunflower-green-olive: #A8A060;
+  --sunflower-orange-dark: #D85F1F;
+  --sunflower-orange-medium: #F39237;
+  --sunflower-yellow-bright: #FFD700;
+  --sunflower-yellow-mustard: #E8B923;
+  --sunflower-green-medium: #6B7C2E;
+  --sunflower-orange-terracotta: #C67D35;
+  --sunflower-yellow-soft: #FFC857;
+  --sunflower-green-olive-light: #8B9556;
+
+  /* Colores primarios del sistema */
+  --primary-color: #4A5D23;
+  --secondary-color: #F39237;
+  --accent-color: #FFD700;
+  --success-color: #6B7C2E;
+  --warning-color: #E8B923;
+  --danger-color: #D85F1F;
+  --info-color: #A8A060;
+
+  /* Colores de fondo */
+  --bg-primary: #FFFEF7;
+  --bg-secondary: #FFF9E6;
+  --bg-card: #FFFFFF;
+  
+  /* Colores de texto */
+  --text-primary: #2C3E10;
+  --text-secondary: #5A6B3D;
+  --text-muted: #8B9556;
+  --text-white: #FFFFFF;
+
+  /* Bordes */
+  --border-color: #D4D8C8;
+  --border-color-light: #E8EBE0;
+
+  /* Sombras */
+  --shadow-sm: 0 1px 3px rgba(74, 93, 35, 0.1);
+  --shadow-md: 0 4px 6px rgba(74, 93, 35, 0.15);
+  --shadow-lg: 0 10px 15px rgba(74, 93, 35, 0.2);
+
+  /* Gradientes */
+  --gradient-primary: linear-gradient(135deg, #4A5D23 0%, #6B7C2E 100%);
+  --gradient-warm: linear-gradient(135deg, #F39237 0%, #FFD700 100%);
+  --gradient-sunset: linear-gradient(135deg, #D85F1F 0%, #F39237 50%, #FFD700 100%);
+}
+
+/* ========================================
+   ESTILOS GLOBALES
+   ======================================== */
+
+/* Botones primarios */
+.btn-primary,
+.btn.btn-primary {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--text-white) !important;
+}
+
+.btn-primary:hover,
+.btn.btn-primary:hover {
+  background: var(--sunflower-green-medium) !important;
+  border-color: var(--sunflower-green-medium) !important;
+}
+
+/* Botones secundarios */
+.btn-secondary {
+  background: var(--secondary-color) !important;
+  border-color: var(--secondary-color) !important;
+  color: var(--text-white) !important;
+}
+
+.btn-secondary:hover {
+  background: var(--sunflower-orange-terracotta) !important;
+  border-color: var(--sunflower-orange-terracotta) !important;
+}
+
+/* Botones de éxito */
+.btn-success {
+  background: var(--success-color) !important;
+  border-color: var(--success-color) !important;
+  color: var(--text-white) !important;
+}
+
+.btn-success:hover {
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+/* Botones de advertencia */
+.btn-warning {
+  background: var(--warning-color) !important;
+  border-color: var(--warning-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.btn-warning:hover {
+  background: var(--sunflower-yellow-bright) !important;
+  border-color: var(--sunflower-yellow-bright) !important;
+}
+
+/* Botones de peligro */
+.btn-danger {
+  background: var(--danger-color) !important;
+  border-color: var(--danger-color) !important;
+  color: var(--text-white) !important;
+}
+
+.btn-danger:hover {
+  background: #B84F18 !important;
+  border-color: #B84F18 !important;
+}
+
+/* Botones de información */
+.btn-info {
+  background: var(--info-color) !important;
+  border-color: var(--info-color) !important;
+  color: var(--text-white) !important;
+}
+
+.btn-info:hover {
+  background: var(--sunflower-green-olive-light) !important;
+  border-color: var(--sunflower-green-olive-light) !important;
+}
+
+/* ========================================
+   TEXTOS CON COLORES
+   ======================================== */
+
+.text-success {
+  color: var(--success-color) !important;
+}
+
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.text-warning {
+  color: var(--warning-color) !important;
+}
+
+.text-danger {
+  color: var(--danger-color) !important;
+}
+
+.text-info {
+  color: var(--info-color) !important;
+}
+
+/* ========================================
+   ICONOS CON COLORES
+   ======================================== */
+
+.fa-solid.text-success,
+.fa.text-success,
+i.text-success {
+  color: var(--success-color) !important;
+}
+
+.fa-solid.text-primary,
+.fa.text-primary,
+i.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.fa-solid.text-warning,
+.fa.text-warning,
+i.text-warning {
+  color: var(--warning-color) !important;
+}
+
+.fa-solid.text-danger,
+.fa.text-danger,
+i.text-danger {
+  color: var(--danger-color) !important;
+}
+
+.fa-solid.text-info,
+.fa.text-info,
+i.text-info {
+  color: var(--info-color) !important;
+}
+
+/* ========================================
+   BADGES Y ETIQUETAS
+   ======================================== */
+
+.badge-success {
+  background-color: var(--success-color) !important;
+  color: var(--text-white) !important;
+}
+
+.badge-primary {
+  background-color: var(--primary-color) !important;
+  color: var(--text-white) !important;
+}
+
+.badge-warning {
+  background-color: var(--warning-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.badge-danger {
+  background-color: var(--danger-color) !important;
+  color: var(--text-white) !important;
+}
+
+.badge-info {
+  background-color: var(--info-color) !important;
+  color: var(--text-white) !important;
+}
+
+/* ========================================
+   ALERTAS
+   ======================================== */
+
+.alert-success {
+  background-color: rgba(107, 124, 46, 0.1) !important;
+  border-color: var(--success-color) !important;
+  color: var(--success-color) !important;
+}
+
+.alert-warning {
+  background-color: rgba(232, 185, 35, 0.1) !important;
+  border-color: var(--warning-color) !important;
+  color: var(--warning-color) !important;
+}
+
+.alert-danger {
+  background-color: rgba(216, 95, 31, 0.1) !important;
+  border-color: var(--danger-color) !important;
+  color: var(--danger-color) !important;
+}
+
+.alert-info {
+  background-color: rgba(168, 160, 96, 0.1) !important;
+  border-color: var(--info-color) !important;
+  color: var(--info-color) !important;
+}
+
+/* ========================================
+   TARJETAS (CARDS)
+   ======================================== */
+
+.card {
+  border-color: var(--border-color-light) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.card-header {
+  background-color: var(--bg-secondary) !important;
+  border-bottom-color: var(--border-color) !important;
+}
+
+.card-header.bg-primary {
+  background: var(--gradient-primary) !important;
+  color: var(--text-white) !important;
+}
+
+/* ========================================
+   TABLAS
+   ======================================== */
+
+.table thead th {
+  background-color: var(--primary-color) !important;
+  color: var(--text-white) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.thead-light th {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 253, 247, 0.5) !important;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(232, 185, 35, 0.1) !important;
+}
+
+/* ========================================
+   FORMULARIOS
+   ======================================== */
+
+.form-control:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 0.2rem rgba(74, 93, 35, 0.25) !important;
+}
+
+.form-check-input:checked {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+/* ========================================
+   NAVEGACIÓN Y SIDEBAR
+   ======================================== */
+
+/* Sidebar - Enlaces activos */
+.sidebar .nav-link.active,
+.sidebar .sidebar-nav .nav-link.active,
+.sidebar-wrapper .nav-link.active {
+  background-color: var(--primary-color) !important;
+  color: var(--text-white) !important;
+}
+
+/* Sidebar - Enlaces hover */
+.sidebar .nav-link:hover,
+.sidebar .sidebar-nav .nav-link:hover,
+.sidebar-wrapper .nav-link:hover {
+  background-color: rgba(74, 93, 35, 0.1) !important;
+  color: var(--primary-color) !important;
+}
+
+/* Sidebar - Iconos en enlaces activos */
+.sidebar .nav-link.active i,
+.sidebar .sidebar-nav .nav-link.active i,
+.sidebar-wrapper .nav-link.active i {
+  color: var(--text-white) !important;
+}
+
+/* Sidebar - Iconos en enlaces hover */
+.sidebar .nav-link:hover i,
+.sidebar .sidebar-nav .nav-link:hover i,
+.sidebar-wrapper .nav-link:hover i {
+  color: var(--primary-color) !important;
+}
+
+/* Sidebar - Texto en enlaces */
+.sidebar .nav-link p,
+.sidebar .sidebar-nav .nav-link p,
+.sidebar-wrapper .nav-link p {
+  margin: 0;
+}
+
+/* Sidebar - Botones de toolbar */
+.sidebar .sidebar-toolbar .btn:hover,
+.sidebar-wrapper .sidebar-toolbar .btn:hover {
+  background-color: var(--primary-color) !important;
+  color: var(--text-white) !important;
+}
+
+/* Sidebar - Color activo (sobrescribe data-active-color) */
+.sidebar[data-active-color] .nav-link.active,
+.sidebar[data-active-color="danger"] .nav-link.active,
+.sidebar .nav li.active > a {
+  background-color: var(--primary-color) !important;
+  color: var(--text-white) !important;
+}
+
+/* Sidebar - Iconos y texto en elementos activos */
+.sidebar[data-active-color] .nav-link.active i,
+.sidebar[data-active-color="danger"] .nav-link.active i,
+.sidebar .nav li.active > a i {
+  color: var(--text-white) !important;
+}
+
+.sidebar[data-active-color] .nav-link.active p,
+.sidebar[data-active-color="danger"] .nav-link.active p,
+.sidebar .nav li.active > a p {
+  color: var(--text-white) !important;
+}
+
+/* ========================================
+   PAGINACIÓN
+   ======================================== */
+
+.pagination .page-item.active .page-link {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--text-white) !important;
+}
+
+.pagination .page-link {
+  color: var(--primary-color) !important;
+}
+
+.pagination .page-link:hover {
+  background-color: rgba(74, 93, 35, 0.1) !important;
+  color: var(--primary-color) !important;
+}
+
+/* ========================================
+   PROGRESS BARS
+   ======================================== */
+
+.progress-bar {
+  background-color: var(--primary-color) !important;
+}
+
+.progress-bar.bg-success {
+  background-color: var(--success-color) !important;
+}
+
+.progress-bar.bg-warning {
+  background-color: var(--warning-color) !important;
+}
+
+.progress-bar.bg-danger {
+  background-color: var(--danger-color) !important;
+}
+
+/* ========================================
+   LINKS
+   ======================================== */
+
+a {
+  color: var(--primary-color) !important;
+}
+
+a:hover {
+  color: var(--sunflower-green-medium) !important;
+}
+
+/* ========================================
+   MODALES
+   ======================================== */
+
+.modal-header {
+  background: var(--gradient-primary) !important;
+  color: var(--text-white) !important;
+}
+
+.modal-header .close,
+.modal-header .btn-close {
+  color: var(--text-white) !important;
+}
+
+/* ========================================
+   DATATABLE BUTTONS
+   ======================================== */
+
+.dt-buttons .btn {
+  margin-right: 5px !important;
+}
+
+.dt-buttons .btn-secondary {
+  background-color: var(--sunflower-green-olive) !important;
+  border-color: var(--sunflower-green-olive) !important;
+}
+
+.dt-buttons .btn-success {
+  background-color: var(--success-color) !important;
+  border-color: var(--success-color) !important;
+}
+
+.dt-buttons .btn-danger {
+  background-color: var(--danger-color) !important;
+  border-color: var(--danger-color) !important;
+}
+
+/* ========================================
+   UTILIDADES
+   ======================================== */
+
+.bg-sunflower-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.bg-sunflower-gradient {
+  background: var(--gradient-warm) !important;
+}
+
+.border-sunflower {
+  border-color: var(--primary-color) !important;
+}
+
+/* ========================================
+   EFECTOS Y ANIMACIONES
+   ======================================== */
+
+.btn,
+.card,
+.form-control {
+  transition: all 0.3s ease !important;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md) !important;
+  transform: translateY(-2px);
+}

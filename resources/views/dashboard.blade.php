@@ -282,27 +282,23 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 const ctx = document.getElementById('reproductiveChart').getContext('2d');
 
-                // 📌 Encontrar el valor máximo
-                const maxValue = Math.max(...data.counts);
+                // 📌 Paleta de colores inspirada en girasoles
+                const colorPalette = [
+                    '#4A5D23', // Verde oscuro
+                    '#A8A060', // Verde oliva/beige
+                    '#D85F1F', // Naranja oscuro
+                    '#F39237', // Naranja medio
+                    '#FFD700', // Amarillo brillante
+                    '#E8B923', // Amarillo mostaza
+                    '#6B7C2E', // Verde medio
+                    '#C67D35', // Naranja terracota
+                    '#FFC857', // Amarillo suave
+                    '#8B9556'  // Verde oliva claro
+                ];
 
-                // 📌 Función para aclarar un color
-                function lightenColor(hex, percent) {
-                    const num = parseInt(hex.replace("#", ""), 16);
-                    const r = Math.min(255, Math.floor((num >> 16) + (255 - (num >> 16)) * percent / 100));
-                    const g = Math.min(255, Math.floor(((num >> 8) & 0x00FF) + (255 - ((num >> 8) &
-                        0x00FF)) *
-                        percent / 100));
-                    const b = Math.min(255, Math.floor((num & 0x0000FF) + (255 - (num & 0x0000FF)) *
-                        percent /
-                        100));
-                    return `rgb(${r},${g},${b})`;
-                }
-
-                // 📌 Generar colores según el valor (más alto = oscuro, más bajo = claro)
-                const baseColor = "#2B6E3D";
-                const backgroundColors = data.counts.map(value => {
-                    const diffPercent = ((maxValue - value) / maxValue) * 60; // hasta 60% más claro
-                    return lightenColor(baseColor, diffPercent);
+                // 📌 Asignar colores según el índice
+                const backgroundColors = data.labels.map((_, index) => {
+                    return colorPalette[index % colorPalette.length];
                 });
 
                 new Chart(ctx, {
@@ -374,27 +370,23 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 const ctx = document.getElementById('productiveChart').getContext('2d');
 
-                // 📌 Encontrar el valor máximo
-                const maxValue = Math.max(...data.counts);
+                // 📌 Paleta de colores inspirada en girasoles
+                const colorPalette = [
+                    '#4A5D23', // Verde oscuro
+                    '#A8A060', // Verde oliva/beige
+                    '#D85F1F', // Naranja oscuro
+                    '#F39237', // Naranja medio
+                    '#FFD700', // Amarillo brillante
+                    '#E8B923', // Amarillo mostaza
+                    '#6B7C2E', // Verde medio
+                    '#C67D35', // Naranja terracota
+                    '#FFC857', // Amarillo suave
+                    '#8B9556'  // Verde oliva claro
+                ];
 
-                // 📌 Función para aclarar un color
-                function lightenColor(hex, percent) {
-                    const num = parseInt(hex.replace("#", ""), 16);
-                    const r = Math.min(255, Math.floor((num >> 16) + (255 - (num >> 16)) * percent / 100));
-                    const g = Math.min(255, Math.floor(((num >> 8) & 0x00FF) + (255 - ((num >> 8) &
-                        0x00FF)) *
-                        percent / 100));
-                    const b = Math.min(255, Math.floor((num & 0x0000FF) + (255 - (num & 0x0000FF)) *
-                        percent /
-                        100));
-                    return `rgb(${r},${g},${b})`;
-                }
-
-                // 📌 Generar colores según el valor (más alto = oscuro, más bajo = claro)
-                const baseColor = "#2B6E3D";
-                const backgroundColors = data.counts.map(value => {
-                    const diffPercent = ((maxValue - value) / maxValue) * 60; // hasta 60% más claro
-                    return lightenColor(baseColor, diffPercent);
+                // 📌 Asignar colores según el índice
+                const backgroundColors = data.labels.map((_, index) => {
+                    return colorPalette[index % colorPalette.length];
                 });
 
                 new Chart(ctx, {
@@ -466,27 +458,23 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 const ctx = document.getElementById('categoryChart').getContext('2d');
 
-                // 📌 Encontrar el valor máximo
-                const maxValue = Math.max(...data.counts);
+                // 📌 Paleta de colores inspirada en girasoles
+                const colorPalette = [
+                    '#4A5D23', // Verde oscuro
+                    '#A8A060', // Verde oliva/beige
+                    '#D85F1F', // Naranja oscuro
+                    '#F39237', // Naranja medio
+                    '#FFD700', // Amarillo brillante
+                    '#E8B923', // Amarillo mostaza
+                    '#6B7C2E', // Verde medio
+                    '#C67D35', // Naranja terracota
+                    '#FFC857', // Amarillo suave
+                    '#8B9556'  // Verde oliva claro
+                ];
 
-                // 📌 Función para aclarar un color
-                function lightenColor(hex, percent) {
-                    const num = parseInt(hex.replace("#", ""), 16);
-                    const r = Math.min(255, Math.floor((num >> 16) + (255 - (num >> 16)) * percent / 100));
-                    const g = Math.min(255, Math.floor(((num >> 8) & 0x00FF) + (255 - ((num >> 8) &
-                        0x00FF)) *
-                        percent / 100));
-                    const b = Math.min(255, Math.floor((num & 0x0000FF) + (255 - (num & 0x0000FF)) *
-                        percent /
-                        100));
-                    return `rgb(${r},${g},${b})`;
-                }
-
-                // 📌 Generar colores según el valor (más alto = oscuro, más bajo = claro)
-                const baseColor = "#2B6E3D";
-                const backgroundColors = data.counts.map(value => {
-                    const diffPercent = ((maxValue - value) / maxValue) * 60; // hasta 60% más claro
-                    return lightenColor(baseColor, diffPercent);
+                // 📌 Asignar colores según el índice
+                const backgroundColors = data.labels.map((_, index) => {
+                    return colorPalette[index % colorPalette.length];
                 });
 
                 new Chart(ctx, {

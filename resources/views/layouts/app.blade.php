@@ -23,6 +23,8 @@
     <link href="{{ asset('paper') }}/css/paper-dashboard.css?v=2.0.0" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('paper') }}/demo/demo.css" rel="stylesheet" />
+    <!-- Sunflower Theme - Paleta de colores personalizada -->
+    <link href="{{ asset('css') }}/sunflower-theme.css" rel="stylesheet" />
 
     <!-- datatable -->
 	<link href="{{ asset('plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />

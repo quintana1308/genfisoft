@@ -46,8 +46,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="col-form-label"><i class="fa-solid fa-stethoscope"></i> Síntoma
-                                            <span class="text-danger">*</span></label>
+                                        <label class="col-form-label"><i class="fa-solid fa-stethoscope"></i> Síntoma</label>
                                         <input type="text" name="symptoms" id="symptoms" class="form-control"
                                             placeholder="Síntoma">
                                     </div>
@@ -83,10 +82,8 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="col-form-label"><i class="fa-solid fa-eye"></i> Observación <span
-                                                class="text-danger">*</span></label>
-                                        <textarea name="observation" id="observation" class="form-control"
-                                            required></textarea>
+                                        <label class="col-form-label"><i class="fa-solid fa-eye"></i> Observación</label>
+                                        <textarea name="observation" id="observation" class="form-control"></textarea>
                                     </div>
                                 </div>
                             </div>

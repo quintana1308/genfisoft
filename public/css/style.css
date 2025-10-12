@@ -1,20 +1,26 @@
-/* Variables de Color */
+/* Variables de Color - Paleta Girasol */
 :root {
-  --color-bg-light: #f8f9fa;
+  --color-bg-light: #FFFEF7;
   --color-bg-dark: #161616;
   --color-text-light: #e0e0e0;
-  --color-text-dark: #000;
-  --color-border-light: #dddddd;
+  --color-text-dark: #2C3E10;
+  --color-border-light: #D4D8C8;
   --color-border-dark: #333;
-  --color-header-light: #35c896;
-  --color-header-update: #007bff;
-  --color-btn-gradient-1: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
-  --color-btn-gradient-2: linear-gradient(to right, #f5ce62, #e43603, #fa7199, #e85a19);
+  --color-header-light: #4A5D23;
+  --color-header-update: #F39237;
+  --color-btn-gradient-1: linear-gradient(to right, #4A5D23, #6B7C2E, #8B9556, #A8A060);
+  --color-btn-gradient-2: linear-gradient(to right, #D85F1F, #F39237, #E8B923, #FFD700);
   --color-background-color-table: #443f3f;
   --color-background-color-oscuro: #161616;
-  --color-background-color-verde: #20D489;
+  --color-background-color-verde: #6B7C2E;
 
-  /* Añadir más variables de colores según sea necesario */
+  /* Variables adicionales de la paleta girasol */
+  --sunflower-green-dark: #4A5D23;
+  --sunflower-green-olive: #A8A060;
+  --sunflower-orange-dark: #D85F1F;
+  --sunflower-orange-medium: #F39237;
+  --sunflower-yellow-bright: #FFD700;
+  --sunflower-yellow-mustard: #E8B923;
 
   --color-background-color: #2a2a2a;
   --color-background-color-arriba: #443f3f;
@@ -22,7 +28,6 @@
 
 /* Estilos generales*/
 /*--------------------------------------*/
-
 /********************/
 /* Modo Claro */
 /********************/

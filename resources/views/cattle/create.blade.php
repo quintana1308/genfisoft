@@ -83,9 +83,8 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="col-form-label"><i class="fa-solid fa-calendar-days"></i> Proxima
-                                            revisión <span class="text-danger">*</span></label>
-                                        <input type="date" name="dateRevision" id="dateRevision" class="form-control"
-                                            required>
+                                            revisión</label>
+                                        <input type="date" name="dateRevision" id="dateRevision" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -126,9 +125,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="col-form-label"><i class="fa-solid fa-book"></i> Guía
-                                            <span class="text-danger">*</span></label>
-                                        <select name="guide" id="guide" class="form-control" required>
+                                        <label class="col-form-label"><i class="fa-solid fa-book"></i> Guía</label>
+                                        <select name="guide" id="guide" class="form-control">
                                             <option value="">-- Seleccione --</option>
                                             @foreach($data['guides'] as $guide)
                                             <option value="{{ $guide->id }}">{{ $guide->name}}</option>
