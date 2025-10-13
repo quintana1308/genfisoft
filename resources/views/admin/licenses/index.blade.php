@@ -5,129 +5,151 @@
 
 @section('content')
 <div class="content">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col-8">
-                            <h4 class="card-title">
-                                <i class="nc-icon nc-key-25"></i> Licencias de {{ $company->name }}
-                            </h4>
+    
+    <!-- Header de la página -->
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-1" style="font-weight: 800; color: #262626;">
+                        <i class="fa-solid fa-key" style="color: #6B8E3F;"></i>
+                        Licencias de {{ $company->name }}
+                    </h2>
+                    <p class="text-muted mb-0">Gestiona las licencias de la empresa</p>
+                </div>
+                <div class="d-flex gap-2" style="gap: 0.5rem;">
+                    <a href="{{ route('admin.companies') }}" class="btn btn-outline-secondary" style="padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600;">
+                        <i class="fa-solid fa-arrow-left"></i> Volver
+                    </a>
+                    <a href="{{ route('admin.licenses.create', $company->id) }}" class="btn" style="background: #6B8E3F; color: white; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; border: none;">
+                        <i class="fa-solid fa-plus"></i> Nueva Licencia
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tarjetas de Información -->
+    <div class="row mb-4">
+        <!-- Card Usuarios -->
+        <div class="col-md-3 mb-3">
+            <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden; background: linear-gradient(to right, #F4F7F0, white);">
+                <div class="card-body" style="padding: 1.25rem;">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <p style="margin: 0; font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px;">Usuarios</p>
+                            <h3 style="margin: 0.5rem 0 0 0; font-weight: 800; color: #262626; font-size: 2rem;">{{ $company->users()->count() }}</h3>
                         </div>
-                        <div class="col-4 text-right">
-                            <a href="{{ route('admin.licenses.create', $company->id) }}" class="btn btn-success btn-sm">
-                                <i class="nc-icon nc-simple-add"></i> Nueva Licencia
-                            </a>
-                            <a href="{{ route('admin.companies') }}" class="btn btn-secondary btn-sm">
-                                <i class="nc-icon nc-minimal-left"></i> Volver
-                            </a>
+                        <div style="width: 60px; height: 60px; border-radius: 12px; background: #D1FAE5; display: flex; align-items: center; justify-content: center;">
+                            <i class="fa-solid fa-users" style="font-size: 1.5rem; color: #059669;"></i>
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <!-- Información de la empresa -->
-                    <div class="row mb-4">
-                        <div class="col-md-3">
-                            <div class="card card-stats">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-5 col-md-4">
-                                            <div class="icon-big text-center icon-warning">
-                                                <i class="nc-icon nc-single-02 text-success"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-7 col-md-8">
-                                            <div class="numbers">
-                                                <p class="card-category">Usuarios</p>
-                                                <p class="card-title">{{ $company->users()->count() }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+            </div>
+        </div>
+
+        <!-- Card Estado Actual -->
+        <div class="col-md-3 mb-3">
+            <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden; background: linear-gradient(to right, #F4F7F0, white);">
+                <div class="card-body" style="padding: 1.25rem;">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <p style="margin: 0; font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px;">Estado Actual</p>
+                            <h3 style="margin: 0.5rem 0 0 0; font-weight: 800; font-size: 1.25rem; 
+                                @if($company->license && $company->license->isValid())
+                                    color: #059669;
+                                @else
+                                    color: #DC2626;
+                                @endif
+                            ">
+                                @if($company->license && $company->license->isValid())
+                                    Activa
+                                @else
+                                    Sin Licencia
+                                @endif
+                            </h3>
                         </div>
-                        <div class="col-md-3">
-                            <div class="card card-stats">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-5 col-md-4">
-                                            <div class="icon-big text-center icon-warning">
-                                                <i class="nc-icon nc-key-25 text-info"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-7 col-md-8">
-                                            <div class="numbers">
-                                                <p class="card-category">Estado Actual</p>
-                                                <p class="card-title">
-                                                    @if($company->license && $company->license->isValid())
-                                                        <span class="text-success">Activa</span>
-                                                    @else
-                                                        <span class="text-danger">Sin Licencia</span>
-                                                    @endif
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card card-stats">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-5 col-md-4">
-                                            <div class="icon-big text-center icon-warning">
-                                                <i class="nc-icon nc-calendar-60 text-warning"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-7 col-md-8">
-                                            <div class="numbers">
-                                                <p class="card-category">Vence</p>
-                                                <p class="card-title">
-                                                    @if($company->license)
-                                                        {{ $company->license->end_date->format('d/m/Y') }}
-                                                    @else
-                                                        N/A
-                                                    @endif
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card card-stats">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-5 col-md-4">
-                                            <div class="icon-big text-center icon-warning">
-                                                <i class="nc-icon nc-time-alarm text-danger"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-7 col-md-8">
-                                            <div class="numbers">
-                                                <p class="card-category">Días Restantes</p>
-                                                <p class="card-title">
-                                                    @if($company->license && $company->license->isValid())
-                                                        {{ $company->getDaysUntilExpiration() }}
-                                                    @else
-                                                        0
-                                                    @endif
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div style="width: 60px; height: 60px; border-radius: 12px; 
+                            @if($company->license && $company->license->isValid())
+                                background: #D1FAE5;
+                            @else
+                                background: #FEE2E2;
+                            @endif
+                            display: flex; align-items: center; justify-content: center;">
+                            <i class="fa-solid fa-key" style="font-size: 1.5rem; 
+                                @if($company->license && $company->license->isValid())
+                                    color: #059669;
+                                @else
+                                    color: #DC2626;
+                                @endif
+                            "></i>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
 
-                    <!-- Historial de licencias -->
+        <!-- Card Vence -->
+        <div class="col-md-3 mb-3">
+            <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden; background: linear-gradient(to right, #F4F7F0, white);">
+                <div class="card-body" style="padding: 1.25rem;">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <p style="margin: 0; font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px;">Vence</p>
+                            <h3 style="margin: 0.5rem 0 0 0; font-weight: 800; color: #262626; font-size: 1.25rem;">
+                                @if($company->license)
+                                    {{ $company->license->end_date->format('d/m/Y') }}
+                                @else
+                                    N/A
+                                @endif
+                            </h3>
+                        </div>
+                        <div style="width: 60px; height: 60px; border-radius: 12px; background: #FEF3C7; display: flex; align-items: center; justify-content: center;">
+                            <i class="fa-solid fa-calendar-days" style="font-size: 1.5rem; color: #D97706;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Días Restantes -->
+        <div class="col-md-3 mb-3">
+            <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden; background: linear-gradient(to right, #F4F7F0, white);">
+                <div class="card-body" style="padding: 1.25rem;">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <p style="margin: 0; font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px;">Días Restantes</p>
+                            <h3 style="margin: 0.5rem 0 0 0; font-weight: 800; color: #262626; font-size: 2rem;">
+                                @if($company->license && $company->license->isValid())
+                                    {{ $company->getDaysUntilExpiration() }}
+                                @else
+                                    0
+                                @endif
+                            </h3>
+                        </div>
+                        <div style="width: 60px; height: 60px; border-radius: 12px; background: #FEE2E2; display: flex; align-items: center; justify-content: center;">
+                            <i class="fa-solid fa-clock" style="font-size: 1.5rem; color: #DC2626;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Licencias -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden;">
+                <div class="card-header" style="background: linear-gradient(to right, #F4F7F0, white); border-bottom: 2px solid #E8EFE0; padding: 1rem 1.25rem;">
+                    <h6 style="margin: 0; font-weight: 700; color: #262626; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-table-list" style="color: #6B8E3F;"></i>
+                        Historial de Licencias
+                    </h6>
+                </div>
+                <div class="card-body" style="padding: 0;">
                     <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
+                        <table class="table table-hover align-items-center" id="licensesTable" style="width: 100%; margin-bottom: 0;">
+                            <thead class="thead-light">
                                 <tr>
                                     <th>Clave de Licencia</th>
                                     <th>Plan</th>
@@ -210,11 +232,16 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="9" class="text-center">
-                                        <p class="text-muted">No hay licencias registradas para esta empresa.</p>
-                                        <a href="{{ route('admin.licenses.create', $company->id) }}" class="btn btn-success">
-                                            <i class="nc-icon nc-simple-add"></i> Crear Primera Licencia
-                                        </a>
+                                    <td colspan="9" class="dataTables_empty">
+                                        <div class="empty-state-container">
+                                            <i class="fa-solid fa-key empty-state-icon"></i>
+                                            <h5 class="empty-state-title">No hay licencias registradas</h5>
+                                            <p class="empty-state-description">Esta empresa aún no tiene licencias asociadas. Crea la primera licencia para comenzar.</p>
+                                            <a href="{{ route('admin.licenses.create', $company->id) }}" class="empty-state-button">
+                                                <i class="fa-solid fa-plus"></i>
+                                                Crear Primera Licencia
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                                 @endforelse
@@ -269,9 +296,175 @@
 </div>
 @endsection
 
+@push('styles')
+<style>
+/* Estilos para el mensaje de tabla vacía */
+.dataTables_empty {
+    padding: 0 !important;
+}
+
+.empty-state-container {
+    background: #F9FAFB;
+    border-radius: 0.75rem;
+    padding: 3rem 2rem;
+    margin: 1rem;
+    text-align: center;
+    border: 2px dashed #E5E7EB;
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    color: #9CA3AF;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.empty-state-title {
+    color: #374151;
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.empty-state-description {
+    color: #6B7280;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+.empty-state-button {
+    background: #6B8E3F !important;
+    color: white !important;
+    padding: 0.875rem 2rem !important;
+    border-radius: 0.5rem !important;
+    font-weight: 600 !important;
+    border: none !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    transition: all 0.2s ease !important;
+}
+
+.empty-state-button:hover {
+    background: #5A7A35 !important;
+    color: white !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(107, 142, 63, 0.3) !important;
+    text-decoration: none !important;
+}
+
+.empty-state-button:focus,
+.empty-state-button:active {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+/* Mejorar la visualización de DataTables */
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_processing,
+.dataTables_wrapper .dataTables_paginate {
+    color: #374151;
+    font-weight: 500;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 0.5rem 0.75rem;
+    margin: 0 0.125rem;
+    border-radius: 0.375rem;
+    border: 1px solid #D1D5DB;
+    background: white;
+    color: #374151;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #6B8E3F;
+    color: white;
+    border-color: #6B8E3F;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: #6B8E3F;
+    color: white;
+    border-color: #6B8E3F;
+}
+</style>
+@endpush
+
 @push('scripts')
 <script>
 $(document).ready(function() {
+    // Inicializar DataTable
+    $('#licensesTable').DataTable({
+        dom: 'lBfrtip',
+        processing: true,
+        paging: true,
+        pageLength: 10,
+        info: true,
+        lengthChange: true,
+        scrollX: false,
+        language: {
+            processing: "Procesando...",
+            lengthMenu: "Mostrar _MENU_ registros por página",
+            zeroRecords: "No se encontraron resultados que coincidan con la búsqueda",
+            emptyTable: "No hay licencias registradas para esta empresa",
+            infoEmpty: "Mostrando 0 a 0 de 0 registros",
+            infoFiltered: "(filtrado de _MAX_ registros totales)",
+            search: "Buscar:",
+            loadingRecords: "Cargando...",
+            paginate: {
+                first: "Primero",
+                last: "Último",
+                next: "Siguiente",
+                previous: "Anterior"
+            },
+            info: "Mostrando _START_ a _END_ de _TOTAL_ registros"
+        },
+        buttons: [
+            {
+                extend: "copyHtml5",
+                text: "<i class='fa fa-copy'></i> Copiar",
+                titleAttr: "Copiar datos al portapapeles",
+                className: "btn btn-outline-secondary btn-sm",
+                exportOptions: {
+                    columns: ':not(:last-child)'
+                }
+            },
+            {
+                extend: "excelHtml5",
+                text: "<i class='fa fa-file-excel-o'></i> Excel",
+                titleAttr: "Exportar a Excel",
+                className: "btn btn-outline-success btn-sm",
+                exportOptions: {
+                    columns: ':not(:last-child)'
+                }
+            },
+            {
+                extend: "pdfHtml5",
+                text: "<i class='fa fa-file-pdf-o'></i> PDF",
+                titleAttr: "Exportar a PDF",
+                className: "btn btn-outline-danger btn-sm",
+                exportOptions: {
+                    columns: ':not(:last-child)'
+                },
+                orientation: 'landscape',
+                pageSize: 'A4'
+            }
+        ],
+        responsive: true,
+        destroy: true,
+        order: [[2, "desc"]],
+        columnDefs: [
+            {
+                targets: -1,
+                orderable: false,
+                searchable: false
+            }
+        ]
+    });
+
     @if(session('success'))
         Swal.fire({
             icon: 'success',

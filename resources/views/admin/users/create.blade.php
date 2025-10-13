@@ -1,18 +1,42 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="content">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Crear Usuario</h4>
-                        <p class="card-category">Registrar un nuevo usuario en el sistema</p>
-                    </div>
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('admin.users.store') }}">
-                            @csrf
-                            
+<div class="content">
+    
+    <!-- Header de la página -->
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-1" style="font-weight: 800; color: #262626;">
+                        <i class="fa-solid fa-user-plus" style="color: #6B8E3F;"></i>
+                        Crear Usuario
+                    </h2>
+                    <p class="text-muted mb-0">Registrar un nuevo usuario en el sistema</p>
+                </div>
+                <div>
+                    <a href="{{ route('admin.users') }}" class="btn btn-outline-secondary" style="padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600;">
+                        <i class="fa-solid fa-arrow-left"></i> Volver al Listado
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden;">
+                <div class="card-body" style="padding: 1.5rem;">
+                    <form method="POST" action="{{ route('admin.users.store') }}">
+                        @csrf
+                        
+                        <!-- Sección: Información Personal -->
+                        <div class="form-section">
+                            <h6 class="form-section-title">
+                                <i class="fa-solid fa-info-circle"></i>
+                                Información Personal
+                            </h6>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -55,7 +79,14 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
+                        <!-- Sección: Configuración de Acceso -->
+                        <div class="form-section">
+                            <h6 class="form-section-title">
+                                <i class="fa-solid fa-key"></i>
+                                Configuración de Acceso
+                            </h6>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -89,9 +120,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="rebaño">Rebaño</label>
@@ -103,9 +131,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="additional_companies">Empresas Adicionales (Opcional)</label>
@@ -124,57 +149,53 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5>Información de Roles</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <h6><i class="fa fa-user-shield text-danger"></i> Administrador</h6>
-                                                    <small class="text-muted">
-                                                        Acceso completo al sistema, gestión de empresas, usuarios y licencias.
-                                                    </small>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <h6><i class="fa fa-user-tie text-warning"></i> Gerente</h6>
-                                                    <small class="text-muted">
-                                                        Gestión completa de su empresa, usuarios y datos del ganado.
-                                                    </small>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <h6><i class="fa fa-user text-info"></i> Operador</h6>
-                                                    <small class="text-muted">
-                                                        Acceso básico para registro y consulta de datos del ganado.
-                                                    </small>
-                                                </div>
-                                            </div>
-                                        </div>
+                        <!-- Sección: Información de Roles -->
+                        <div class="form-section">
+                            <h6 class="form-section-title">
+                                <i class="fa-solid fa-users-gear"></i>
+                                Información de Roles
+                            </h6>
+                            <div style="background: white; border-radius: 0.5rem; padding: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h6><i class="fa fa-user-shield text-danger"></i> Administrador</h6>
+                                        <small class="text-muted">
+                                            Acceso completo al sistema, gestión de empresas, usuarios y licencias.
+                                        </small>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h6><i class="fa fa-user-tie text-warning"></i> Gerente</h6>
+                                        <small class="text-muted">
+                                            Gestión completa de su empresa, usuarios y datos del ganado.
+                                        </small>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h6><i class="fa fa-user text-info"></i> Operador</h6>
+                                        <small class="text-muted">
+                                            Acceso básico para registro y consulta de datos del ganado.
+                                        </small>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group text-right">
-                                        <a href="{{ route('admin.users') }}" class="btn btn-secondary">
-                                            <i class="fa fa-arrow-left"></i> Cancelar
-                                        </a>
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="fa fa-save"></i> Crear Usuario
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                        <!-- Botones de Acción -->
+                        <div class="d-flex justify-content-end gap-2 mt-4" style="gap: 0.5rem;">
+                            <a href="{{ route('admin.users') }}" class="btn btn-outline-secondary" style="padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600;">
+                                <i class="fa-solid fa-times"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn" style="background: #6B8E3F; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; border: none;">
+                                <i class="fa-solid fa-save"></i> Crear Usuario
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @push('scripts')

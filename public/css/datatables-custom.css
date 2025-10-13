@@ -1,0 +1,146 @@
+/* Estilos globales para DataTables - Genfisoft */
+
+/* Ocultar encabezados fantasma de DataTables para scroll */
+.dataTables_scrollHead {
+    display: none !important;
+}
+
+.dataTables_scrollHeadInner {
+    display: none !important;
+}
+
+/* Ocultar elementos de sizing de DataTables */
+.dataTables_sizing {
+    display: none !important;
+}
+
+/* Asegurar que solo se muestre una fila de encabezados */
+table.dataTable thead tr:first-child th[style*="height: 0px"] {
+    display: none !important;
+}
+
+/* Estilos para encabezados de DataTables */
+table.dataTable thead th,
+table.dataTable thead td {
+    background: #6B8E3F !important;
+    color: white !important;
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
+    text-transform: uppercase !important;
+    border: none !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+table.dataTable thead th:last-child,
+table.dataTable thead td:last-child {
+    border-right: none !important;
+}
+
+/* Estilos para filas del cuerpo */
+table.dataTable tbody tr {
+    transition: all 0.2s ease;
+    background: white;
+}
+
+table.dataTable tbody tr:hover {
+    background-color: #F4F7F0 !important;
+}
+
+table.dataTable tbody td {
+    padding: 0.75rem 1rem !important;
+    vertical-align: middle !important;
+    border-bottom: 1px solid #E8EFE0 !important;
+    color: #262626 !important;
+    font-size: 0.875rem !important;
+}
+
+/* Contenedor superior de DataTables - alinear botones y buscador */
+div.dataTables_wrapper div.row:first-child {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 1rem !important;
+    width: 100% !important;
+}
+
+/* Todas las columnas en modo flex */
+div.dataTables_wrapper div.row:first-child > div {
+    position: relative !important;
+    width: auto !important;
+    max-width: none !important;
+    flex: 0 0 auto !important;
+    padding: 0 !important;
+}
+
+/* Contenedor de botones - izquierda */
+div.dataTables_wrapper div.row:first-child > div:has(.dt-buttons) {
+    order: 1 !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+}
+
+/* Contenedor de buscador - derecha */
+div.dataTables_wrapper div.row:first-child > div:has(.dataTables_filter) {
+    order: 2 !important;
+    justify-content: flex-end !important;
+    text-align: right !important;
+    margin-left: auto !important;
+}
+
+/* Botones */
+div.dataTables_wrapper div.dt-buttons {
+    display: inline-flex !important;
+    gap: 0.5rem !important;
+    flex-wrap: nowrap !important;
+    margin: 0 !important;
+    float: none !important;
+}
+
+/* Buscador */
+div.dataTables_wrapper div.dataTables_filter {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+    float: right !important;
+}
+
+.dataTables_wrapper .dataTables_filter label {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    margin: 0 !important;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    border: 1px solid #E8EFE0;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    margin: 0 !important;
+    min-width: 200px !important;
+}
+
+/* Ocultar el selector de length (cantidad de registros) */
+.dataTables_wrapper .dataTables_length {
+    display: none !important;
+}
+
+/* Botones de DataTables - solo mostrar iconos */
+.dt-buttons .btn {
+    padding: 0.5rem 0.75rem !important;
+    min-width: 2.5rem !important;
+    font-size: 0 !important; /* Ocultar texto */
+}
+
+.dt-buttons .btn i {
+    margin: 0 !important;
+    font-size: 1rem !important; /* Mostrar iconos con tamaño normal */
+}
+
+/* Eliminar bordes y espacios no deseados */
+table.dataTable {
+    border-collapse: collapse !important;
+}

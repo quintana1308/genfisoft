@@ -7,7 +7,7 @@ var sale = {
             paging: true,
             info: true,
             lengthChange: true,
-            scrollX: true,
+            scrollX: false,
             language: {
                 processing: "Procesando...",
                 lengthMenu: "Mostrar _MENU_ registros",

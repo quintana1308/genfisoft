@@ -5,19 +5,42 @@
 
 @section('content')
 <div class="content">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">
-                        <i class="nc-icon nc-simple-add"></i> Nueva Licencia para {{ $company->name }}
-                    </h4>
+    
+    <!-- Header de la página -->
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-1" style="font-weight: 800; color: #262626;">
+                        <i class="fa-solid fa-key" style="color: #6B8E3F;"></i>
+                        Nueva Licencia
+                    </h2>
+                    <p class="text-muted mb-0">Crear licencia para {{ $company->name }}</p>
                 </div>
-                <div class="card-body">
+                <div>
+                    <a href="{{ route('admin.companies.licenses', $company->id) }}" class="btn btn-outline-secondary" style="padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600;">
+                        <i class="fa-solid fa-arrow-left"></i> Volver al Listado
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden;">
+                <div class="card-body" style="padding: 1.5rem;">
                     <form method="POST" action="{{ route('admin.licenses.store', $company->id) }}">
                         @csrf
                         
-                        <div class="row">
+                        <!-- Sección: Información de la Licencia -->
+                        <div class="form-section">
+                            <h6 class="form-section-title">
+                                <i class="fa-solid fa-info-circle"></i>
+                                Información de la Licencia
+                            </h6>
+                            <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Tipo de Plan *</label>
@@ -72,69 +95,72 @@
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Referencia de Pago</label>
-                                    <input type="text" class="form-control @error('payment_reference') is-invalid @enderror" 
-                                           name="payment_reference" value="{{ old('payment_reference') }}" 
-                                           placeholder="Número de transferencia, referencia bancaria, etc.">
-                                    @error('payment_reference')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
                             </div>
                         </div>
-                        
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Notas</label>
-                                    <textarea class="form-control @error('notes') is-invalid @enderror" 
-                                              name="notes" rows="3" placeholder="Observaciones adicionales">{{ old('notes') }}</textarea>
-                                    @error('notes')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+
+                        <!-- Sección: Información de Pago -->
+                        <div class="form-section">
+                            <h6 class="form-section-title">
+                                <i class="fa-solid fa-credit-card"></i>
+                                Información de Pago
+                            </h6>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Referencia de Pago</label>
+                                        <input type="text" class="form-control @error('payment_reference') is-invalid @enderror" 
+                                               name="payment_reference" value="{{ old('payment_reference') }}" 
+                                               placeholder="Número de transferencia, referencia bancaria, etc.">
+                                        @error('payment_reference')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Información del plan seleccionado -->
-                        <div class="row" id="planInfo" style="display: none;">
-                            <div class="col-md-12">
-                                <div class="card card-stats">
-                                    <div class="card-body">
-                                        <h6>Características del Plan:</h6>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <p><strong>Usuarios máximos:</strong> <span id="maxUsers">-</span></p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><strong>Ganado máximo:</strong> <span id="maxCattle">-</span></p>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <p><strong>Funcionalidades:</strong></p>
-                                                <ul id="features" class="list-unstyled"></ul>
-                                            </div>
-                                        </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Notas</label>
+                                        <textarea class="form-control @error('notes') is-invalid @enderror" 
+                                                  name="notes" rows="3" placeholder="Observaciones adicionales">{{ old('notes') }}</textarea>
+                                        @error('notes')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-success">
-                                        <i class="nc-icon nc-check-2"></i> Crear Licencia
-                                    </button>
-                                    <a href="{{ route('admin.companies.licenses', $company->id) }}" class="btn btn-secondary">
-                                        <i class="nc-icon nc-minimal-left"></i> Cancelar
-                                    </a>
+                        <!-- Información del plan seleccionado -->
+                        <div id="planInfo" style="display: none;">
+                            <div class="form-section">
+                                <h6 class="form-section-title">
+                                    <i class="fa-solid fa-list-check"></i>
+                                    Características del Plan
+                                </h6>
+                                <div style="background: white; border-radius: 0.5rem; padding: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p><strong>Usuarios máximos:</strong> <span id="maxUsers">-</span></p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p><strong>Ganado máximo:</strong> <span id="maxCattle">-</span></p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p><strong>Funcionalidades:</strong></p>
+                                            <ul id="features" class="list-unstyled"></ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <!-- Botones de Acción -->
+                        <div class="d-flex justify-content-end gap-2 mt-4" style="gap: 0.5rem;">
+                            <a href="{{ route('admin.companies.licenses', $company->id) }}" class="btn btn-outline-secondary" style="padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600;">
+                                <i class="fa-solid fa-times"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn" style="background: #6B8E3F; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; border: none;">
+                                <i class="fa-solid fa-check"></i> Crear Licencia
+                            </button>
                         </div>
                     </form>
                 </div>

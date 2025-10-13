@@ -5,18 +5,43 @@
 
 @section('content')
 <div class="content">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title"><i class="nc-icon nc-ruler-pencil"></i> Editar Empresa: {{ $company->name }}</h4>
+    
+    <!-- Header de la página -->
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-1" style="font-weight: 800; color: #262626;">
+                        <i class="fa-solid fa-building" style="color: #6B8E3F;"></i>
+                        Editar Empresa
+                    </h2>
+                    <p class="text-muted mb-0">{{ $company->name }}</p>
                 </div>
-                <div class="card-body">
+                <div>
+                    <a href="{{ route('admin.companies') }}" class="btn btn-outline-secondary" style="padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600;">
+                        <i class="fa-solid fa-arrow-left"></i> Volver al Listado
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden;">
+                <div class="card-body" style="padding: 1.5rem;">
                     <form method="POST" action="{{ route('admin.companies.update', $company->id) }}">
                         @csrf
                         @method('PUT')
                         
-                        <div class="row">
+                        <!-- Sección: Información Básica -->
+                        <div class="form-section">
+                            <h6 class="form-section-title">
+                                <i class="fa-solid fa-info-circle"></i>
+                                Información Básica de la Empresa
+                            </h6>
+                            <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Nombre de la Empresa *</label>
@@ -106,128 +131,143 @@
                                     @enderror
                                 </div>
                             </div>
+                            </div>
                         </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Estado de la Empresa</label>
-                                    <select class="form-control @error('status_id') is-invalid @enderror" name="status_id">
-                                        <option value="1" {{ old('status_id', $company->status_id) == 1 ? 'selected' : '' }}>Activa</option>
-                                        <option value="2" {{ old('status_id', $company->status_id) == 2 ? 'selected' : '' }}>Inactiva</option>
-                                    </select>
-                                    @error('status_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+
+                        <!-- Sección: Información de Contacto y Ubicación -->
+                        <div class="form-section">
+                            <h6 class="form-section-title">
+                                <i class="fa-solid fa-location-dot"></i>
+                                Información de Contacto y Ubicación
+                            </h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Estado de la Empresa</label>
+                                        <select class="form-control @error('status_id') is-invalid @enderror" name="status_id">
+                                            <option value="1" {{ old('status_id', $company->status_id) == 1 ? 'selected' : '' }}>Activa</option>
+                                            <option value="2" {{ old('status_id', $company->status_id) == 2 ? 'selected' : '' }}>Inactiva</option>
+                                        </select>
+                                        @error('status_id')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Dirección</label>
+                                        <textarea class="form-control @error('address') is-invalid @enderror" 
+                                                  name="address" rows="3" placeholder="Dirección completa de la empresa">{{ old('address', $company->address) }}</textarea>
+                                        @error('address')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Dirección</label>
-                                    <textarea class="form-control @error('address') is-invalid @enderror" 
-                                              name="address" rows="3">{{ old('address', $company->address) }}</textarea>
-                                    @error('address')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-success">
-                                        <i class="nc-icon nc-check-2"></i> Actualizar Empresa
-                                    </button>
-                                    <a href="{{ route('admin.companies') }}" class="btn btn-secondary">
-                                        <i class="nc-icon nc-minimal-left"></i> Volver
-                                    </a>
-                                    <a href="{{ route('admin.companies.licenses', $company->id) }}" class="btn btn-info">
-                                        <i class="nc-icon nc-key-25"></i> Gestionar Licencias
-                                    </a>
-                                </div>
+
+                        <!-- Botones de Acción -->
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+                            <a href="{{ route('admin.companies.licenses', $company->id) }}" class="btn btn-outline-primary" style="padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600;">
+                                <i class="fa-solid fa-key"></i> Gestionar Licencias
+                            </a>
+                            <div class="d-flex gap-2" style="gap: 0.5rem;">
+                                <a href="{{ route('admin.companies') }}" class="btn btn-outline-secondary" style="padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600;">
+                                    <i class="fa-solid fa-times"></i> Cancelar
+                                </a>
+                                <button type="submit" class="btn" style="background: #6B8E3F; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; border: none;">
+                                    <i class="fa-solid fa-save"></i> Actualizar Empresa
+                                </button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
             
-            <!-- Información adicional -->
-            <div class="card mt-3">
-                <div class="card-header">
-                    <h5 class="card-title">Información Adicional</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card card-stats">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-5 col-md-4">
-                                            <div class="icon-big text-center icon-warning">
-                                                <i class="nc-icon nc-single-02 text-success"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-7 col-md-8">
-                                            <div class="numbers">
-                                                <p class="card-category">Usuarios</p>
-                                                <p class="card-title">{{ $company->users()->count() }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    <!-- Información adicional -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <h5 style="font-weight: 700; color: #262626; margin-bottom: 1rem;">Información Adicional</h5>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Card Usuarios -->
+        <div class="col-md-4 mb-3">
+            <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden; background: linear-gradient(to right, #F4F7F0, white);">
+                <div class="card-body" style="padding: 1.25rem;">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <p style="margin: 0; font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px;">Usuarios</p>
+                            <h3 style="margin: 0.5rem 0 0 0; font-weight: 800; color: #262626; font-size: 2rem;">{{ $company->users()->count() }}</h3>
                         </div>
-                        <div class="col-md-4">
-                            <div class="card card-stats">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-5 col-md-4">
-                                            <div class="icon-big text-center icon-warning">
-                                                <i class="nc-icon nc-key-25 text-info"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-7 col-md-8">
-                                            <div class="numbers">
-                                                <p class="card-category">Estado Licencia</p>
-                                                <p class="card-title">
-                                                    @if($company->license && $company->license->isValid())
-                                                        <span class="text-success">Activa</span>
-                                                    @else
-                                                        <span class="text-danger">Inactiva</span>
-                                                    @endif
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card card-stats">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-5 col-md-4">
-                                            <div class="icon-big text-center icon-warning">
-                                                <i class="nc-icon nc-calendar-60 text-warning"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-7 col-md-8">
-                                            <div class="numbers">
-                                                <p class="card-category">Registrada</p>
-                                                <p class="card-title">{{ $company->created_at->format('d/m/Y') }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div style="width: 60px; height: 60px; border-radius: 12px; background: #D1FAE5; display: flex; align-items: center; justify-content: center;">
+                            <i class="fa-solid fa-users" style="font-size: 1.5rem; color: #059669;"></i>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Card Estado Licencia -->
+        <div class="col-md-4 mb-3">
+            <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden; background: linear-gradient(to right, #F4F7F0, white);">
+                <div class="card-body" style="padding: 1.25rem;">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <p style="margin: 0; font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px;">Estado Licencia</p>
+                            <h3 style="margin: 0.5rem 0 0 0; font-weight: 800; font-size: 1.5rem; 
+                                @if($company->license && $company->license->isValid())
+                                    color: #059669;
+                                @else
+                                    color: #DC2626;
+                                @endif
+                            ">
+                                @if($company->license && $company->license->isValid())
+                                    Activa
+                                @else
+                                    Inactiva
+                                @endif
+                            </h3>
+                        </div>
+                        <div style="width: 60px; height: 60px; border-radius: 12px; 
+                            @if($company->license && $company->license->isValid())
+                                background: #D1FAE5;
+                            @else
+                                background: #FEE2E2;
+                            @endif
+                            display: flex; align-items: center; justify-content: center;">
+                            <i class="fa-solid fa-key" style="font-size: 1.5rem; 
+                                @if($company->license && $company->license->isValid())
+                                    color: #059669;
+                                @else
+                                    color: #DC2626;
+                                @endif
+                            "></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Registrada -->
+        <div class="col-md-4 mb-3">
+            <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden; background: linear-gradient(to right, #F4F7F0, white);">
+                <div class="card-body" style="padding: 1.25rem;">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <p style="margin: 0; font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px;">Registrada</p>
+                            <h3 style="margin: 0.5rem 0 0 0; font-weight: 800; color: #262626; font-size: 1.5rem;">{{ $company->created_at->format('d/m/Y') }}</h3>
+                        </div>
+                        <div style="width: 60px; height: 60px; border-radius: 12px; background: #FEF3C7; display: flex; align-items: center; justify-content: center;">
+                            <i class="fa-solid fa-calendar-days" style="font-size: 1.5rem; color: #D97706;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
         </div>
     </div>
 </div>

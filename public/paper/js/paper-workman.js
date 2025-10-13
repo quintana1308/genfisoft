@@ -7,7 +7,7 @@ workman = {
             paging: false,
             info: false,
             lengthChange: false,
-            scrollX: true,
+            scrollX: false,
             language: {
                 processing: "Procesando...",
                 lengthMenu: "Mostrar _MENU_ registros",

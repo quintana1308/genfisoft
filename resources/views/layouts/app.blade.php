@@ -16,18 +16,26 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
         name='viewport' />
     <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <!-- CSS Files -->
     <link href="{{ asset('paper') }}/css/bootstrap.min.css" rel="stylesheet" />
     <link href="{{ asset('paper') }}/css/paper-dashboard.css?v=2.0.0" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('paper') }}/demo/demo.css" rel="stylesheet" />
+    <!-- GenFinSoft Modern Design System -->
+    <link href="{{ asset('css') }}/genfisoft-modern.css" rel="stylesheet" />
     <!-- Sunflower Theme - Paleta de colores personalizada -->
     <link href="{{ asset('css') }}/sunflower-theme.css" rel="stylesheet" />
+    <!-- Modern Components - Componentes modernos adicionales -->
+    <link href="{{ asset('css') }}/modern-components.css" rel="stylesheet" />
+    <!-- Visual Overrides - Sobrescrituras visuales completas -->
+    <link href="{{ asset('css') }}/visual-overrides.css" rel="stylesheet" />
 
     <!-- datatable -->
 	<link href="{{ asset('plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <!-- DataTables Custom Styles -->
+    <link href="{{ asset('css/datatables-custom.css') }}?v={{ time() }}" rel="stylesheet" type="text/css" />
 
     <!-- uicons -->
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">

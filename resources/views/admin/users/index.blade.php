@@ -44,58 +44,69 @@
 
     <!-- Modal para ver detalles del usuario -->
     <div class="modal fade" id="userDetailsModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Detalles del Usuario</h5>
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span>&times;</span>
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" style="border-radius: 0.75rem; overflow: hidden; border: none;">
+                <div class="modal-header" style="background: linear-gradient(135deg, #6B8E3F, #8FAF64); border: none; padding: 1.5rem;">
+                    <h5 class="modal-title" style="color: white !important; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-user" style="color: white !important;"></i>
+                        Detalles del Usuario
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white !important; opacity: 1 !important; text-shadow: none;">
+                        <span aria-hidden="true" style="font-size: 1.5rem; color: white !important;">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <strong>Nombre:</strong>
-                            <p id="modalUserName"></p>
-                        </div>
-                        <div class="col-md-6">
-                            <strong>Email:</strong>
-                            <p id="modalUserEmail"></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <strong>Empresa:</strong>
-                            <p id="modalUserCompany"></p>
-                        </div>
-                        <div class="col-md-6">
-                            <strong>Rol:</strong>
-                            <p id="modalUserRole"></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <strong>Rebaño:</strong>
-                            <p id="modalUserRebano"></p>
-                        </div>
-                        <div class="col-md-6">
-                            <strong>Estado:</strong>
-                            <p id="modalUserStatus"></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <strong>Último Acceso:</strong>
-                            <p id="modalUserLastLogin"></p>
-                        </div>
-                        <div class="col-md-6">
-                            <strong>Fecha de Registro:</strong>
-                            <p id="modalUserCreated"></p>
+                <div class="modal-body" style="padding: 1.5rem; background: #F9FAFB;">
+                    <!-- Información Personal -->
+                    <div style="background: white; border-radius: 0.5rem; padding: 1.25rem; margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                        <h6 style="color: #6B8E3F; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fa-solid fa-circle-info"></i>
+                            Información Personal
+                        </h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label style="font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Nombre</label>
+                                <div style="background: #F3F4F6; padding: 0.625rem 0.875rem; border-radius: 0.375rem; font-weight: 600; color: #262626;" id="modalUserName"></div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label style="font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Email</label>
+                                <div style="background: #F3F4F6; padding: 0.625rem 0.875rem; border-radius: 0.375rem; font-weight: 600; color: #262626;" id="modalUserEmail"></div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label style="font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Empresa</label>
+                                <div style="background: #F3F4F6; padding: 0.625rem 0.875rem; border-radius: 0.375rem; font-weight: 600; color: #262626;" id="modalUserCompany"></div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label style="font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Rol</label>
+                                <div style="background: #F3F4F6; padding: 0.625rem 0.875rem; border-radius: 0.375rem; font-weight: 600; color: #262626;" id="modalUserRole"></div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label style="font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Rebaño</label>
+                                <div style="background: #F3F4F6; padding: 0.625rem 0.875rem; border-radius: 0.375rem; font-weight: 600; color: #262626;" id="modalUserRebano"></div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label style="font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Estado</label>
+                                <div style="background: #F3F4F6; padding: 0.625rem 0.875rem; border-radius: 0.375rem; font-weight: 600; color: #262626;" id="modalUserStatus"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+                    <!-- Información de Actividad -->
+                    <div style="background: white; border-radius: 0.5rem; padding: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                        <h6 style="color: #6B8E3F; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fa-solid fa-clock"></i>
+                            Información de Actividad
+                        </h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label style="font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Último Acceso</label>
+                                <div style="background: #F3F4F6; padding: 0.625rem 0.875rem; border-radius: 0.375rem; font-weight: 600; color: #262626;" id="modalUserLastLogin"></div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label style="font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Fecha de Registro</label>
+                                <div style="background: #F3F4F6; padding: 0.625rem 0.875rem; border-radius: 0.375rem; font-weight: 600; color: #262626;" id="modalUserCreated"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -165,9 +176,26 @@ $(document).ready(function() {
                 }
             }
         ],
-        dom: 'Bfrtip',
+        dom: 'lBfrtip',
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            {
+                extend: "copyHtml5",
+                text: "<i class='fa fa-copy'></i> Copiar",
+                titleAttr: "Copiar",
+                className: "btn btn-secondary"
+            },
+            {
+                extend: "excelHtml5",
+                text: "<i class='fa fa-file-excel-o'></i> Excel",
+                titleAttr: "Exportar a Excel",
+                className: "btn btn-success"
+            },
+            {
+                extend: "pdfHtml5",
+                text: "<i class='fa fa-file-pdf-o'></i> PDF",
+                titleAttr: "Exportar a PDF",
+                className: "btn btn-danger"
+            }
         ],
         language: {
             url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'

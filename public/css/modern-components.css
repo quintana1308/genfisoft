@@ -1,0 +1,534 @@
+/* ========================================
+   COMPONENTES MODERNOS - GENFISOFT
+   Estilos adicionales para mejorar la UI
+   ======================================== */
+
+/* ========================================
+   BADGES Y ETIQUETAS MODERNAS
+   ======================================== */
+
+.badge {
+  padding: 0.375rem 0.75rem !important;
+  border-radius: 20px !important;
+  font-weight: 600 !important;
+  font-size: 0.8125rem !important;
+  letter-spacing: 0.3px !important;
+  text-transform: uppercase !important;
+}
+
+.badge-pill {
+  border-radius: 50px !important;
+}
+
+/* ========================================
+   BOTONES PEQUEÑOS Y REDONDOS
+   ======================================== */
+
+.btn-sm {
+  padding: 0.5rem 1rem !important;
+  font-size: 0.875rem !important;
+  border-radius: var(--border-radius-sm) !important;
+}
+
+.btn-round {
+  border-radius: 30px !important;
+  padding: 0.625rem 1.75rem !important;
+}
+
+.btn-icon {
+  width: 40px !important;
+  height: 40px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+}
+
+.btn-icon i {
+  margin: 0 !important;
+}
+
+/* ========================================
+   SEPARADORES Y DIVISORES
+   ======================================== */
+
+hr {
+  border: 0 !important;
+  height: 2px !important;
+  background: linear-gradient(to right, transparent, var(--border-color), transparent) !important;
+  margin: 1.5rem 0 !important;
+}
+
+hr.thick {
+  height: 3px !important;
+  background: linear-gradient(to right, transparent, var(--primary-color), transparent) !important;
+}
+
+/* ========================================
+   SECCIONES DE FORMULARIO
+   ======================================== */
+
+.form-section {
+  background: linear-gradient(135deg, rgba(255, 249, 230, 0.3), rgba(255, 255, 255, 0.5)) !important;
+  border-left: 4px solid var(--primary-color) !important;
+  padding: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+  border-radius: var(--border-radius-md) !important;
+}
+
+.form-section-title {
+  font-size: 1.125rem !important;
+  font-weight: 700 !important;
+  color: var(--primary-color) !important;
+  margin-bottom: 1rem !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.form-section-title i {
+  margin-right: 0.75rem !important;
+  font-size: 1.25rem !important;
+}
+
+/* ========================================
+   ALERTAS MEJORADAS
+   ======================================== */
+
+.alert {
+  border-radius: var(--border-radius-md) !important;
+  border: none !important;
+  border-left: 4px solid !important;
+  padding: 1rem 1.25rem !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.alert i {
+  margin-right: 0.5rem !important;
+}
+
+/* ========================================
+   TOOLTIPS Y POPOVERS
+   ======================================== */
+
+.tooltip-inner {
+  background-color: var(--primary-color) !important;
+  border-radius: var(--border-radius-sm) !important;
+  padding: 0.5rem 0.75rem !important;
+  font-size: 0.875rem !important;
+}
+
+/* ========================================
+   BREADCRUMBS
+   ======================================== */
+
+.breadcrumb {
+  background: transparent !important;
+  padding: 0.75rem 0 !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.breadcrumb-item {
+  font-size: 0.9375rem !important;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "›" !important;
+  color: var(--text-muted) !important;
+  font-size: 1.25rem !important;
+}
+
+.breadcrumb-item.active {
+  color: var(--primary-color) !important;
+  font-weight: 600 !important;
+}
+
+/* ========================================
+   PROGRESS BARS MEJORADAS
+   ======================================== */
+
+.progress {
+  height: 8px !important;
+  border-radius: 10px !important;
+  background-color: rgba(74, 93, 35, 0.1) !important;
+  overflow: hidden !important;
+}
+
+.progress-bar {
+  border-radius: 10px !important;
+  transition: width 0.6s ease !important;
+}
+
+/* ========================================
+   PAGINACIÓN MEJORADA
+   ======================================== */
+
+.pagination {
+  gap: 0.25rem !important;
+}
+
+.page-item .page-link {
+  border-radius: var(--border-radius-sm) !important;
+  border: 1px solid var(--border-color) !important;
+  margin: 0 0.125rem !important;
+  padding: 0.5rem 0.875rem !important;
+  font-weight: 600 !important;
+  transition: all var(--transition-base) !important;
+}
+
+.page-item.active .page-link {
+  box-shadow: var(--shadow-sm) !important;
+}
+
+/* ========================================
+   ICONOS CON FONDO
+   ======================================== */
+
+.icon-shape {
+  width: 48px !important;
+  height: 48px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: var(--border-radius-md) !important;
+  font-size: 1.25rem !important;
+  transition: all var(--transition-base) !important;
+}
+
+.icon-shape-primary {
+  background: linear-gradient(135deg, rgba(74, 93, 35, 0.15), rgba(107, 124, 46, 0.1)) !important;
+  color: var(--primary-color) !important;
+}
+
+.icon-shape-success {
+  background: linear-gradient(135deg, rgba(107, 124, 46, 0.15), rgba(139, 149, 86, 0.1)) !important;
+  color: var(--success-color) !important;
+}
+
+.icon-shape-warning {
+  background: linear-gradient(135deg, rgba(232, 185, 35, 0.15), rgba(255, 215, 0, 0.1)) !important;
+  color: var(--warning-color) !important;
+}
+
+.icon-shape-danger {
+  background: linear-gradient(135deg, rgba(216, 95, 31, 0.15), rgba(184, 79, 24, 0.1)) !important;
+  color: var(--danger-color) !important;
+}
+
+.icon-shape-info {
+  background: linear-gradient(135deg, rgba(168, 160, 96, 0.15), rgba(139, 149, 86, 0.1)) !important;
+  color: var(--info-color) !important;
+}
+
+.icon-shape:hover {
+  transform: scale(1.1) rotate(5deg) !important;
+}
+
+/* ========================================
+   LISTAS MEJORADAS
+   ======================================== */
+
+.list-group-item {
+  border: 1px solid var(--border-color-light) !important;
+  border-radius: var(--border-radius-sm) !important;
+  margin-bottom: 0.5rem !important;
+  transition: all var(--transition-base) !important;
+}
+
+.list-group-item:hover {
+  background-color: var(--bg-hover) !important;
+  box-shadow: var(--shadow-sm) !important;
+  transform: translateX(4px) !important;
+}
+
+/* ========================================
+   TABS MEJORADOS
+   ======================================== */
+
+.nav-tabs {
+  border-bottom: 2px solid var(--border-color-light) !important;
+}
+
+.nav-tabs .nav-link {
+  border: none !important;
+  border-bottom: 3px solid transparent !important;
+  color: var(--text-secondary) !important;
+  font-weight: 600 !important;
+  padding: 0.75rem 1.5rem !important;
+  transition: all var(--transition-base) !important;
+}
+
+.nav-tabs .nav-link:hover {
+  border-bottom-color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
+}
+
+.nav-tabs .nav-link.active {
+  border-bottom-color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
+  background: transparent !important;
+}
+
+/* ========================================
+   DROPDOWNS MEJORADOS
+   ======================================== */
+
+.dropdown-menu {
+  border: none !important;
+  border-radius: var(--border-radius-md) !important;
+  box-shadow: var(--shadow-lg) !important;
+  padding: 0.5rem !important;
+}
+
+.dropdown-item {
+  border-radius: var(--border-radius-sm) !important;
+  padding: 0.625rem 1rem !important;
+  transition: all var(--transition-fast) !important;
+  font-weight: 500 !important;
+}
+
+.dropdown-item:hover {
+  background-color: var(--bg-hover) !important;
+  color: var(--primary-color) !important;
+  transform: translateX(4px) !important;
+}
+
+.dropdown-item i {
+  margin-right: 0.5rem !important;
+  color: var(--primary-color) !important;
+}
+
+/* ========================================
+   SPINNERS Y LOADERS
+   ======================================== */
+
+.spinner-border {
+  border-color: var(--primary-color) !important;
+  border-right-color: transparent !important;
+}
+
+/* ========================================
+   UTILIDADES DE ESPACIADO
+   ======================================== */
+
+.section-padding {
+  padding: 3rem 0 !important;
+}
+
+.card-spacing {
+  margin-bottom: 1.5rem !important;
+}
+
+/* ========================================
+   EFECTOS DE HOVER PARA IMÁGENES
+   ======================================== */
+
+.img-hover {
+  transition: all var(--transition-base) !important;
+  border-radius: var(--border-radius-md) !important;
+  overflow: hidden !important;
+}
+
+.img-hover:hover {
+  transform: scale(1.05) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+/* ========================================
+   CONTENEDORES CON FONDO
+   ======================================== */
+
+.bg-gradient-primary {
+  background: var(--gradient-primary) !important;
+  color: var(--text-white) !important;
+}
+
+.bg-gradient-warm {
+  background: var(--gradient-warm) !important;
+  color: var(--text-white) !important;
+}
+
+.bg-gradient-success {
+  background: var(--gradient-success) !important;
+  color: var(--text-white) !important;
+}
+
+/* ========================================
+   ANIMACIONES SUTILES
+   ======================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out !important;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.4s ease-out !important;
+}
+
+/* ========================================
+   SKELETON LOADERS
+   ======================================== */
+
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%) !important;
+  background-size: 200% 100% !important;
+  animation: loading 1.5s ease-in-out infinite !important;
+  border-radius: var(--border-radius-sm) !important;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ========================================
+   RESPONSIVE UTILITIES
+   ======================================== */
+
+@media (max-width: 768px) {
+  .card-stats .icon-big {
+    width: 50px !important;
+    height: 50px !important;
+  }
+  
+  .card-stats .card-title {
+    font-size: 1.5rem !important;
+  }
+  
+  .btn {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  .modal-body {
+    padding: 1.5rem !important;
+  }
+}
+
+/* ========================================
+   MEJORAS PARA DATATABLES
+   ======================================== */
+
+.dataTables_wrapper .dataTables_length select {
+  border: 1.5px solid var(--border-color) !important;
+  border-radius: var(--border-radius-sm) !important;
+  padding: 0.375rem 2rem 0.375rem 0.75rem !important;
+  background-color: var(--bg-card) !important;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+  border: 1.5px solid var(--border-color) !important;
+  border-radius: var(--border-radius-sm) !important;
+  padding: 0.5rem 1rem !important;
+  transition: all var(--transition-base) !important;
+}
+
+.dataTables_wrapper .dataTables_filter input:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 3px rgba(74, 93, 35, 0.1) !important;
+  outline: none !important;
+}
+
+.dataTables_wrapper .dataTables_info {
+  color: var(--text-secondary) !important;
+  font-weight: 500 !important;
+}
+
+/* ========================================
+   SCROLL PERSONALIZADO
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary) !important;
+  border-radius: 10px !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color) !important;
+  border-radius: 10px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sunflower-green-medium) !important;
+}
+
+/* ========================================
+   ESTADOS DE CARGA
+   ======================================== */
+
+.loading-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 9999 !important;
+}
+
+/* ========================================
+   MEJORAS TIPOGRÁFICAS
+   ======================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+  letter-spacing: -0.02em !important;
+}
+
+.text-gradient {
+  background: var(--gradient-primary) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* ========================================
+   BOTONES DE ACCIÓN EN TABLAS
+   ======================================== */
+
+.action-buttons {
+  display: flex !important;
+  gap: 0.5rem !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.action-buttons .btn {
+  padding: 0.375rem 0.75rem !important;
+  font-size: 0.875rem !important;
+}

@@ -24,28 +24,26 @@
                         <i class="nc-icon nc-single-02"></i>{{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink2">
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            @if(Auth::user()->getActiveCompany())
-                            <div class="dropdown-header">
-                                <small class="text-muted">Empresa Activa:</small><br>
-                                <strong>{{ Auth::user()->getActiveCompany()->name }}</strong>
-                            </div>
-                            <div class="dropdown-divider"></div>
-                            @endif
-                            
-                            <a class="dropdown-item" href="{{ route('profile.edit') }}">
-                                <i class="nc-icon nc-single-02"></i> {{ __('Perfil') }}
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                <i class="nc-icon nc-button-power"></i> {{ __('Cerrar Sesión') }}
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
+                        @if(Auth::user()->getActiveCompany())
+                        <div class="dropdown-header">
+                            <small class="text-muted">Empresa Activa:</small><br>
+                            <strong>{{ Auth::user()->getActiveCompany()->name }}</strong>
                         </div>
+                        <div class="dropdown-divider"></div>
+                        @endif
+                        
+                        <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                            <i class="nc-icon nc-single-02"></i> {{ __('Perfil') }}
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                            <i class="nc-icon nc-button-power"></i> {{ __('Cerrar Sesión') }}
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </div>
                 </li>
             </ul>

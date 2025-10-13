@@ -86,34 +86,44 @@
 <!-- Modal Ver Venta -->
 <div class="modal fade" tabindex="-1" role="dialog" id="modalSaleView">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title">Información de Venta</h5>
-                <button type="button" class="close btn btn-danger" data-dismiss="modal" aria-label="Close">
-                    <i class="nc-icon nc-simple-remove"></i>
+        <div class="modal-content" style="border-radius: 0.75rem; overflow: hidden; border: none;">
+            <div class="modal-header" style="background: linear-gradient(135deg, #6B8E3F, #8FAF64); border: none; padding: 1.5rem;">
+                <h5 class="modal-title" style="color: white !important; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-dollar-sign" style="color: white !important;"></i>
+                    Información de Venta
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white !important; opacity: 1 !important; text-shadow: none;">
+                    <span aria-hidden="true" style="font-size: 1.5rem; color: white !important;">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-12 p-3">
-                        <strong>Código Animal:</strong><br>
-                        <span class="text-muted" id="cattleCodeView"></span>
-                    </div>
-                    <div class="col-12 p-3">
-                        <strong>Precio de Venta:</strong><br>
-                        <span class="text-muted" id="salePriceView"></span>
-                    </div>
-                    <div class="col-12 p-3">
-                        <strong>Fecha de Venta:</strong><br>
-                        <span class="text-muted" id="saleDateView"></span>
-                    </div>
-                    <div class="col-12 p-3">
-                        <strong>Observaciones:</strong><br>
-                        <span class="text-muted" id="observationsView"></span>
-                    </div>
-                    <div class="col-12 p-3">
-                        <strong>Estado:</strong><br>
-                        <span class="text-muted" id="statusView"></span>
+            <div class="modal-body" style="padding: 1.5rem; background: #F9FAFB;">
+                <!-- Información de la Venta -->
+                <div style="background: white; border-radius: 0.5rem; padding: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <h6 style="color: #6B8E3F; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-circle-info"></i>
+                        Detalles de la Venta
+                    </h6>
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <label style="font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Código Animal</label>
+                            <div style="background: #F3F4F6; padding: 0.625rem 0.875rem; border-radius: 0.375rem; font-weight: 600; color: #262626;" id="cattleCodeView"></div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label style="font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Precio de Venta</label>
+                            <div style="background: #F3F4F6; padding: 0.625rem 0.875rem; border-radius: 0.375rem; font-weight: 600; color: #262626;" id="salePriceView"></div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label style="font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Fecha de Venta</label>
+                            <div style="background: #F3F4F6; padding: 0.625rem 0.875rem; border-radius: 0.375rem; font-weight: 600; color: #262626;" id="saleDateView"></div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label style="font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Observaciones</label>
+                            <div style="background: #F3F4F6; padding: 0.625rem 0.875rem; border-radius: 0.375rem; font-weight: 600; color: #262626;" id="observationsView"></div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label style="font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Estado</label>
+                            <div style="background: #F3F4F6; padding: 0.625rem 0.875rem; border-radius: 0.375rem; font-weight: 600; color: #262626;" id="statusView"></div>
+                        </div>
                     </div>
                 </div>
             </div>

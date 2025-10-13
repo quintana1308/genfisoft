@@ -1,19 +1,43 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="content">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Editar Usuario</h4>
-                        <p class="card-category">Modificar información del usuario: {{ $user->name }}</p>
-                    </div>
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('admin.users.update', $user->id) }}">
-                            @csrf
-                            @method('PUT')
-                            
+<div class="content">
+    
+    <!-- Header de la página -->
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-1" style="font-weight: 800; color: #262626;">
+                        <i class="fa-solid fa-user-edit" style="color: #6B8E3F;"></i>
+                        Editar Usuario
+                    </h2>
+                    <p class="text-muted mb-0">{{ $user->name }}</p>
+                </div>
+                <div>
+                    <a href="{{ route('admin.users') }}" class="btn btn-outline-secondary" style="padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600;">
+                        <i class="fa-solid fa-arrow-left"></i> Volver al Listado
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden;">
+                <div class="card-body" style="padding: 1.5rem;">
+                    <form method="POST" action="{{ route('admin.users.update', $user->id) }}">
+                        @csrf
+                        @method('PUT')
+                        
+                        <!-- Sección: Información Personal -->
+                        <div class="form-section">
+                            <h6 class="form-section-title">
+                                <i class="fa-solid fa-info-circle"></i>
+                                Información Personal
+                            </h6>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -186,24 +210,21 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group text-right">
-                                        <a href="{{ route('admin.users') }}" class="btn btn-secondary">
-                                            <i class="fa fa-arrow-left"></i> Cancelar
-                                        </a>
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="fa fa-save"></i> Actualizar Usuario
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                        <!-- Botones de Acción -->
+                        <div class="d-flex justify-content-end gap-2 mt-4" style="gap: 0.5rem;">
+                            <a href="{{ route('admin.users') }}" class="btn btn-outline-secondary" style="padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600;">
+                                <i class="fa-solid fa-times"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn" style="background: #6B8E3F; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; border: none;">
+                                <i class="fa-solid fa-save"></i> Actualizar Usuario
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @push('scripts')

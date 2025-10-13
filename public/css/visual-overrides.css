@@ -1,0 +1,1072 @@
+/* ========================================
+   VISUAL OVERRIDES - GENFISOFT
+   Sobrescrituras para cambio visual completo
+   ======================================== */
+
+/* === SIDEBAR MODERNO === */
+.sidebar {
+    z-index: 1000 !important;
+    width: 260px !important;
+    background: white !important;
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.08) !important;
+    border-right: 1px solid #E5E5E5 !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+.sidebar[data-color="white"] {
+    width: 260px !important;
+    background: white !important;
+}
+
+.sidebar .sidebar-wrapper {
+    padding: 0.75rem 0.5rem !important;
+    overflow: visible !important;
+    height: auto !important;
+}
+
+/* Ocultar scrollbar pero mantener funcionalidad */
+.sidebar::-webkit-scrollbar {
+    width: 6px !important;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(107, 142, 63, 0.2) !important;
+    border-radius: 10px !important;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(107, 142, 63, 0.4) !important;
+}
+
+.sidebar .sidebar-wrapper::-webkit-scrollbar {
+    width: 6px !important;
+}
+
+.sidebar .sidebar-wrapper::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+.sidebar .sidebar-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(107, 142, 63, 0.2) !important;
+    border-radius: 10px !important;
+}
+
+.sidebar .sidebar-wrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(107, 142, 63, 0.4) !important;
+}
+
+/* Firefox scrollbar */
+.sidebar,
+.sidebar .sidebar-wrapper {
+    scrollbar-width: thin !important;
+    scrollbar-color: rgba(107, 142, 63, 0.2) transparent !important;
+}
+
+.sidebar .nav {
+    padding: 0 !important;
+}
+
+.sidebar .nav li a {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.8125rem !important;
+    white-space: nowrap !important;
+    border-radius: 0.375rem !important;
+}
+
+.sidebar .nav li a i {
+    font-size: 0.875rem !important;
+    width: 1.5rem !important;
+    margin-right: 0.375rem !important;
+    flex-shrink: 0 !important;
+}
+
+.sidebar .nav li a p {
+    font-size: 0.8125rem !important;
+    margin: 0 !important;
+    line-height: 1.3 !important;
+    flex: 1 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* Ajustar padding para items con collapse */
+.sidebar .nav li a[data-toggle="collapse"] p {
+    padding-right: 2rem !important;
+}
+
+.sidebar .nav li a:hover {
+    background: rgba(107, 142, 63, 0.08) !important;
+    color: #415626 !important;
+    transform: translateX(4px) !important;
+}
+
+.sidebar .nav li.active > a,
+.sidebar .nav-link.active {
+    background: linear-gradient(135deg, #6B8E3F, #8FAF64) !important;
+    color: white !important;
+    box-shadow: 0 4px 6px -1px rgba(107, 142, 63, 0.3) !important;
+}
+
+.sidebar .nav li.active > a i,
+.sidebar .nav-link.active i {
+    color: white !important;
+}
+
+.sidebar .nav li.active > a p,
+.sidebar .nav-link.active p {
+    color: white !important;
+}
+
+/* Mejorar submenús */
+.sidebar .nav li .collapse .nav li a {
+    font-size: 0.75rem !important;
+    padding: 0.375rem 0.75rem 0.375rem 2.25rem !important;
+    line-height: 1.2 !important;
+}
+
+.sidebar .nav li .collapse .nav li a i {
+    font-size: 0.75rem !important;
+    width: 1.25rem !important;
+}
+
+.sidebar .nav li .collapse .nav li a p {
+    font-size: 0.75rem !important;
+}
+
+/* Ajustar main-panel para el sidebar más ancho */
+.main-panel {
+    width: calc(100% - 260px) !important;
+}
+
+.main-panel[data-color="white"] {
+    width: calc(100% - 260px) !important;
+}
+
+/* Logo del sidebar */
+.sidebar .logo {
+    padding: 1.25rem 1rem !important;
+    border-bottom: 2px solid #E8EFE0 !important;
+    background: linear-gradient(135deg, #F4F7F0, white) !important;
+}
+
+.sidebar .logo .simple-text {
+    font-size: 1.125rem !important;
+    font-weight: 700 !important;
+    color: #415626 !important;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.sidebar .logo .logo-image-small img {
+    border-radius: 0.5rem !important;
+}
+
+/* Mejorar separación entre items del menú */
+.sidebar .nav > li {
+    margin-bottom: 0.25rem !important;
+}
+
+.sidebar .nav li a {
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Mejorar el caret de los menús desplegables */
+.sidebar .nav li a[data-toggle="collapse"] {
+    position: relative !important;
+}
+
+.sidebar .nav li a[data-toggle="collapse"]::after {
+    content: '\f107' !important;
+    font-family: 'Font Awesome 6 Free' !important;
+    font-weight: 900 !important;
+    position: absolute !important;
+    right: 0.75rem !important;
+    font-size: 0.75rem !important;
+    transition: transform 0.3s ease !important;
+    color: inherit !important;
+}
+
+.sidebar .nav li a[data-toggle="collapse"][aria-expanded="true"]::after {
+    transform: rotate(180deg) !important;
+}
+
+/* Ocultar el caret por defecto del bootstrap */
+.sidebar .nav li a[data-toggle="collapse"] .caret,
+.sidebar .nav li a[data-toggle="collapse"] b {
+    display: none !important;
+}
+
+/* Mejorar el estilo de la flecha en estado activo */
+.sidebar .nav li.active > a[data-toggle="collapse"]::after {
+    color: white !important;
+}
+
+/* Asegurar que la flecha no interfiera con el hover */
+.sidebar .nav li a[data-toggle="collapse"]:hover::after {
+    color: inherit !important;
+}
+
+/* Ocultar la flecha blanca que aparece cuando un item está activo */
+.sidebar .sidebar-wrapper li.active > a:not([data-toggle="collapse"])::after,
+.sidebar .sidebar-wrapper li.active > [data-toggle="collapse"] + div .nav li::after,
+.sidebar .nav li.active > a::after,
+.off-canvas-sidebar .sidebar-wrapper li.active > a:not([data-toggle="collapse"])::after {
+    display: none !important;
+    content: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+.sidebar .sidebar-wrapper li.active > [data-toggle="collapse"] + div .nav li a::before,
+.sidebar .sidebar-wrapper li.active > [data-toggle="collapse"] + div .nav li a::after {
+    display: none !important;
+    content: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* Ocultar todas las flechas de items activos excepto la del collapse */
+.sidebar .nav li.active > a:not([data-toggle="collapse"])::after {
+    display: none !important;
+}
+
+/* Ocultar flechas en submenús activos */
+.sidebar .collapse .nav li.active > a::after,
+.sidebar .collapse .nav li.active > a::before {
+    display: none !important;
+    content: none !important;
+}
+
+/* Mejorar el espaciado del collapse */
+.sidebar .nav li .collapse {
+    margin-top: 0.25rem !important;
+}
+
+/* Responsive para sidebar */
+@media (max-width: 991px) {
+    .sidebar {
+        width: 260px !important;
+    }
+    
+    .sidebar[data-color="white"] {
+        width: 260px !important;
+    }
+    
+    .main-panel {
+        width: 100% !important;
+    }
+    
+    .sidebar .nav li a {
+        font-size: 0.8125rem !important;
+    }
+    
+    .sidebar .nav li .collapse .nav li a {
+        font-size: 0.75rem !important;
+    }
+}
+
+/* === NAVBAR SUPERIOR === */
+.navbar {
+    background: white !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+    border-bottom: 1px solid #E5E5E5 !important;
+    padding: 0.75rem 1.5rem !important;
+}
+
+.navbar .navbar-brand {
+    font-weight: 700 !important;
+    color: #415626 !important;
+}
+
+.navbar .nav-link {
+    color: #525252 !important;
+    font-weight: 500 !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 0.5rem !important;
+    transition: all 0.3s ease !important;
+}
+
+.navbar .nav-link:hover {
+    background: #F4F7F0 !important;
+    color: #6B8E3F !important;
+}
+
+/* === CARDS CON HOVER === */
+.card:not([style*="background"]):not([style*="linear-gradient"]) {
+    background: white !important;
+    background-color: white !important;
+    border: 1px solid #E5E5E5 !important;
+    border-radius: 0.75rem !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Cards con fondos personalizados (gradientes) */
+.card[style*="background"],
+.card[style*="linear-gradient"] {
+    border: none !important;
+    border-radius: 0.75rem !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Card-body - padding por defecto */
+.card-body {
+    padding: 1.25rem !important;
+}
+
+/* Card-body con fondo blanco para cards normales (sin estilos inline) */
+.card:not([style]) .card-body,
+.card[style=""] .card-body {
+    background: white !important;
+}
+
+/* Card-body transparente para cards con background personalizado (gradientes o colores sólidos) */
+.card[style*="background"] .card-body {
+    background: transparent !important;
+}
+
+.card-header {
+    background: white !important;
+    border-bottom: 1px solid #E5E5E5 !important;
+}
+
+/* Permitir fondos personalizados en card-header */
+.card[style*="background"] .card-header,
+.card[style*="linear-gradient"] .card-header {
+    background: transparent !important;
+    border-bottom: none !important;
+}
+
+.card-footer {
+    background: white !important;
+    border-top: 1px solid #E5E5E5 !important;
+}
+
+/* === BOTONES === */
+.btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.btn:hover {
+    transform: translateY(-2px) !important;
+}
+
+.btn:active {
+    transform: translateY(0) !important;
+}
+
+/* === TABLAS === */
+.table tbody tr {
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.table-hover tbody tr:hover {
+    background: rgba(107, 142, 63, 0.05) !important;
+    box-shadow: inset 4px 0 0 #6B8E3F !important;
+}
+
+/* === FORM SECTIONS === */
+.form-section {
+    background: linear-gradient(135deg, rgba(107, 142, 63, 0.05) 0%, white 100%) !important;
+    border-left: 4px solid #6B8E3F !important;
+    border-radius: 0.75rem !important;
+    padding: 1.25rem !important;
+    margin-bottom: 1.25rem !important;
+    animation: fadeInUp 0.5s ease-out !important;
+}
+
+.form-section-title {
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    color: #415626 !important;
+    margin-bottom: 1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    padding-bottom: 0.625rem !important;
+    border-bottom: 2px solid rgba(107, 142, 63, 0.2) !important;
+}
+
+.form-section-title i {
+    font-size: 1.125rem !important;
+    color: #6B8E3F !important;
+}
+
+/* === ANIMACIONES === */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.card,
+.form-section {
+    animation: fadeInUp 0.4s ease-out !important;
+}
+
+/* === BADGES Y ETIQUETAS MODERNAS === */
+
+.badge {
+  padding: 0.25rem 0.625rem !important;
+  border-radius: 20px !important;
+  font-weight: 600 !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.3px !important;
+  text-transform: uppercase !important;
+}
+
+/* === INPUTS Y FORMULARIOS === */
+.form-control {
+    border: 2px solid #E5E5E5 !important;
+    border-radius: 0.5rem !important;
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.8125rem !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.form-control:hover {
+    border-color: #D4D4D4 !important;
+}
+
+.form-control:focus {
+    border-color: #6B8E3F !important;
+    box-shadow: 0 0 0 4px rgba(107, 142, 63, 0.1) !important;
+    outline: none !important;
+}
+
+/* === SELECT PERSONALIZADO === */
+select.form-control {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23525252' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 0.75rem center !important;
+    background-size: 12px 12px !important;
+    padding-right: 2.5rem !important;
+}
+
+select.form-control:hover {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B8E3F' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E") !important;
+}
+
+select.form-control:focus {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B8E3F' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E") !important;
+}
+
+/* Eliminar flecha nativa en IE */
+select.form-control::-ms-expand {
+    display: none !important;
+}
+
+.form-group label {
+    font-weight: 600 !important;
+    color: #404040 !important;
+    margin-bottom: 0.375rem !important;
+    font-size: 0.8125rem !important;
+}
+
+.form-group label i {
+    color: #6B8E3F !important;
+    margin-right: 0.25rem !important;
+    font-size: 0.875rem !important;
+}
+
+/* === INPUT GROUPS === */
+.input-group-text {
+    background: linear-gradient(135deg, rgba(107, 142, 63, 0.08), white) !important;
+    border: 2px solid #E5E5E5 !important;
+    border-right: none !important;
+    color: #567232 !important;
+    font-weight: 600 !important;
+    border-radius: 0.75rem 0 0 0.75rem !important;
+}
+
+.input-group .form-control {
+    border-left: none !important;
+    border-radius: 0 0.75rem 0.75rem 0 !important;
+}
+
+.input-group:focus-within .input-group-text {
+    border-color: #6B8E3F !important;
+    background: rgba(107, 142, 63, 0.15) !important;
+}
+
+/* === MODALES === */
+.modal-content {
+    border: none !important;
+    border-radius: 1.5rem !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #6B8E3F, #8FAF64) !important;
+    color: white !important;
+    padding: 1.5rem 2rem !important;
+    border-bottom: none !important;
+    border-radius: 1.5rem 1.5rem 0 0 !important;
+}
+
+.modal-body {
+    padding: 2rem !important;
+}
+
+/* === UTILIDADES === */
+.text-primary { color: #6B8E3F !important; }
+.text-success { color: #10B981 !important; }
+.text-warning { color: #F59E0B !important; }
+.text-danger { color: #EF4444 !important; }
+.text-info { color: #3B82F6 !important; }
+.text-muted { color: #737373 !important; }
+
+.bg-primary { background: #6B8E3F !important; }
+.bg-success { background: #10B981 !important; }
+
+/* === SCROLL PERSONALIZADO === */
+::-webkit-scrollbar {
+    width: 10px !important;
+    height: 10px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: #F5F5F5 !important;
+    border-radius: 10px !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #6B8E3F !important;
+    border-radius: 10px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #567232 !important;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .form-section {
+        padding: 1rem !important;
+    }
+    
+    .card-body {
+        padding: 1rem !important;
+    }
+    
+    h2 {
+        font-size: 1.5rem !important;
+    }
+}
+
+/* === DATATABLES === */
+.dataTables_wrapper .dataTables_length select,
+.dataTables_wrapper .dataTables_filter input {
+    border: 2px solid #E5E5E5 !important;
+    border-radius: 0.5rem !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 0.875rem !important;
+}
+
+.dataTables_wrapper .dataTables_filter input:focus {
+    border-color: #6B8E3F !important;
+    box-shadow: 0 0 0 3px rgba(107, 142, 63, 0.1) !important;
+    outline: none !important;
+}
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+    margin-bottom: 1rem !important;
+}
+
+.dataTables_wrapper .dataTables_info {
+    font-size: 0.875rem !important;
+    padding-top: 1rem !important;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    padding-top: 1rem !important;
+}
+
+/* Botones de DataTables */
+.dt-buttons {
+    margin-bottom: 1rem !important;
+    display: flex !important;
+    gap: 0.5rem !important;
+}
+
+.dt-buttons .btn {
+    background: white !important;
+    border: 2px solid #E5E5E5 !important;
+    color: #525252 !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 0.875rem !important;
+    border-radius: 0.5rem !important;
+    font-weight: 500 !important;
+}
+
+.dt-buttons .btn:hover {
+    border-color: #6B8E3F !important;
+    color: #6B8E3F !important;
+    background: #F4F7F0 !important;
+}
+
+/* Botones de acción en tablas */
+table button,
+table .btn,
+table a.btn {
+    padding: 0.375rem 0.5rem !important;
+    font-size: 0.75rem !important;
+    border-radius: 0.375rem !important;
+    margin: 0 0.125rem !important;
+    min-width: auto !important;
+    width: auto !important;
+    height: auto !important;
+    line-height: 1 !important;
+}
+
+table button i,
+table .btn i,
+table a.btn i {
+    font-size: 0.875rem !important;
+    margin: 0 !important;
+}
+
+/* Botones solo con iconos en tablas */
+table button:not(:has(span)),
+table .btn:not(:has(span)),
+table a.btn:not(:has(span)) {
+    padding: 0.375rem !important;
+    width: 2rem !important;
+    height: 2rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Botones específicos por color */
+table .btn-warning,
+table .btn-info,
+table .btn-danger,
+table .btn-success,
+table .btn-primary {
+    padding: 0.375rem !important;
+    width: 2rem !important;
+    height: 2rem !important;
+}
+
+/* Columna de acciones más estrecha */
+table td:last-child,
+table th:last-child {
+    width: auto !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+}
+
+/* Reducir espacio entre botones */
+table td:last-child button,
+table td:last-child .btn,
+table td:last-child a.btn {
+    margin: 0 0.125rem !important;
+}
+
+/* Ajustar padding de celdas con botones */
+table td:has(button),
+table td:has(.btn),
+table td:has(a.btn) {
+    padding: 0.5rem 0.75rem !important;
+}
+
+/* Botones en DataTables */
+.dataTables_wrapper table button,
+.dataTables_wrapper table .btn,
+.dataTables_wrapper table a.btn {
+    padding: 0.375rem !important;
+    width: 2rem !important;
+    height: 2rem !important;
+    font-size: 0.75rem !important;
+}
+
+/* Asegurar que los iconos estén centrados */
+table button i,
+table .btn i,
+table a.btn i {
+    display: inline-block !important;
+    vertical-align: middle !important;
+}
+
+/* Botones cuadrados compactos */
+table tbody button,
+table tbody .btn,
+table tbody a.btn {
+    border-radius: 0.375rem !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.2s ease !important;
+}
+
+table tbody button:hover,
+table tbody .btn:hover,
+table tbody a.btn:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Eliminar padding extra de Bootstrap */
+table .btn-group {
+    gap: 0.125rem !important;
+}
+
+table .btn-group .btn {
+    margin: 0 !important;
+}
+
+/* Estados en tablas */
+table td {
+    font-size: 0.8125rem !important;
+    padding: 0.75rem 1rem !important;
+}
+
+table th {
+    font-size: 0.75rem !important;
+    padding: 0.75rem 1rem !important;
+}
+
+/* Mejorar celdas de estado */
+table tbody td:nth-last-child(2) {
+    font-weight: 600 !important;
+}
+
+/* Badges para estados */
+.badge-estado-activo {
+    background: #D1FAE5 !important;
+    color: #059669 !important;
+    padding: 0.375rem 0.75rem !important;
+    border-radius: 20px !important;
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
+}
+
+.badge-estado-inactivo {
+    background: #FEE2E2 !important;
+    color: #DC2626 !important;
+    padding: 0.375rem 0.75rem !important;
+    border-radius: 20px !important;
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
+}
+
+.badge-estado-vendido {
+    background: #DBEAFE !important;
+    color: #2563EB !important;
+    padding: 0.375rem 0.75rem !important;
+    border-radius: 20px !important;
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
+}
+
+/* === FLEXBOX UTILITIES === */
+.d-flex {
+    display: flex !important;
+}
+
+.justify-content-between {
+    justify-content: space-between !important;
+}
+
+.justify-content-end {
+    justify-content: flex-end !important;
+}
+
+.align-items-center {
+    align-items: center !important;
+}
+
+.align-items-start {
+    align-items: flex-start !important;
+}
+
+.flex-wrap {
+    flex-wrap: wrap !important;
+}
+
+.gap-3 {
+    gap: 0.75rem !important;
+}
+
+/* === MARGIN Y PADDING UTILITIES === */
+.mb-1 { margin-bottom: 0.25rem !important; }
+.mb-2 { margin-bottom: 0.5rem !important; }
+.mb-3 { margin-bottom: 0.75rem !important; }
+.mb-4 { margin-bottom: 1rem !important; }
+.mb-5 { margin-bottom: 1.25rem !important; }
+
+.pt-4 { padding-top: 1rem !important; }
+.pb-4 { padding-bottom: 1rem !important; }
+
+/* === MEJORAS ADICIONALES === */
+html {
+    overflow-x: hidden !important;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    background-color: #FAFAFA !important;
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', 'Inter', sans-serif !important;
+    font-weight: 700 !important;
+    color: #262626 !important;
+}
+
+.content {
+    min-height: calc(100vh - 100px) !important;
+    padding: 1.5rem 1rem !important;
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* === FOOTER === */
+footer,
+.footer {
+    background: white !important;
+    border-top: 1px solid #E5E5E5 !important;
+    padding: 1.5rem !important;
+    font-size: 0.875rem !important;
+    color: #737373 !important;
+}
+
+footer a,
+.footer a {
+    color: #6B8E3F !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+}
+
+footer a:hover,
+.footer a:hover {
+    color: #567232 !important;
+    text-decoration: underline !important;
+}
+
+/* === CORRECCIONES DE LAYOUT === */
+.wrapper {
+    height: auto !important;
+    min-height: 100vh !important;
+}
+
+.main-panel {
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+.main-panel > .content {
+    padding: 1.5rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.container-fluid {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+/* Permitir que el navbar y dropdowns sean visibles */
+.navbar,
+.navbar .container-fluid,
+.navbar-collapse,
+.navbar-nav {
+    overflow: visible !important;
+}
+
+.dropdown-menu {
+    overflow-y: visible !important;
+    max-height: none !important;
+}
+
+/* Mejorar visibilidad del hover en dropdown del navbar */
+.navbar .dropdown-menu .dropdown-item {
+    color: #333333 !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+}
+
+.navbar .dropdown-menu .dropdown-item:hover,
+.navbar .dropdown-menu .dropdown-item:focus {
+    background-color: #6B8E3F !important;
+    color: #ffffff !important;
+    transform: translateX(4px) !important;
+}
+
+.navbar .dropdown-menu .dropdown-item i {
+    margin-right: 0.5rem !important;
+    opacity: 0.8 !important;
+}
+
+.navbar .dropdown-menu .dropdown-item:hover i,
+.navbar .dropdown-menu .dropdown-item:focus i {
+    opacity: 1 !important;
+}
+
+/* Estilos para encabezados de DataTables con color verde - MÁXIMA PRIORIDAD */
+table.dataTable thead.thead-light,
+table.dataTable thead.thead-light tr,
+table.dataTable thead.thead-light th,
+table.dataTable thead.thead-light td,
+table.dataTable.table-hover thead.thead-light th,
+.table.dataTable thead.thead-light th,
+.table-hover.dataTable thead.thead-light th {
+    background: #6B8E3F !important;
+    background-color: #6B8E3F !important;
+    background-image: none !important;
+    color: white !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.5px !important;
+    border: none !important;
+    border-color: #6B8E3F !important;
+    padding: 1rem 1.25rem !important;
+    display: table-cell !important;
+    visibility: visible !important;
+}
+
+/* Asegurar que el thead sea visible */
+table.dataTable thead.thead-light {
+    display: table-header-group !important;
+    background: #6B8E3F !important;
+}
+
+table.dataTable thead.thead-light tr {
+    display: table-row !important;
+    background: #6B8E3F !important;
+}
+
+/* Estilos para sorting icons en DataTables */
+table.dataTable thead.thead-light th.sorting,
+table.dataTable thead.thead-light th.sorting_asc,
+table.dataTable thead.thead-light th.sorting_desc,
+table.dataTable thead.thead-light th.sorting:before,
+table.dataTable thead.thead-light th.sorting:after,
+table.dataTable thead.thead-light th.sorting_asc:before,
+table.dataTable thead.thead-light th.sorting_asc:after,
+table.dataTable thead.thead-light th.sorting_desc:before,
+table.dataTable thead.thead-light th.sorting_desc:after {
+    background: #6B8E3F !important;
+    background-color: #6B8E3F !important;
+    color: white !important;
+}
+
+table.dataTable.no-footer {
+    border-bottom: none !important;
+}
+
+table.dataTable tbody tr {
+    border-bottom: 1px solid #E5E5E5 !important;
+}
+
+table.dataTable tbody td {
+    padding: 0.875rem 1rem !important;
+    vertical-align: middle !important;
+}
+
+.row {
+    margin-left: -0.75rem !important;
+    margin-right: -0.75rem !important;
+}
+
+.col, [class*="col-"] {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+}
+
+/* === AJUSTES DE TAMAÑO === */
+h2 {
+    font-size: 1.25rem !important;
+    margin-bottom: 0.375rem !important;
+    font-weight: 800 !important;
+}
+
+h3 {
+    font-size: 1.125rem !important;
+}
+
+h5 {
+    font-size: 0.9375rem !important;
+}
+
+h6 {
+    font-size: 0.875rem !important;
+}
+
+p {
+    font-size: 0.8125rem !important;
+}
+
+.text-muted {
+    font-size: 0.75rem !important;
+}
+
+/* Ajustar tamaño de cards de estadísticas */
+.card-stats h3 {
+    font-size: 1.5rem !important;
+}
+
+.card-stats p {
+    font-size: 0.75rem !important;
+}
+
+.card-stats .icon-big {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+}
+
+.card-stats .icon-big i {
+    font-size: 1.125rem !important;
+}
+
+/* Ajustar tamaño de botones */
+.btn {
+    font-size: 0.8125rem !important;
+    padding: 0.5rem 1rem !important;
+}
+
+.btn-lg {
+    font-size: 0.875rem !important;
+    padding: 0.625rem 1.25rem !important;
+}
+
+.btn-sm {
+    font-size: 0.75rem !important;
+    padding: 0.375rem 0.75rem !important;
+}

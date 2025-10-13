@@ -44,26 +44,26 @@
 
                             <div class="row mb-4">
                                 <div class="col-md-4">
-                                    <div class="card" style="background: linear-gradient(87deg, #11cdef 0, #1171ef 100%);">
+                                    <div class="card" style="background: #d85f1f !important;">
                                         <div class="card-body">
-                                            <h6 class="text-white mb-2">Total Litros</h6>
-                                            <h2 class="text-white mb-0" id="totalLiters">0 L</h2>
+                                            <h6 class="text-white mb-2" style="font-weight: 600; font-size: 0.875rem;">Total Litros</h6>
+                                            <h2 class="text-white mb-0" id="totalLiters" style="font-weight: 800; font-size: 2rem;">0 L</h2>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="card" style="background: linear-gradient(87deg, #2dce89 0, #2dcecc 100%);">
+                                    <div class="card" style="background: linear-gradient(135deg, #567232 0%, #6B8E3F 100%) !important;">
                                         <div class="card-body">
-                                            <h6 class="text-white mb-2">Total Ingresos</h6>
-                                            <h2 class="text-white mb-0" id="totalIncome">$0.00</h2>
+                                            <h6 class="text-white mb-2" style="font-weight: 600; font-size: 0.875rem;">Total Ingresos</h6>
+                                            <h2 class="text-white mb-0" id="totalIncome" style="font-weight: 800; font-size: 2rem;">$0.00</h2>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="card" style="background: linear-gradient(87deg, #fb6340 0, #fbb140 100%);">
+                                    <div class="card" style="background: #e8b923 !important;">
                                         <div class="card-body">
-                                            <h6 class="text-white mb-2">Precio Promedio/L</h6>
-                                            <h2 class="text-white mb-0" id="avgPrice">$0.00</h2>
+                                            <h6 class="text-white mb-2" style="font-weight: 600; font-size: 0.875rem;">Precio Promedio/L</h6>
+                                            <h2 class="text-white mb-0" id="avgPrice" style="font-weight: 800; font-size: 2rem;">$0.00</h2>
                                         </div>
                                     </div>
                                 </div>
