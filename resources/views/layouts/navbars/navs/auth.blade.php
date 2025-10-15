@@ -8,7 +8,13 @@
                     <span class="navbar-toggler-bar bar3"></span>
                 </button>
             </div>
-            <a class="navbar-brand" href="#pablo">{{ Auth::user()->rebaño }}</a>
+            <a class="navbar-brand" href="#pablo">
+                @if(Auth::user()->getActiveCompany())
+                    {{ Auth::user()->getActiveCompany()->name }}
+                @else
+                    GenFinSoft
+                @endif
+            </a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
             aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">

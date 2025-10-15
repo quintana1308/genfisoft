@@ -80,10 +80,6 @@
                                 <div style="background: #F3F4F6; padding: 0.625rem 0.875rem; border-radius: 0.375rem; font-weight: 600; color: #262626;" id="modalUserRole"></div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label style="font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Rebaño</label>
-                                <div style="background: #F3F4F6; padding: 0.625rem 0.875rem; border-radius: 0.375rem; font-weight: 600; color: #262626;" id="modalUserRebano"></div>
-                            </div>
-                            <div class="col-md-6 mb-3">
                                 <label style="font-size: 0.75rem; font-weight: 600; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Estado</label>
                                 <div style="background: #F3F4F6; padding: 0.625rem 0.875rem; border-radius: 0.375rem; font-weight: 600; color: #262626;" id="modalUserStatus"></div>
                             </div>
@@ -213,7 +209,6 @@ $(document).ready(function() {
                 $('#modalUserEmail').text(data.email);
                 $('#modalUserCompany').text(data.company);
                 $('#modalUserRole').text(data.role.charAt(0).toUpperCase() + data.role.slice(1));
-                $('#modalUserRebano').text(data.rebaño || 'No especificado');
                 $('#modalUserStatus').html(data.is_active ? 
                     '<span class="badge badge-success">Activo</span>' : 
                     '<span class="badge badge-danger">Inactivo</span>'

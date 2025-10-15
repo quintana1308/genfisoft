@@ -30,6 +30,9 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $user = Auth::user();
+        
+        // Actualizar último acceso
+        $user->updateLastLogin();
 
         // Guardamos variables personalizadas en la sesión
         session([

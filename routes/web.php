@@ -24,18 +24,26 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\MilkProductionController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanySwitchController;
+use App\Http\Controllers\LicenseStatusController;
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
+// Rutas para estados de licencia
+Route::middleware('auth')->group(function () {
+    Route::get('/license/required', [LicenseStatusController::class, 'required'])->name('license.required');
+    Route::get('/license/expired', [LicenseStatusController::class, 'expired'])->name('license.expired');
+    Route::get('/license/inactive', [LicenseStatusController::class, 'inactive'])->name('license.inactive');
+});
+
 Route::get('/', [DashboardController::class, 'dashboard'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'license'])
     ->name('dashboard');
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'license'])
     ->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'license'])->group(function () {
 
     //DASHBOARD
     Route::get('/chart/reproductive-stats', [DashboardController::class, 'getReproductiveStats']);

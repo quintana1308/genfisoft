@@ -252,7 +252,7 @@ class AdminController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admin.company.licenses', $companyId)
+            return redirect()->route('admin.companies.licenses', $companyId)
                 ->with('success', 'Licencia creada exitosamente.');
 
         } catch (\Exception $e) {
@@ -289,7 +289,7 @@ class AdminController extends Controller
                 'last_validated_at' => now()
             ]);
 
-            return redirect()->route('admin.company.licenses', $license->company_id)
+            return redirect()->route('admin.companies.licenses', $license->company_id)
                 ->with('success', 'Licencia renovada exitosamente hasta ' . $newEndDate->format('d/m/Y'));
 
         } catch (\Exception $e) {
@@ -370,7 +370,6 @@ class AdminController extends Controller
             'additional_companies' => 'nullable|array',
             'additional_companies.*' => 'exists:companies,id',
             'role' => 'required|in:admin,manager,operator',
-            'rebaño' => 'nullable|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -384,7 +383,6 @@ class AdminController extends Controller
             'company_id' => $request->company_id,
             'active_company_id' => $request->company_id,
             'role' => $request->role,
-            'rebaño' => $request->rebaño,
             'is_active' => true,
             'email_verified_at' => now(),
         ]);
@@ -429,7 +427,6 @@ class AdminController extends Controller
             'additional_companies' => 'nullable|array',
             'additional_companies.*' => 'exists:companies,id',
             'role' => 'required|in:admin,manager,operator',
-            'rebaño' => 'nullable|string|max:255',
             'is_active' => 'boolean',
         ]);
 
@@ -442,7 +439,6 @@ class AdminController extends Controller
             'email' => $request->email,
             'company_id' => $request->company_id,
             'role' => $request->role,
-            'rebaño' => $request->rebaño,
             'is_active' => $request->has('is_active'),
         ];
 
@@ -487,7 +483,6 @@ class AdminController extends Controller
             'name' => $user->name,
             'email' => $user->email,
             'role' => $user->role,
-            'rebaño' => $user->rebaño,
             'company' => $user->company ? $user->company->name : 'Sin empresa',
             'is_active' => $user->is_active,
             'last_login' => $user->last_login_at ? $user->last_login_at->format('d/m/Y H:i') : 'Nunca',

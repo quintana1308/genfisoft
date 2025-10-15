@@ -136,10 +136,10 @@ class Veterinarian extends Model
             'company_id' => $activeCompanyId,
             'cattle_id' => $request->cattle,
             'product_id' => $request->product,
-            'symptoms' => $request->symptoms,
+            'symptoms' => $request->symptoms ?: null,
             'date_start' => $request->dateStart,
-            'date_end' => $request->dateEnd,
-            'observation' => $request->observation,
+            'date_end' => $request->dateEnd ?: null,
+            'observation' => $request->observation ?: null,
             'status_id' => $request->status,
         ]);
 
@@ -222,10 +222,10 @@ class Veterinarian extends Model
         
         $veterinarian->cattle_id= $request->cattleEdit;
         $veterinarian->product_id = $request->productEdit;
-        $veterinarian->symptoms = $request->symptomsEdit;
+        $veterinarian->symptoms = $request->symptomsEdit ?: null;
         $veterinarian->date_start = $request->dateStartEdit;
-        $veterinarian->date_end = $request->dateEndEdit;
-        $veterinarian->observation = $request->observationEdit;
+        $veterinarian->date_end = $request->dateEndEdit ?: null;
+        $veterinarian->observation = $request->observationEdit ?: null;
 
         if (isset($request->statusEdit) && $veterinarian->status_id != $request->statusEdit) {
             $veterinarian->status_id = $request->statusEdit;

@@ -10,15 +10,40 @@ use Symfony\Component\HttpFoundation\Response;
 class ValidateLicense
 {
     /**
+     * Rutas excluidas de la validación de licencia
+     */
+    protected $excludedRoutes = [
+        'admin.*',
+        'license.*',
+        'logout',
+        'profile.*',
+        'switch.company',
+        'accessible.companies'
+    ];
+
+    /**
      * Handle an incoming request.
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // Verificar si la ruta actual está excluida
+        foreach ($this->excludedRoutes as $pattern) {
+            if ($request->routeIs($pattern)) {
+                return $next($request);
+            }
+        }
+
         if (!Auth::check()) {
             return redirect()->route('login');
         }
 
         $user = Auth::user();
+        
+        // Los administradores globales (role = admin) no necesitan validación de licencia
+        if ($user->role === 'admin') {
+            return $next($request);
+        }
+
         $company = $user->company;
 
         if (!$company) {

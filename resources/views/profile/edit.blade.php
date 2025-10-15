@@ -5,60 +5,172 @@
 
 @section('content')
 <div class="content">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title"><i class="nc-icon nc-single-02"></i> Información del Usuario</h5>
+    
+    <!-- Header de la página -->
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-1" style="font-weight: 800; color: #262626;">
+                        <i class="fa-solid fa-user-circle" style="color: #6B8E3F;"></i>
+                        Mi Perfil
+                    </h2>
+                    <p class="text-muted mb-0">Gestiona tu información personal y configuración de cuenta</p>
                 </div>
-                <div class="card-body">
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="row">
+        <!-- Columna Principal -->
+        <div class="col-lg-8">
+            <!-- Información del Usuario -->
+            <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden; margin-bottom: 1.5rem;">
+                <div class="card-body" style="padding: 1.5rem;">
                     <form method="post" action="{{ route('profile.update') }}">
                         @csrf
                         @method('patch')
                         
-                        <div class="row">
-                            <div class="col-md-6 pr-1">
-                                <div class="form-group">
-                                    <label>Nombre Completo</label>
-                                    <input type="text" class="form-control" name="name" value="{{ old('name', $user->name) }}" required>
-                                    @error('name')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                        <!-- Sección: Información Personal -->
+                        <div class="form-section">
+                            <h6 class="form-section-title">
+                                <i class="fa-solid fa-user"></i>
+                                Información Personal
+                            </h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">
+                                            <i class="fa-solid fa-signature"></i> Nombre Completo
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="name" value="{{ old('name', $user->name) }}" placeholder="Nombre completo" required>
+                                        </div>
+                                        @error('name')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 pl-1">
-                                <div class="form-group">
-                                    <label>Correo Electrónico</label>
-                                    <input type="email" class="form-control" name="email" value="{{ old('email', $user->email) }}" required>
-                                    @error('email')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">
+                                            <i class="fa-solid fa-envelope"></i> Correo Electrónico
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                                            </div>
+                                            <input type="email" class="form-control" name="email" value="{{ old('email', $user->email) }}" placeholder="correo@ejemplo.com" required>
+                                        </div>
+                                        @error('email')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">
+                                            <i class="fa-solid fa-calendar-check"></i> Fecha de Registro
+                                        </label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa-solid fa-calendar"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" value="{{ $user->created_at->format('d/m/Y H:i') }}" readonly style="background-color: #f5f5f5;">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         
+                        <!-- Botón de envío -->
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Rebaño</label>
-                                    <input type="text" class="form-control" value="{{ $user->rebaño }}" readonly>
+                            <div class="col-12 d-flex justify-content-end pt-3">
+                                <button type="submit" class="btn btn-primary" style="padding: 0.75rem 2rem; border-radius: 0.75rem; font-weight: 600;">
+                                    <i class="fa-solid fa-check"></i> Actualizar Información
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Cambiar Contraseña -->
+            <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden;">
+                <div class="card-body" style="padding: 1.5rem;">
+                    <form method="post" action="{{ route('password.update') }}">
+                        @csrf
+                        @method('put')
+                        
+                        <!-- Sección: Seguridad -->
+                        <div class="form-section">
+                            <h6 class="form-section-title">
+                                <i class="fa-solid fa-lock"></i>
+                                Cambiar Contraseña
+                            </h6>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-form-label">
+                                            <i class="fa-solid fa-key"></i> Contraseña Actual
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                                            </div>
+                                            <input type="password" class="form-control" name="current_password" placeholder="Ingresa tu contraseña actual" required>
+                                        </div>
+                                        @error('current_password')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">
+                                            <i class="fa-solid fa-key"></i> Nueva Contraseña
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                                            </div>
+                                            <input type="password" class="form-control" name="password" placeholder="Nueva contraseña" required>
+                                        </div>
+                                        @error('password')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-form-label">
+                                            <i class="fa-solid fa-key"></i> Confirmar Nueva Contraseña
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                                            </div>
+                                            <input type="password" class="form-control" name="password_confirmation" placeholder="Confirma tu contraseña" required>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         
+                        <!-- Botón de envío -->
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Fecha de Registro</label>
-                                    <input type="text" class="form-control" value="{{ $user->created_at->format('d/m/Y H:i') }}" readonly>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-success">
-                                    <i class="nc-icon nc-check-2"></i> Actualizar Información
+                            <div class="col-12 d-flex justify-content-end pt-3">
+                                <button type="submit" class="btn btn-warning" style="padding: 0.75rem 2rem; border-radius: 0.75rem; font-weight: 600;">
+                                    <i class="fa-solid fa-shield-halved"></i> Cambiar Contraseña
                                 </button>
                             </div>
                         </div>
@@ -67,133 +179,166 @@
             </div>
         </div>
         
-        <div class="col-md-4">
+        <!-- Columna Lateral -->
+        <div class="col-lg-4">
             @if($company)
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title"><i class="nc-icon nc-bank"></i> Información de la Empresa</h5>
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <label>Nombre de la Empresa</label>
-                        <input type="text" class="form-control" value="{{ $company->name }}" readonly>
+            <!-- Información de la Empresa -->
+            <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden; margin-bottom: 1.5rem;">
+                <div class="card-body" style="padding: 1.5rem;">
+                    <div class="form-section">
+                        <h6 class="form-section-title">
+                            <i class="fa-solid fa-building"></i>
+                            Información de la Empresa
+                        </h6>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="col-form-label">
+                                        <i class="fa-solid fa-briefcase"></i> Nombre de la Empresa
+                                    </label>
+                                    <input type="text" class="form-control" value="{{ $company->name }}" readonly style="background-color: #f5f5f5;">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="col-form-label">
+                                        <i class="fa-solid fa-id-card"></i> RIF/NIT
+                                    </label>
+                                    <input type="text" class="form-control" value="{{ $company->tax_id ?? 'No especificado' }}" readonly style="background-color: #f5f5f5;">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="col-form-label">
+                                        <i class="fa-solid fa-phone"></i> Teléfono
+                                    </label>
+                                    <input type="text" class="form-control" value="{{ $company->phone ?? 'No especificado' }}" readonly style="background-color: #f5f5f5;">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="col-form-label">
+                                        <i class="fa-solid fa-envelope"></i> Email
+                                    </label>
+                                    <input type="text" class="form-control" value="{{ $company->email ?? 'No especificado' }}" readonly style="background-color: #f5f5f5;">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="col-form-label">
+                                        <i class="fa-solid fa-location-dot"></i> Dirección
+                                    </label>
+                                    <textarea class="form-control" rows="2" readonly style="background-color: #f5f5f5;">{{ $company->address ?? 'No especificada' }}</textarea>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="col-form-label">
+                                        <i class="fa-solid fa-certificate"></i> Estado de la Licencia
+                                    </label>
+                                    <div>
+                                        @if($company->license)
+                                            @if($company->license->isValid())
+                                                <span class="badge badge-success" style="font-size: 0.9rem; padding: 0.5rem 1rem;">
+                                                    <i class="fa-solid fa-check-circle"></i> Activa
+                                                </span>
+                                                <small class="text-muted d-block mt-2">
+                                                    <i class="fa-solid fa-calendar"></i> Vence: {{ $company->license->end_date->format('d/m/Y') }}
+                                                </small>
+                                                @if($company->license->isExpiringSoon(7))
+                                                    <small class="text-warning d-block mt-1">
+                                                        <i class="fa-solid fa-exclamation-triangle"></i> Expira en {{ $company->license->getDaysRemaining() }} días
+                                                    </small>
+                                                @endif
+                                            @elseif($company->license->isExpired())
+                                                <span class="badge badge-danger" style="font-size: 0.9rem; padding: 0.5rem 1rem;">
+                                                    <i class="fa-solid fa-times-circle"></i> Expirada
+                                                </span>
+                                                <small class="text-muted d-block mt-2">
+                                                    <i class="fa-solid fa-calendar"></i> Expiró: {{ $company->license->end_date->format('d/m/Y') }}
+                                                </small>
+                                            @else
+                                                <span class="badge badge-warning" style="font-size: 0.9rem; padding: 0.5rem 1rem;">
+                                                    <i class="fa-solid fa-pause-circle"></i> Inactiva
+                                                </span>
+                                                <small class="text-muted d-block mt-2">
+                                                    Estado: {{ ucfirst($company->license->status) }}
+                                                </small>
+                                            @endif
+                                        @else
+                                            <span class="badge badge-secondary" style="font-size: 0.9rem; padding: 0.5rem 1rem;">
+                                                <i class="fa-solid fa-ban"></i> Sin Licencia
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label>RIF/NIT</label>
-                        <input type="text" class="form-control" value="{{ $company->tax_id ?? 'No especificado' }}" readonly>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Teléfono</label>
-                        <input type="text" class="form-control" value="{{ $company->phone ?? 'No especificado' }}" readonly>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="text" class="form-control" value="{{ $company->email ?? 'No especificado' }}" readonly>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Dirección</label>
-                        <textarea class="form-control" rows="3" readonly>{{ $company->address ?? 'No especificada' }}</textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Estado de la Licencia</label>
-                        @if($company->license && $company->license->is_active)
-                            <span class="badge badge-success">Activa</span>
-                            <small class="text-muted d-block">Vence: {{ $company->license->end_date->format('d/m/Y') }}</small>
-                        @else
-                            <span class="badge badge-danger">Inactiva</span>
-                        @endif
-                    </div>
-
-                    @if(!$user->isAdmin())
-                    <div class="form-group">
-                        <label>Cambiar Empresa Activa</label>
-                        <select class="form-control" id="companySelector">
-                            @foreach($user->getAccessibleCompanies() as $accessibleCompany)
-                                <option value="{{ $accessibleCompany->id }}" 
-                                    {{ $user->getActiveCompany()->id == $accessibleCompany->id ? 'selected' : '' }}>
-                                    {{ $accessibleCompany->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        <small class="form-text text-muted">
-                            Selecciona la empresa con la que deseas trabajar. Los datos mostrados corresponderán a la empresa seleccionada.
-                        </small>
-                    </div>
-                    @else
-                    <div class="form-group">
-                        <label>Empresa Activa (Administrador)</label>
-                        <select class="form-control" id="companySelector">
-                            <option value="all" {{ !$user->active_company_id ? 'selected' : '' }}>
-                                Todas las Empresas (Vista Administrador)
-                            </option>
-                            @foreach($user->getAccessibleCompanies() as $accessibleCompany)
-                                <option value="{{ $accessibleCompany->id }}" 
-                                    {{ $user->active_company_id == $accessibleCompany->id ? 'selected' : '' }}>
-                                    {{ $accessibleCompany->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        <small class="form-text text-muted">
-                            Como administrador, puedes ver todas las empresas o enfocarte en una específica.
-                        </small>
-                    </div>
-                    @endif
                 </div>
             </div>
             @else
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title"><i class="nc-icon nc-bank"></i> Información de la Empresa</h5>
-                </div>
-                <div class="card-body">
+            <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden; margin-bottom: 1.5rem;">
+                <div class="card-body" style="padding: 1.5rem;">
                     <div class="alert alert-warning">
-                        <i class="nc-icon nc-alert-circle-i"></i>
+                        <i class="fa-solid fa-exclamation-triangle"></i>
                         No hay empresa asignada a este usuario.
                     </div>
                 </div>
             </div>
             @endif
-            
-            <!-- Cambiar Contraseña -->
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title"><i class="nc-icon nc-key-25"></i> Cambiar Contraseña</h5>
-                </div>
-                <div class="card-body">
-                    <form method="post" action="{{ route('password.update') }}">
-                        @csrf
-                        @method('put')
-                        
-                        <div class="form-group">
-                            <label>Contraseña Actual</label>
-                            <input type="password" class="form-control" name="current_password" required>
-                            @error('current_password')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
+
+            <!-- Cambiar Empresa Activa -->
+            <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden;">
+                <div class="card-body" style="padding: 1.5rem;">
+                    <div class="form-section">
+                        <h6 class="form-section-title">
+                            <i class="fa-solid fa-building-circle-arrow-right"></i>
+                            Cambiar Empresa Activa
+                        </h6>
+                        <div class="row">
+                            <div class="col-12">
+                                @if(!$user->isAdmin())
+                                <div class="form-group">
+                                    <label class="col-form-label">
+                                        <i class="fa-solid fa-building"></i> Seleccionar Empresa
+                                    </label>
+                                    <select class="form-control" id="companySelector">
+                                        @foreach($user->getAccessibleCompanies() as $accessibleCompany)
+                                            <option value="{{ $accessibleCompany->id }}" 
+                                                {{ $user->getActiveCompany()->id == $accessibleCompany->id ? 'selected' : '' }}>
+                                                {{ $accessibleCompany->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <small class="form-text text-muted mt-2">
+                                        <i class="fa-solid fa-info-circle"></i> Los datos mostrados corresponderán a la empresa seleccionada.
+                                    </small>
+                                </div>
+                                @else
+                                <div class="form-group">
+                                    <label class="col-form-label">
+                                        <i class="fa-solid fa-user-shield"></i> Vista de Administrador
+                                    </label>
+                                    <select class="form-control" id="companySelector">
+                                        <option value="all" {{ !$user->active_company_id ? 'selected' : '' }}>
+                                            <i class="fa-solid fa-globe"></i> Todas las Empresas
+                                        </option>
+                                        @foreach($user->getAccessibleCompanies() as $accessibleCompany)
+                                            <option value="{{ $accessibleCompany->id }}" 
+                                                {{ $user->active_company_id == $accessibleCompany->id ? 'selected' : '' }}>
+                                                {{ $accessibleCompany->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <small class="form-text text-muted mt-2">
+                                        <i class="fa-solid fa-info-circle"></i> Puedes ver todas las empresas o enfocarte en una específica.
+                                    </small>
+                                </div>
+                                @endif
+                            </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <label>Nueva Contraseña</label>
-                            <input type="password" class="form-control" name="password" required>
-                            @error('password')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Confirmar Nueva Contraseña</label>
-                            <input type="password" class="form-control" name="password_confirmation" required>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-warning btn-sm">
-                            <i class="nc-icon nc-refresh-69"></i> Cambiar Contraseña
-                        </button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

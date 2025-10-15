@@ -120,17 +120,9 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="rebaño">Rebaño</label>
-                                        <input type="text" class="form-control @error('rebaño') is-invalid @enderror" 
-                                               id="rebaño" name="rebaño" value="{{ old('rebaño') }}" 
-                                               placeholder="Nombre del rebaño asignado">
-                                        @error('rebaño')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
+                            </div>
+                            
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="additional_companies">Empresas Adicionales (Opcional)</label>
