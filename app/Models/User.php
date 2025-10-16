@@ -85,17 +85,17 @@ class User extends Authenticatable
     // Métodos de utilidad
     public function isAdmin(): bool
     {
-        return $this->role === 'admin';
+        return $this->role === 'Administrador';
     }
 
     public function isManager(): bool
     {
-        return in_array($this->role, ['admin', 'manager']);
+        return in_array($this->role, ['Administrador', 'Gerente']);
     }
 
     public function canManage(): bool
     {
-        return in_array($this->role, ['admin', 'manager']);
+        return in_array($this->role, ['Administrador', 'Gerente']);
     }
 
     public function hasValidLicense(): bool

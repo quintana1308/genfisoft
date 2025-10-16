@@ -172,7 +172,13 @@ function editProduct($id){
             {
                 document.querySelector('#id').value = objData.data.id;
                 document.querySelector('#name').value = objData.data.name;
-                document.querySelector('#type').value = objData.data.type;
+                
+                // Establecer el valor del tipo
+                const typeSelect = document.querySelector('#type');
+                if (typeSelect && objData.data.type) {
+                    typeSelect.value = objData.data.type;
+                }
+                
                 document.querySelector('#titleHeaderForm').innerHTML = '<i class="fa-solid fa-syringe text-success"></i> Actualizar Producto';
                 document.querySelector('#buttomSubmit').innerHTML = '<i class="fa-solid fa-check"></i> Actualizar';
 

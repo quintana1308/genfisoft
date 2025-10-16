@@ -18,7 +18,7 @@
                     <p class="text-muted mb-0">Completa la información del animal</p>
                 </div>
                 <div>
-                    <a href="{{ route('cattle.index') }}" class="btn btn-outline-secondary" style="padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600;">
+                    <a href="{{ route('cattle.index') }}" class="btn" style="background: #6B8E3F; color: white !important; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; border: none;">
                         <i class="fa-solid fa-arrow-left"></i> Volver al Listado
                     </a>
                 </div>
@@ -302,7 +302,7 @@
                         <!-- Botón de envío -->
                         <div class="row">
                             <div class="col-12 d-flex justify-content-end gap-3 pt-4" style="gap: 1rem !important;">
-                                <button type="button" class="btn btn-outline-secondary" onclick="window.history.back()" style="padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600;">
+                                <button type="button" class="btn" onclick="window.history.back()" style="background: #6c757d; color: white !important; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; border: none;">
                                     <i class="fa-solid fa-times"></i> Cancelar
                                 </button>
                                 <button type="submit" id="buttomSubmit" class="btn btn-primary" style="padding: 0.75rem 2rem; border-radius: 0.75rem; font-weight: 600;">

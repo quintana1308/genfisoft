@@ -18,7 +18,7 @@
                     <p class="text-muted mb-0">Crear licencia para {{ $company->name }}</p>
                 </div>
                 <div>
-                    <a href="{{ route('admin.companies.licenses', $company->id) }}" class="btn btn-outline-secondary" style="padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600;">
+                    <a href="{{ route('admin.companies.licenses', $company->id) }}" class="btn" style="background: #6B8E3F; color: white !important; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; border: none;">
                         <i class="fa-solid fa-arrow-left"></i> Volver al Listado
                     </a>
                 </div>
@@ -155,7 +155,7 @@
 
                         <!-- Botones de Acción -->
                         <div class="d-flex justify-content-end gap-2 mt-4" style="gap: 0.5rem;">
-                            <a href="{{ route('admin.companies.licenses', $company->id) }}" class="btn btn-outline-secondary" style="padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600;">
+                            <a href="{{ route('admin.companies.licenses', $company->id) }}" class="btn" style="background: #6c757d; color: white !important; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; border: none;">
                                 <i class="fa-solid fa-times"></i> Cancelar
                             </a>
                             <button type="submit" class="btn" style="background: #6B8E3F; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; border: none;">

@@ -9,11 +9,11 @@
                 </ul>
             </nav>-->
             <div class="credits ml-auto">
-                <span class="copyright">
+                <span class="copyright @if(Auth::guest()) text-white @endif">
                     ©
                     <script>
                         document.write(new Date().getFullYear())
-                    </script>{{ __(', Desarrollado por ') }}<a class="@if(Auth::guest()) text-white @endif" href="#" target="_blank">{{ __('Quingoz Digital Marketing Agency') }}</a>
+                    </script>{{ __(', Desarrollado por ') }}<a class="text-white" href="#" target="_blank">{{ __('Quingoz Digital Marketing Agency') }}</a>
                 </span>
             </div>
         </div>  

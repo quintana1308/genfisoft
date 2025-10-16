@@ -10,12 +10,14 @@
                 <form class="form" method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="card card-login">
-                        <div class="card-header ">
-                            <div class="card-header ">
-                                <h3 class="header text-center">{{ __('Iniciar sesión') }}</h3>
+                        <div class="card-header">
+                            <div class="logo-container-login text-center">
+                                <img src="{{ asset('paper') }}/img/logotipo-genfinsoft.png" alt="GenFinSoft Logo" class="login-logo">
+                                <h2 class="system-name mt-2 mb-0">GenFinSoft</h2>
                             </div>
+                            <h3 class="header text-center mt-3">{{ __('Iniciar sesión') }}</h3>
                         </div>
-                        <div class="card-body ">
+                        <div class="card-body">
 
                             <div class="input-group">
                                 <div class="input-group-prepend">

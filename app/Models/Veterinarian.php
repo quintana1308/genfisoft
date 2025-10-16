@@ -77,13 +77,13 @@ class Veterinarian extends Model
                 return $veterinarian->product->name;
             })
             ->addColumn('symptoms', function ($veterinarian) {
-                return $veterinarian->symptoms;
+                return $veterinarian->symptoms ?: '<span class="text-muted">Sin asignar</span>';
             })
             ->addColumn('date_start', function ($veterinarian) {
                 return $veterinarian->date_start;
             })
             ->addColumn('date_end', function ($veterinarian) {
-                return $veterinarian->date_end;
+                return $veterinarian->date_end ?: '<span class="text-muted">Sin asignar</span>';
             })
             ->addColumn('status', function ($veterinarian) {
                 $statusName = $veterinarian->status ? $veterinarian->status->name : 'Sin estado';
@@ -127,23 +127,27 @@ class Veterinarian extends Model
 
     public function createVeterinarian($request)
     {
-        $user = auth()->user();
-        $userId = $user->id;
-        $activeCompanyId = $user->active_company_id;
+        try {
+            $user = auth()->user();
+            $userId = $user->id;
+            $activeCompanyId = $user->active_company_id;
 
-        Veterinarian::create([
-            'user_id' => $userId,
-            'company_id' => $activeCompanyId,
-            'cattle_id' => $request->cattle,
-            'product_id' => $request->product,
-            'symptoms' => $request->symptoms ?: null,
-            'date_start' => $request->dateStart,
-            'date_end' => $request->dateEnd ?: null,
-            'observation' => $request->observation ?: null,
-            'status_id' => $request->status,
-        ]);
+            Veterinarian::create([
+                'user_id' => $userId,
+                'company_id' => $activeCompanyId,
+                'cattle_id' => $request->cattle,
+                'product_id' => $request->product,
+                'symptoms' => $request->symptoms ?: null,
+                'date_start' => $request->dateStart,
+                'date_end' => $request->dateEnd ?: null,
+                'observation' => $request->observation ?: null,
+                'status_id' => $request->status,
+            ]);
 
-        return response()->json(['status' => true, 'msg' => 'Servicio se ha creado correctamente.']);
+            return response()->json(['status' => true, 'msg' => 'Servicio se ha creado correctamente.']);
+        } catch (\Exception $e) {
+            return response()->json(['status' => false, 'msg' => 'Error al crear el servicio: ' . $e->getMessage()]);
+        }
     }
 
     public function getVeterinarian($id)
@@ -178,6 +182,7 @@ class Veterinarian extends Model
                 'cattle' => $veterinarian->cattle_id,
                 'product' => $veterinarian->product_id,
                 'observation' => $veterinarian->observation,
+                'status_id' => $veterinarian->status_id,
             ],
             'cattles' => $cattles,
             'products' => $products,

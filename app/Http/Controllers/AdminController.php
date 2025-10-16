@@ -337,7 +337,7 @@ class AdminController extends Controller
                 'name' => $user->name,
                 'email' => $user->email,
                 'company' => $user->company ? $user->company->name : 'Sin empresa',
-                'role' => ucfirst($user->role),
+                'role' => $user->role,
                 'is_active' => $user->is_active,
                 'last_login' => $user->last_login_at ? $user->last_login_at->format('d/m/Y H:i') : 'Nunca',
                 'created_at' => $user->created_at->format('d/m/Y'),
@@ -369,7 +369,7 @@ class AdminController extends Controller
             'company_id' => 'required|exists:companies,id',
             'additional_companies' => 'nullable|array',
             'additional_companies.*' => 'exists:companies,id',
-            'role' => 'required|in:admin,manager,operator',
+            'role' => 'required|in:Administrador,Gerente,Operador',
         ]);
 
         if ($validator->fails()) {
@@ -426,7 +426,7 @@ class AdminController extends Controller
             'company_id' => 'required|exists:companies,id',
             'additional_companies' => 'nullable|array',
             'additional_companies.*' => 'exists:companies,id',
-            'role' => 'required|in:admin,manager,operator',
+            'role' => 'required|in:Administrador,Gerente,Operador',
             'is_active' => 'boolean',
         ]);
 

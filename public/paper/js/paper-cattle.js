@@ -353,7 +353,7 @@ function viewCattle($id) {
                 document.querySelector('#causeEntryView').innerHTML = objData.cattle?.cause_entry?.name ?? 'Sin causa de entrada';
                 document.querySelector('#statusReproductiveView').innerHTML = objData.cattle.status_reproductive?.name ?? 'Sin estado reproductivo';
                 document.querySelector('#statusProductiveView').innerHTML = objData.cattle.status_productive?.name ?? 'Sin estado productivo';
-                document.querySelector('#dateRevisionView').innerHTML = objData.cattle?.dateRevision ?? 'Sin fecha de revisión';
+                document.querySelector('#dateRevisionView').innerHTML = objData.cattle?.date_revision ?? 'Sin fecha de revisión';
                 document.querySelector('#ownerView').innerHTML = objData.cattle.owner?.name ?? 'Sin Propietario';
                 document.querySelector('#fatherView').innerHTML = objData.cattle.father?.father_id ?? 'Sin padre';
                 document.querySelector('#motherView').innerHTML = objData.cattle.mother_id ?? 'Sin madre';
@@ -423,8 +423,8 @@ function editCattle($id) {
                 fillSelect('#statusProductiveEdit', objData.statusProductives, objData.data.statusProductive);
                 document.querySelector('#dateRevisionEdit').value = objData.data.dateRevision;
                 fillSelect('#ownerEdit', objData.owners, objData.data.owner);
-                fillSelect('#fatherEdit', objData.fathers, objData.data.father);
-                fillSelect('#motherEdit', objData.mothers, objData.data.mother);
+                fillSelectCattle('#fatherEdit', objData.fathers, objData.data.father);
+                fillSelectCattle('#motherEdit', objData.mothers, objData.data.mother);
                 document.querySelector('#dateBirthEdit').value = objData.data.dateBirth;
                 fillSelect('#colorEdit', objData.colors, objData.data.color);
                 fillSelect('#classificationEdit', objData.classifications, objData.data.classification);
@@ -449,7 +449,19 @@ function fillSelect(selectId, items, selectedValue) {
         option.textContent = item.name;
         select.appendChild(option);
     });
-    select.value = selectedValue;
+    select.value = selectedValue || '';
+}
+
+function fillSelectCattle(selectId, items, selectedValue) {
+    const select = document.querySelector(selectId);
+    select.innerHTML = '<option value="">-- Seleccione --</option>';
+    items.forEach(item => {
+        let option = document.createElement('option');
+        option.value = item.id;
+        option.textContent = item.code;
+        select.appendChild(option);
+    });
+    select.value = selectedValue || '';
 }
 
 function toggleReproductiveFields(containerReproductive, containerProductive, sexoSelect) {

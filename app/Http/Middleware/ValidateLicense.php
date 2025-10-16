@@ -39,8 +39,8 @@ class ValidateLicense
 
         $user = Auth::user();
         
-        // Los administradores globales (role = admin) no necesitan validación de licencia
-        if ($user->role === 'admin') {
+        // Los administradores globales (role = Administrador) no necesitan validación de licencia
+        if ($user->role === 'Administrador') {
             return $next($request);
         }
 

@@ -32,14 +32,18 @@
         <div class="col-lg-3 col-md-6 mb-3">
             <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden;">
                 <div class="card-body" style="padding: 1.25rem;">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <div class="icon-big" style="width: 3rem; height: 3rem; border-radius: 0.5rem; background: linear-gradient(135deg, #D1FAE5, #ECFDF5); display: flex; align-items: center; justify-content: center;">
-                            <i class="fa-solid fa-building" style="font-size: 1.25rem; color: #10B981;"></i>
-                        </div>
+                    <div class="d-flex justify-content-end mb-2">
                         <span class="badge" style="background: #D1FAE5; color: #059669; padding: 0.25rem 0.625rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600;">TOTAL</span>
                     </div>
-                    <h3 style="font-size: 1.75rem; font-weight: 800; color: #262626; margin-bottom: 0.25rem;">{{ $stats['total_companies'] }}</h3>
-                    <p style="color: #737373; font-size: 0.8125rem; font-weight: 600; margin: 0;">Total Empresas</p>
+                    <div class="d-flex align-items-center">
+                        <div class="icon-big" style="width: 3rem; height: 3rem; border-radius: 0.5rem; background: linear-gradient(135deg, #D1FAE5, #ECFDF5); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <i class="fa-solid fa-building" style="font-size: 1.25rem; color: #10B981;"></i>
+                        </div>
+                        <div style="margin-left: 1rem;">
+                            <h3 style="font-size: 1.75rem; font-weight: 800; color: #262626; margin-bottom: 0.25rem;">{{ $stats['total_companies'] }}</h3>
+                            <p style="color: #737373; font-size: 0.8125rem; font-weight: 600; margin: 0;">Total Empresas</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -48,14 +52,18 @@
         <div class="col-lg-3 col-md-6 mb-3">
             <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden;">
                 <div class="card-body" style="padding: 1.25rem;">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <div class="icon-big" style="width: 3rem; height: 3rem; border-radius: 0.5rem; background: linear-gradient(135deg, #DBEAFE, #EFF6FF); display: flex; align-items: center; justify-content: center;">
-                            <i class="fa-solid fa-heart" style="font-size: 1.25rem; color: #3B82F6;"></i>
-                        </div>
+                    <div class="d-flex justify-content-end mb-2">
                         <span class="badge" style="background: #DBEAFE; color: #2563EB; padding: 0.25rem 0.625rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600;">ACTIVAS</span>
                     </div>
-                    <h3 style="font-size: 1.75rem; font-weight: 800; color: #262626; margin-bottom: 0.25rem;">{{ $stats['active_companies'] }}</h3>
-                    <p style="color: #737373; font-size: 0.8125rem; font-weight: 600; margin: 0;">Empresas Activas</p>
+                    <div class="d-flex align-items-center">
+                        <div class="icon-big" style="width: 3rem; height: 3rem; border-radius: 0.5rem; background: linear-gradient(135deg, #DBEAFE, #EFF6FF); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <i class="fa-solid fa-heart" style="font-size: 1.25rem; color: #3B82F6;"></i>
+                        </div>
+                        <div style="margin-left: 1rem;">
+                            <h3 style="font-size: 1.75rem; font-weight: 800; color: #262626; margin-bottom: 0.25rem;">{{ $stats['active_companies'] }}</h3>
+                            <p style="color: #737373; font-size: 0.8125rem; font-weight: 600; margin: 0;">Empresas Activas</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -64,14 +72,18 @@
         <div class="col-lg-3 col-md-6 mb-3">
             <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden;">
                 <div class="card-body" style="padding: 1.25rem;">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <div class="icon-big" style="width: 3rem; height: 3rem; border-radius: 0.5rem; background: linear-gradient(135deg, #FEF3C7, #FFFBEB); display: flex; align-items: center; justify-content: center;">
-                            <i class="fa-solid fa-key" style="font-size: 1.25rem; color: #F59E0B;"></i>
-                        </div>
+                    <div class="d-flex justify-content-end mb-2">
                         <span class="badge" style="background: #FEF3C7; color: #D97706; padding: 0.25rem 0.625rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600;">ACTIVAS</span>
                     </div>
-                    <h3 style="font-size: 1.75rem; font-weight: 800; color: #262626; margin-bottom: 0.25rem;">{{ $stats['active_licenses'] }}</h3>
-                    <p style="color: #737373; font-size: 0.8125rem; font-weight: 600; margin: 0;">Licencias Activas</p>
+                    <div class="d-flex align-items-center">
+                        <div class="icon-big" style="width: 3rem; height: 3rem; border-radius: 0.5rem; background: linear-gradient(135deg, #FEF3C7, #FFFBEB); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <i class="fa-solid fa-key" style="font-size: 1.25rem; color: #F59E0B;"></i>
+                        </div>
+                        <div style="margin-left: 1rem;">
+                            <h3 style="font-size: 1.75rem; font-weight: 800; color: #262626; margin-bottom: 0.25rem;">{{ $stats['active_licenses'] }}</h3>
+                            <p style="color: #737373; font-size: 0.8125rem; font-weight: 600; margin: 0;">Licencias Activas</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -80,14 +92,18 @@
         <div class="col-lg-3 col-md-6 mb-3">
             <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden;">
                 <div class="card-body" style="padding: 1.25rem;">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <div class="icon-big" style="width: 3rem; height: 3rem; border-radius: 0.5rem; background: linear-gradient(135deg, #E8EFE0, #F4F7F0); display: flex; align-items: center; justify-content: center;">
-                            <i class="fa-solid fa-money-check-dollar" style="font-size: 1.25rem; color: #6B8E3F;"></i>
-                        </div>
+                    <div class="d-flex justify-content-end mb-2">
                         <span class="badge" style="background: #E8EFE0; color: #567232; padding: 0.25rem 0.625rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600;">TOTAL</span>
                     </div>
-                    <h3 style="font-size: 1.75rem; font-weight: 800; color: #262626; margin-bottom: 0.25rem;">${{ number_format($stats['total_revenue'], 2) }}</h3>
-                    <p style="color: #737373; font-size: 0.8125rem; font-weight: 600; margin: 0;">Ingresos Totales</p>
+                    <div class="d-flex align-items-center">
+                        <div class="icon-big" style="width: 3rem; height: 3rem; border-radius: 0.5rem; background: linear-gradient(135deg, #E8EFE0, #F4F7F0); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <i class="fa-solid fa-money-check-dollar" style="font-size: 1.25rem; color: #6B8E3F;"></i>
+                        </div>
+                        <div style="margin-left: 1rem;">
+                            <h3 style="font-size: 1.75rem; font-weight: 800; color: #262626; margin-bottom: 0.25rem;">${{ number_format($stats['total_revenue'], 2) }}</h3>
+                            <p style="color: #737373; font-size: 0.8125rem; font-weight: 600; margin: 0;">Ingresos Totales</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -207,14 +223,18 @@
         <div class="col-lg-3 col-md-6 mb-3">
             <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden;">
                 <div class="card-body" style="padding: 1.25rem;">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <div class="icon-big" style="width: 3rem; height: 3rem; border-radius: 0.5rem; background: linear-gradient(135deg, #E0E7FF, #EEF2FF); display: flex; align-items: center; justify-content: center;">
-                            <i class="fa-solid fa-users" style="font-size: 1.25rem; color: #6366F1;"></i>
-                        </div>
+                    <div class="d-flex justify-content-end mb-2">
                         <span class="badge" style="background: #E0E7FF; color: #4F46E5; padding: 0.25rem 0.625rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600;">TOTAL</span>
                     </div>
-                    <h3 style="font-size: 1.75rem; font-weight: 800; color: #262626; margin-bottom: 0.25rem;">{{ $stats['total_users'] }}</h3>
-                    <p style="color: #737373; font-size: 0.8125rem; font-weight: 600; margin: 0;">Total Usuarios</p>
+                    <div class="d-flex align-items-center">
+                        <div class="icon-big" style="width: 3rem; height: 3rem; border-radius: 0.5rem; background: linear-gradient(135deg, #E0E7FF, #EEF2FF); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <i class="fa-solid fa-users" style="font-size: 1.25rem; color: #6366F1;"></i>
+                        </div>
+                        <div style="margin-left: 1rem;">
+                            <h3 style="font-size: 1.75rem; font-weight: 800; color: #262626; margin-bottom: 0.25rem;">{{ $stats['total_users'] }}</h3>
+                            <p style="color: #737373; font-size: 0.8125rem; font-weight: 600; margin: 0;">Total Usuarios</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -223,14 +243,18 @@
         <div class="col-lg-3 col-md-6 mb-3">
             <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden;">
                 <div class="card-body" style="padding: 1.25rem;">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <div class="icon-big" style="width: 3rem; height: 3rem; border-radius: 0.5rem; background: linear-gradient(135deg, #F3E8FF, #FAF5FF); display: flex; align-items: center; justify-content: center;">
-                            <i class="fa-solid fa-id-card" style="font-size: 1.25rem; color: #A855F7;"></i>
-                        </div>
+                    <div class="d-flex justify-content-end mb-2">
                         <span class="badge" style="background: #F3E8FF; color: #9333EA; padding: 0.25rem 0.625rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600;">TOTAL</span>
                     </div>
-                    <h3 style="font-size: 1.75rem; font-weight: 800; color: #262626; margin-bottom: 0.25rem;">{{ $stats['total_licenses'] }}</h3>
-                    <p style="color: #737373; font-size: 0.8125rem; font-weight: 600; margin: 0;">Total Licencias</p>
+                    <div class="d-flex align-items-center">
+                        <div class="icon-big" style="width: 3rem; height: 3rem; border-radius: 0.5rem; background: linear-gradient(135deg, #F3E8FF, #FAF5FF); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <i class="fa-solid fa-id-card" style="font-size: 1.25rem; color: #A855F7;"></i>
+                        </div>
+                        <div style="margin-left: 1rem;">
+                            <h3 style="font-size: 1.75rem; font-weight: 800; color: #262626; margin-bottom: 0.25rem;">{{ $stats['total_licenses'] }}</h3>
+                            <p style="color: #737373; font-size: 0.8125rem; font-weight: 600; margin: 0;">Total Licencias</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -239,14 +263,18 @@
         <div class="col-lg-3 col-md-6 mb-3">
             <div class="card" style="border: none; border-radius: 0.75rem; overflow: hidden;">
                 <div class="card-body" style="padding: 1.25rem;">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <div class="icon-big" style="width: 3rem; height: 3rem; border-radius: 0.5rem; background: linear-gradient(135deg, #FEE2E2, #FEF2F2); display: flex; align-items: center; justify-content: center;">
-                            <i class="fa-solid fa-clock" style="font-size: 1.25rem; color: #EF4444;"></i>
-                        </div>
+                    <div class="d-flex justify-content-end mb-2">
                         <span class="badge" style="background: #FEE2E2; color: #DC2626; padding: 0.25rem 0.625rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600;">30 DÍAS</span>
                     </div>
-                    <h3 style="font-size: 1.75rem; font-weight: 800; color: #262626; margin-bottom: 0.25rem;">{{ $stats['expiring_licenses'] }}</h3>
-                    <p style="color: #737373; font-size: 0.8125rem; font-weight: 600; margin: 0;">Por Vencer (30d)</p>
+                    <div class="d-flex align-items-center">
+                        <div class="icon-big" style="width: 3rem; height: 3rem; border-radius: 0.5rem; background: linear-gradient(135deg, #FEE2E2, #FEF2F2); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <i class="fa-solid fa-clock" style="font-size: 1.25rem; color: #EF4444;"></i>
+                        </div>
+                        <div style="margin-left: 1rem;">
+                            <h3 style="font-size: 1.75rem; font-weight: 800; color: #262626; margin-bottom: 0.25rem;">{{ $stats['expiring_licenses'] }}</h3>
+                            <p style="color: #737373; font-size: 0.8125rem; font-weight: 600; margin: 0;">Por Vencer (30d)</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

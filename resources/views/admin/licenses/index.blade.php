@@ -21,7 +21,7 @@
                     <a href="{{ route('admin.companies') }}" class="btn btn-outline-secondary" style="padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600;">
                         <i class="fa-solid fa-arrow-left"></i> Volver
                     </a>
-                    <a href="{{ route('admin.licenses.create', $company->id) }}" class="btn" style="background: #6B8E3F; color: white; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; border: none;">
+                    <a href="{{ route('admin.licenses.create', $company->id) }}" class="btn" style="background: #6B8E3F; color: white !important; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; border: none;">
                         <i class="fa-solid fa-plus"></i> Nueva Licencia
                     </a>
                 </div>
@@ -287,7 +287,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background: #6c757d; color: white !important; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; border: none;">Cancelar</button>
                     <button type="submit" class="btn btn-success">Renovar Licencia</button>
                 </div>
             </form>

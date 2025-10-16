@@ -189,11 +189,11 @@ function viewVeterinarian($id) {
 
                 document.querySelector('#cattleView').innerHTML = objData.veterinarian.cattle.code;
                 document.querySelector('#productView').innerHTML = objData.veterinarian.product.name;
-                document.querySelector('#symptomsView').innerHTML = objData.veterinarian.symptoms;
+                document.querySelector('#symptomsView').innerHTML = objData.veterinarian.symptoms || '<span class="text-muted">Sin asignar</span>';
                 document.querySelector('#dateStartView').innerHTML = objData.veterinarian.date_start;
-                document.querySelector('#dateEndView').innerHTML = objData.veterinarian.date_end;
+                document.querySelector('#dateEndView').innerHTML = objData.veterinarian.date_end || '<span class="text-muted">Sin asignar</span>';
                 document.querySelector('#statusView').innerHTML = objData.veterinarian.status.name;
-                document.querySelector('#observationView').innerHTML = objData.veterinarian.observation;
+                document.querySelector('#observationView').innerHTML = objData.veterinarian.observation || '<span class="text-muted">Sin asignar</span>';
             }
             $('#modalVeterinarianView').modal('show');
         }
@@ -213,11 +213,11 @@ function editVeterinarian($id) {
                 document.querySelector('#idEdit').value = objData.data.id;
                 fillSelectCattle('#cattleEdit', objData.cattles, objData.data.cattle);
                 fillSelect('#productEdit', objData.products, objData.data.product);
-                fillSelect('#statusEdit', objData.statuses, objData.data.id);
-                document.querySelector('#symptomsEdit').value = objData.data.symptoms;
+                fillSelect('#statusEdit', objData.statuses, objData.data.status_id);
+                document.querySelector('#symptomsEdit').value = objData.data.symptoms || '';
                 document.querySelector('#dateStartEdit').value = objData.data.date_start;
-                document.querySelector('#dateEndEdit').value = objData.data.date_end;
-                document.querySelector('#observationEdit').value = objData.data.observation;
+                document.querySelector('#dateEndEdit').value = objData.data.date_end || '';
+                document.querySelector('#observationEdit').value = objData.data.observation || '';
 
             }
             $('#modalVeterinarianEdit').modal('show');
@@ -234,7 +234,7 @@ function fillSelect(selectId, items, selectedValue) {
         option.textContent = item.name;
         select.appendChild(option);
     });
-    select.value = selectedValue;
+    select.value = selectedValue || '';
 }
 
 function fillSelectCattle(selectId, items, selectedValue) {
@@ -246,5 +246,5 @@ function fillSelectCattle(selectId, items, selectedValue) {
         option.textContent = item.code;
         select.appendChild(option);
     });
-    select.value = selectedValue;
+    select.value = selectedValue || '';
 }

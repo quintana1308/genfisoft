@@ -862,6 +862,14 @@ footer,
     color: #737373 !important;
 }
 
+/* Footer transparente en páginas de login */
+.login-page footer,
+.login-page .footer {
+    background: transparent !important;
+    border-top: none !important;
+    color: white !important;
+}
+
 footer a,
 .footer a {
     color: #6B8E3F !important;
@@ -873,6 +881,31 @@ footer a:hover,
 .footer a:hover {
     color: #567232 !important;
     text-decoration: underline !important;
+}
+
+/* === LOGIN PAGE === */
+.login-page .navbar {
+    display: none !important;
+}
+
+.logo-container-login {
+    padding: 1rem 0 0.5rem !important;
+}
+
+.login-logo {
+    width: 80px !important;
+    height: 80px !important;
+    object-fit: contain !important;
+    border-radius: 0.75rem !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.system-name {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    color: #415626 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    letter-spacing: 0.5px !important;
 }
 
 /* === CORRECCIONES DE LAYOUT === */

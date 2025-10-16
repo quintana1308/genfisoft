@@ -15,7 +15,7 @@
                     <p class="text-muted mb-0">{{ $user->name }}</p>
                 </div>
                 <div>
-                    <a href="{{ route('admin.users') }}" class="btn btn-outline-secondary" style="padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600;">
+                    <a href="{{ route('admin.users') }}" class="btn" style="background: #6B8E3F; color: white !important; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; border: none;">
                         <i class="fa-solid fa-arrow-left"></i> Volver al Listado
                     </a>
                 </div>
@@ -86,10 +86,10 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="company_id">Empresa <span class="text-danger">*</span></label>
+                                        <label for="company_id">Empresa Principal <span class="text-danger">*</span></label>
                                         <select class="form-control @error('company_id') is-invalid @enderror" 
                                                 id="company_id" name="company_id" required>
-                                            <option value="">Seleccionar empresa...</option>
+                                            <option value="">Seleccionar empresa principal...</option>
                                             @foreach($companies as $company)
                                                 <option value="{{ $company->id }}" 
                                                     {{ old('company_id', $user->company_id) == $company->id ? 'selected' : '' }}>
@@ -97,6 +97,9 @@
                                                 </option>
                                             @endforeach
                                         </select>
+                                        <small class="form-text text-muted">
+                                            Esta será la empresa por defecto del usuario.
+                                        </small>
                                         @error('company_id')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -108,9 +111,9 @@
                                         <select class="form-control @error('role') is-invalid @enderror" 
                                                 id="role" name="role" required>
                                             <option value="">Seleccionar rol...</option>
-                                            <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>Administrador</option>
-                                            <option value="manager" {{ old('role', $user->role) == 'manager' ? 'selected' : '' }}>Gerente</option>
-                                            <option value="operator" {{ old('role', $user->role) == 'operator' ? 'selected' : '' }}>Operador</option>
+                                            <option value="Administrador" {{ old('role', $user->role) == 'Administrador' ? 'selected' : '' }}>Administrador</option>
+                                            <option value="Gerente" {{ old('role', $user->role) == 'Gerente' ? 'selected' : '' }}>Gerente</option>
+                                            <option value="Operador" {{ old('role', $user->role) == 'Operador' ? 'selected' : '' }}>Operador</option>
                                         </select>
                                         @error('role')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -124,18 +127,11 @@
                                     <div class="form-group">
                                         <label for="additional_companies">Empresas Adicionales (Opcional)</label>
                                         <select class="form-control" id="additional_companies" name="additional_companies[]" multiple>
-                                            @foreach($companies as $company)
-                                                @if($company->id != $user->company_id)
-                                                    <option value="{{ $company->id }}" 
-                                                        {{ $user->companies->contains($company->id) ? 'selected' : '' }}>
-                                                        {{ $company->name }}
-                                                    </option>
-                                                @endif
-                                            @endforeach
+                                            <!-- Las opciones se cargarán dinámicamente según la empresa principal seleccionada -->
                                         </select>
                                         <small class="form-text text-muted">
-                                            Mantén presionado Ctrl (Cmd en Mac) para seleccionar múltiples empresas. 
-                                            El usuario podrá cambiar entre estas empresas desde su perfil.
+                                            <i class="fa fa-info-circle"></i> Selecciona las empresas adicionales a las que este usuario tendrá acceso (además de la empresa principal).
+                                            Mantén presionado Ctrl (Cmd en Mac) para seleccionar múltiples empresas.
                                         </small>
                                         @error('additional_companies')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -201,7 +197,7 @@
 
                         <!-- Botones de Acción -->
                         <div class="d-flex justify-content-end gap-2 mt-4" style="gap: 0.5rem;">
-                            <a href="{{ route('admin.users') }}" class="btn btn-outline-secondary" style="padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600;">
+                            <a href="{{ route('admin.users') }}" class="btn" style="background: #6c757d; color: white !important; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; border: none;">
                                 <i class="fa-solid fa-times"></i> Cancelar
                             </a>
                             <button type="submit" class="btn" style="background: #6B8E3F; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; border: none;">
@@ -240,6 +236,65 @@ $(document).ready(function() {
         });
     @endif
 
+    // Lista de todas las empresas disponibles
+    const allCompanies = @json($companies);
+    
+    // Empresas adicionales actuales del usuario
+    const currentAdditionalCompanies = @json($user->companies->pluck('id'));
+    
+    // Función para actualizar el select de empresas adicionales
+    function updateAdditionalCompanies() {
+        const mainCompanyId = $('#company_id').val();
+        const additionalSelect = $('#additional_companies');
+        
+        // Guardar selecciones actuales
+        const currentSelections = additionalSelect.val() || [];
+        
+        // Limpiar opciones actuales
+        additionalSelect.empty();
+        
+        if (mainCompanyId) {
+            // Filtrar empresas excluyendo la empresa principal
+            const availableCompanies = allCompanies.filter(company => company.id != mainCompanyId);
+            
+            // Agregar opciones filtradas
+            availableCompanies.forEach(company => {
+                const isSelected = currentAdditionalCompanies.includes(company.id) || currentSelections.includes(company.id.toString());
+                const option = $('<option></option>')
+                    .attr('value', company.id)
+                    .text(company.name);
+                
+                if (isSelected) {
+                    option.attr('selected', true);
+                }
+                
+                additionalSelect.append(option);
+            });
+            
+            // Mostrar mensaje si no hay empresas adicionales disponibles
+            if (availableCompanies.length === 0) {
+                additionalSelect.append(
+                    $('<option></option>')
+                        .attr('disabled', true)
+                        .text('No hay empresas adicionales disponibles')
+                );
+            }
+        } else {
+            // Si no hay empresa principal seleccionada, mostrar mensaje
+            additionalSelect.append(
+                $('<option></option>')
+                    .attr('disabled', true)
+                    .text('Primero selecciona una empresa principal')
+            );
+        }
+    }
+    
+    // Actualizar empresas adicionales cuando cambie la empresa principal
+    $('#company_id').on('change', updateAdditionalCompanies);
+    
+    // Inicializar al cargar la página
+    updateAdditionalCompanies();
+    
     // Validación del formulario
     $('form').on('submit', function(e) {
         var password = $('#password').val();

@@ -420,7 +420,7 @@
 
                     <!-- Botón de Actualizar -->
                     <div class="d-flex justify-content-end gap-2" style="gap: 0.5rem;">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600;">
+                        <button type="button" class="btn" data-dismiss="modal" style="background: #6c757d; color: white !important; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; border: none;">
                             <i class="fa-solid fa-times"></i> Cancelar
                         </button>
                         <button type="submit" id="buttomSubmit" class="btn" style="background: #6B8E3F; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; border: none;">
