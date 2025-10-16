@@ -115,7 +115,7 @@ class Veterinarian extends Model
         $activeCompanyId = $user->active_company_id;
         
         $status = Status::all();
-        $cattles = Cattle::where('company_id', $activeCompanyId)->whereNotIn('status_id', [2, 3])->get();
+        $cattles = Cattle::where('company_id', $activeCompanyId)->whereIn('status_id', [1, 3])->get();
         $products = Product::where('company_id', $activeCompanyId)->whereNotIn('status_id', [2, 3])->get();
         
         return [
@@ -169,7 +169,7 @@ class Veterinarian extends Model
 
         // Obtener todos los status
         $statuses = Status::orderBy('name')->get(['id', 'name']);
-        $cattles = Cattle::where('company_id', $activeCompanyId)->orderBy('code')->whereNotIn('status_id', [2, 3])->get(['id', 'code']);
+        $cattles = Cattle::where('company_id', $activeCompanyId)->orderBy('code')->whereIn('status_id', [1, 3])->get(['id', 'code']);
         $products = Product::where('company_id', $activeCompanyId)->orderBy('name')->whereNotIn('status_id', [2, 3])->get(['id', 'name']);
 
         return response()->json([

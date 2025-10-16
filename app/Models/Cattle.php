@@ -226,13 +226,13 @@ class Cattle extends Model
         $fathers = Cattle::where('company_id', $activeCompanyId)
             ->where('sexo', 'Macho')
             ->whereNotNull('code')
-            ->whereNotIn('status_id', [2, 3, 4]) // Excluir muertos, inactivos y vendidos
+            ->whereIn('status_id', [1, 3]) // Solo activos y referencia
             ->get();
         
         $mothers = Cattle::where('company_id', $activeCompanyId)
             ->where('sexo', 'Hembra')
             ->whereNotNull('code')
-            ->whereNotIn('status_id', [2, 3, 4]) // Excluir muertos, inactivos y vendidos
+            ->whereIn('status_id', [1, 3]) // Solo activos y referencia
             ->get();
         
         $colors = Color::where('company_id', $activeCompanyId)
@@ -269,9 +269,9 @@ class Cattle extends Model
         $user = auth()->user();
         $activeCompanyId = $user->active_company_id;
 
-        // Evitar duplicados
-        if (Cattle::where('user_id', $userId)->where('code', $request->code)->exists()) {
-            return response()->json(['status' => false, 'msg' => 'El animal ya existe.']);
+        // Evitar duplicados por empresa
+        if (Cattle::where('company_id', $activeCompanyId)->where('code', $request->code)->exists()) {
+            return response()->json(['status' => false, 'msg' => 'Ya existe un animal con este código en la empresa.']);
         }
 
         Cattle::create([
@@ -331,8 +331,8 @@ class Cattle extends Model
         $owners = Owner::where('company_id', $activeCompanyId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
         $statusProductives = StatusProductive::where('company_id', $activeCompanyId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
         $statusReproductives = StatusReproductive::where('company_id', $activeCompanyId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
-        $fathers = Cattle::where('company_id', $activeCompanyId)->where('sexo', 'Macho')->whereNotIn('status_id', [2, 3])->orderBy('code')->get(['id', 'code']);
-        $mothers = Cattle::where('company_id', $activeCompanyId)->where('sexo', 'Hembra')->whereNotIn('status_id', [2, 3])->orderBy('code')->get(['id', 'code']);
+        $fathers = Cattle::where('company_id', $activeCompanyId)->where('sexo', 'Macho')->whereIn('status_id', [1, 3])->orderBy('code')->get(['id', 'code']);
+        $mothers = Cattle::where('company_id', $activeCompanyId)->where('sexo', 'Hembra')->whereIn('status_id', [1, 3])->orderBy('code')->get(['id', 'code']);
         $guides = Guide::where('company_id', $activeCompanyId)->whereNotIn('status_id', [2, 3])->orderBy('name')->get(['id', 'name']);
 
         $data =  response()->json([
@@ -430,6 +430,17 @@ class Cattle extends Model
         $cattle = $this->find($request->idEdit);
         if (!$cattle) {
             return response()->json(['status' => false, 'msg' => 'Animal no encontrado.']);
+        }
+
+        // Validar duplicados por empresa (excluyendo el animal actual)
+        $user = auth()->user();
+        $activeCompanyId = $user->active_company_id;
+        
+        if (Cattle::where('company_id', $activeCompanyId)
+                ->where('code', $request->codeEdit)
+                ->where('id', '!=', $request->idEdit)
+                ->exists()) {
+            return response()->json(['status' => false, 'msg' => 'Ya existe un animal con este código en la empresa.']);
         }
 
         //dd($request->incomeWeightEdit);

@@ -14,9 +14,9 @@ class SaleController extends Controller
         $user = Auth::user();
         $activeCompanyId = $user->active_company_id;
 
-        // Obtener solo animales que NO estén vendidos (status_id != 4) y que NO estén muertos (status_id != 2)
+        // Obtener solo animales activos (status_id = 1) y de referencia (status_id = 3)
         $cattles = Cattle::where('company_id', $activeCompanyId)
-            ->whereNotIn('status_id', [2, 4]) // Excluir muertos y vendidos
+            ->whereIn('status_id', [1, 3]) // Solo activos y referencia
             ->whereNotNull('code')
             ->orderBy('code')
             ->get(['id', 'code']);
@@ -36,9 +36,9 @@ class SaleController extends Controller
         $user = Auth::user();
         $activeCompanyId = $user->active_company_id;
 
-        // Obtener solo animales que NO estén vendidos (status_id != 4) y que NO estén muertos (status_id != 2)
+        // Obtener solo animales activos (status_id = 1) y de referencia (status_id = 3)
         $cattles = Cattle::where('company_id', $activeCompanyId)
-            ->whereNotIn('status_id', [2, 4]) // Excluir muertos y vendidos
+            ->whereIn('status_id', [1, 3]) // Solo activos y referencia
             ->whereNotNull('code')
             ->orderBy('code')
             ->get(['id', 'code']);

@@ -114,6 +114,7 @@ cattle = {
                 const date_start = document.querySelector("#dateStart").value;
                 const causeEntry = document.querySelector("#causeEntry").value;
                 const dateRevision = document.querySelector("#dateRevision").value;
+                const herd = document.querySelector("#herd").value;
                 const color = document.querySelector("#color").value;
                 const classification = document.querySelector("#classification").value;
                 const sexo = document.querySelector("#sexo").value;
@@ -124,6 +125,7 @@ cattle = {
                     { campo: code, nombre: "'Código'" },
                     { campo: category, nombre: "'Categoría'" },
                     { campo: status, nombre: "'Estado'" },
+                    { campo: herd, nombre: "'Rebaño'" },
                     { campo: date_start, nombre: "'Fecha de entrada'" },
                     { campo: causeEntry, nombre: "'Causa de entrada'" },
                     { campo: color, nombre: "'Color'" },
